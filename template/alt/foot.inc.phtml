@@ -1,0 +1,23 @@
+  </div>
+</main>
+
+<!-- End page content -->
+
+
+<!-- Begin Footer -->
+
+<footer class="footer mt-auto py-3 bg-dark">
+  <div class="container">
+    <span class="text-muted">
+      <?php if (\Session\User::isLoggedIn()): ?>
+						<a href="<?php echo App::getBaseUrl() ?>index/logout" class="link-light">Logout</a>
+						<?php else: ?>
+						<a href="<?php echo App::getBaseUrl() ?>index/login" class="link-light">Login</a>
+			<?php endif; ?></span>
+  </div>
+</footer>
+
+
+
+</body>
+</html>

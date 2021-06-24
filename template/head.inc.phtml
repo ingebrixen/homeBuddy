@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+
+<title>homeBuddy - Deine freundliche Haushaltshilfe</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="<?php echo App::getBaseUrl()?>skin/css/w3.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
+<link media="all" rel="stylesheet" type="text/css" href="<?php echo App::getBaseUrl()?>skin/css/bootstrap.css" />
+<link media="all" rel="stylesheet" type="text/css" href="<?php echo App::getBaseUrl()?>skin/css/style.css" />
+<script src="<?php echo App::getBaseUrl()?>skin/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js"></script>
+<!-- <script src="<?php echo App::getBaseUrl()?>skin/js/script.js"></script> -->
+
+<body class="bg-light">
+
+<!-- Top container -->
+<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+  <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+  <span class="w3-bar-item w3-right">&nbsp</span>
+</div>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+  <div class="w3-container w3-row">
+    <div class="w3-col s4">
+      <img src="../skin/images/avatar2.png" class="w3-circle w3-margin-right" style="width:46px">
+    </div>
+    <div class="w3-col s8 w3-bar">
+      <span>Hallo, <strong><?php echo $_SESSION['user_name']; ?></strong></span><br>
+      <a href="#" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i></a>
+      <a href="#" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
+      <a href="#" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>
+    </div>
+  </div>
+  <hr>
+<!--   <div class="w3-container">
+    <h5>Dashboard</h5>
+  </div> -->
+  <div class="w3-bar-block">
+    <!-- <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a> -->
+    <a href="<?php echo App::getBaseUrl() ?>" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw iconWidth"></i>Dashboard</a>
+    <hr>
+    <a href="<?php echo App::getBaseUrl() ?>finanzen/" class="w3-bar-item w3-button w3-padding"><i class="fas fa-euro-sign iconWidth"></i>Finanzen</a>
+
+    <a href="<?php echo App::getBaseUrl() ?>finanzen/haushaltskasse" class="w3-bar-item w3-button w3-padding"><i class="fas fa-wallet iconWidth"></i>Haushaltskasse</a>
+    <a href="<?php echo App::getBaseUrl() ?>finanzen/ausgaben" class="w3-bar-item w3-button w3-padding"><i class="fas fa-cash-register iconWidth"></i>Ausgaben allg.</a>
+    <a href="<?php echo App::getBaseUrl() ?>finanzen/vanLife" class="w3-bar-item w3-button w3-padding"><i class="fas fa-shuttle-van iconWidth"></i>Ausgaben VanLife</a>
+    <hr>
+    <a href="<?php echo App::getBaseUrl() ?>kueche/" class="w3-bar-item w3-button w3-padding"><i class="fas fa-mug-hot iconWidth"></i>Küche</a>
+    <a href="<?php echo App::getBaseUrl() ?>kueche/einkauf" class="w3-bar-item w3-button w3-padding"><i class="fas fa-shopping-bag iconWidth"></i>Einkauf</a>
+    <a href="<?php echo App::getBaseUrl() ?>kueche/rezepte" class="w3-bar-item w3-button w3-padding"><i class="fas fa-sync iconWidth"></i>Rezept Karusell</a>
+    <hr>
+    <a href="<?php echo App::getBaseUrl() ?>todo/" class="w3-bar-item w3-button w3-padding"><i class="fas fa-tasks iconWidth"></i>toDo</a>
+    <hr>
+    <a href="<?php echo App::getBaseUrl() ?>" class="w3-bar-item w3-button w3-padding"><i class="fas fa-cog iconWidth"></i>Settings</a><br><br>
+    <hr>
+    <?php if (\Session\User::isLoggedIn()): ?>
+          <a href="<?php echo App::getBaseUrl() ?>index/logout" class="w3-padding link-dark"><i class="fa fa-power-off iconWidth"></i>Logout</a>
+          <?php else: ?>
+          <a href="<?php echo App::getBaseUrl() ?>index/login" class="w3-padding link-dark"><i class="fa fa-power-off iconWidth"></i>Login</a>
+    <?php endif; ?></span>
+    
+    
+    <div>
+    
+    <?php
+      echo '<table border=1>';
+      echo '<tr><td><b>KEY</b></td><td><b>VALUE</b></td></tr>';
+      foreach ($_SESSION as $key =>$value) 
+      {
+          echo '<tr><td>'.$key.'</td>';
+          echo '<td>'.$value.'</td></tr>';
+      }
+      echo '</table>';
+    ?>
+    
+    </div>
+
+
+  </div>
+</nav>
+
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>

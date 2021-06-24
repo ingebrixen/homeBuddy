@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=1000" />
+    <title>Tribelens</title>
+    <link media="all" rel="stylesheet" type="text/css" href="<?php echo App::getBaseUrl() ?>skin/css/all.css" />
+    <link href='http://fonts.googleapis.com/css?family=Cabin:400,600,700' rel='stylesheet' type='text/css' />
+    <script type="text/javascript" src="<?php echo App::getBaseUrl() ?>skin/js/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="<?php echo App::getBaseUrl() ?>skin/js/jquery.main.js" ></script>
+    <!--[if lt IE 8]><link rel="stylesheet" type="text/css" href="<?php echo App::getBaseUrl() ?>skin/css/ie.css" /><![endif]-->
+</head>
+<body>
+<div id="wrapper">
+    <div class="w1">
+        <div class="w2">
+        <div id="header">
+					<div class="holder">
+						<ul class="tools">
+							<li><a class="home" href="<?php echo App::getBaseUrl(); ?>">home</a></li>
+							<li><a class="zoom" href="<?php echo App::getBaseUrl(); ?>upload/index">upload</a></li>
+						</ul>
+					</div>
+				</div>
+            <div id="main">
+                <div class="register-area">
+                    <div class="register-holder">
+                        <div class="register-frame">
+                            <form action="<?php echo App::getBaseUrl()?>upload/save" enctype="multipart/form-data" method="POST" class="register-form">
+                                <fieldset>
+                                    <div class="box">
+                                        <?php if (\Session\Msg::hasMsg()): ?>
+                                                <div class="row">
+                                                    <span style="color: red"><?php echo \Session\Msg::readMsg(); ?>
+                                                </div>
+                                        <?php endif; ?>
+                                        <div class="row">
+                                            <div>
+                                                <input name="uploadImg" type="file" />
+                                            </div>
+                                        </div>
+
+                                        <input type="submit" value="Upload" />
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                    <span class="login"><a href="<?php echo App::getBaseUrl() ?>index/register">Register</a> if you dont' have an account</span>
+                    <ul class="menu">
+                        <li><a href="#">Help</a></li>
+                        <li><a href="#">How it works</a></li>
+                        <li><a href="#">Terms of service</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

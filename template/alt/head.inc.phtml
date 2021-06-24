@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de" class="h-100">
+
+<head>
+    <title>DoBoe HomeBuddy</title>
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <meta name="keywords" content="" />
+
+    <link media="all" rel="stylesheet" type="text/css" href="<?php echo App::getBaseUrl()?>skin/css/bootstrap.css" />
+    <link media="all" rel="stylesheet" type="text/css" href="<?php echo App::getBaseUrl()?>skin/css/style.css" />
+    <script src="<?php echo App::getBaseUrl()?>skin/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body class="d-flex flex-column h-100">
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="<?php echo App::getBaseUrl()?>">homeBuddy</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="Finanzen" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Finanzen
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="<?php echo App::getBaseUrl() ?>finanzen/">&Uuml;bersicht</a></li>
+            <li><a class="dropdown-item" href="<?php echo App::getBaseUrl() ?>finanzen/haushaltskasse">Haushaltskasse</a></li>
+            <li><a class="dropdown-item" href="<?php echo App::getBaseUrl() ?>finanzen/ausgaben">Ausgaben allg.</a></li>
+            <li><a class="dropdown-item" href="<?php echo App::getBaseUrl() ?>finanzen/vanLife">Ausgaben VanLife</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="K&uuml;che" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Küche
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Einkauf</a></li>
+            <li><a class="dropdown-item" href="#">Rezept Karusell</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Musik</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">toDo</a>
+        </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- Begin page content -->
+
+<main class="h-100 ">
+  <div class="container shadow p-3 mb-5 rounded h-100 mt-5 bg-white">

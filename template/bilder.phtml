@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=1000" />
+	<title>Tribelens</title>
+	<link media="all" rel="stylesheet" type="text/css" href="<?php echo App::getBaseUrl()?>skin/css/all.css" />
+	<link href='http://fonts.googleapis.com/css?family=Cabin:400,600,700' rel='stylesheet' type='text/css' />
+	<script type="text/javascript" src="<?php echo App::getBaseUrl()?>skin/js/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="<?php echo App::getBaseUrl()?>skin/js/jquery.main.js" ></script>
+	<!--[if lt IE 8]><link rel="stylesheet" type="text/css" href="/skin/css/ie.css" /><![endif]-->
+</head>
+<body>
+	<div id="wrapper">
+		<div class="w1">
+			<div class="w2">
+				<div id="header">
+					<div class="holder">
+<!-- 						<strong class="logo"><a href="<?php echo App::getBaseUrl(); ?>">Tribelens</a></strong>
+ -->						<ul class="tools">
+							<li><a class="home" href="<?php echo App::getBaseUrl(); ?>">home</a></li>
+							<li><a class="zoom" href="<?php echo App::getBaseUrl(); ?>upload/index">upload</a></li>
+						</ul>
+					</div>
+				</div>
+				<div id="main">
+					<div id="sidebar" class="open-close-wrapper">
+						<div class="holder">
+							<div class="block information">
+								<h2 class="hidden">Kraig Ward</h2>
+								<div class="area">
+									<img class="hidden" src="<?php echo App::getBaseUrl()?>skin/images/img-avatar.png" alt="image description" width="47" height="48" />
+									<img src="<?php echo App::getBaseUrl()?>skin/images/img-avatar1.png" alt="image description" width="27" height="27" />
+									<div class="info">
+										<ul class="list">
+											<li><a class="albums" href="#">17 albums</a></li>
+											<li><a class="photos" href="#">182 photos</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div id="open-close">
+								<div class="block">
+									<h2>About me</h2>
+									<p>I help healers, coaches, and people in direct sales, who struggle getting clients, to grow their businesses to 6-figures &amp; </p>
+								</div>
+								<div class="block">
+									<h2>Kraig profiles</h2>
+									<ul class="social">
+										<li><a class="twitter" href="#">twitter</a></li>
+										<li><a class="facebook" href="#">facebook</a></li>
+										<li><a class="google" href="#">google</a></li>
+										<li><a href="#" class="dribbble">dribbble</a></li>
+										<li><a href="#" class="flickr">flickr</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<a href="#" class="opener">OPENER</a>
+					</div>
+					<div id="content">
+						<form class="select-form" action="#">
+							<fieldset>
+								<select>
+									<option>Filter</option>
+								</select>
+								<select>
+									<option>Order</option>
+								</select>
+							</fieldset>
+						</form>
+						<ul class="gallery">
+                            <?php foreach ($bilder as $bild): ?>    
+							<li class="png-box">
+                            	<div class="holder">
+									<div class="lt"></div>
+									<div class="t"></div>
+									<div class="rt"></div>
+									<div class="c">
+										<div class="l"></div>
+										<div class="content">
+                                            <img src="<?php echo App::getBaseUrl(); ?>image/view/id/<?php echo $bild->getId(); ?>" /><br>
+											
+										</div>
+										<div class="r"></div>
+									</div>
+									<div class="lb"></div>
+									<div class="b"></div>
+									<div class="rb"></div>
+								</div>
+							</li>
+                            <?php endforeach; ?>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="footer">
+			<div class="holder">
+				<ul class="menu">
+					<li><a href="#">Help</a></li>
+					<li><a href="#">How it works</a></li>
+					<li><a href="#">Terms of service</a></li>
+					<li><a href="#">Blog</a></li>
+					<li><?php if (\Session\User::isLoggedIn()): ?>
+						<a href="<?php echo App::getBaseUrl() ?>index/logout">Logout</a>
+						<?php else: ?>
+						<a href="<?php echo App::getBaseUrl() ?>index/login">Login</a>
+						<?php endif; ?>
+					</li>
+				</ul>
+				<ul class="social">
+					<li><a class="twitter" href="#">twitter</a></li>
+					<li><a class="facebook" href="#">facebook</a></li>
+					<li><a class="google" href="#">google</a></li>
+					<li><a href="#" class="dribbble">dribbble</a></li>
+					<li><a href="#" class="flickr">flickr</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

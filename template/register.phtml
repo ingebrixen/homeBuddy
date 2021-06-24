@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+
+<head>
+    <title>DoBoe HomeBuddy</title>
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <meta name="keywords" content="" />
+
+    <link media="all" rel="stylesheet" type="text/css" href="<?php echo App::getBaseUrl()?>skin/css/bootstrap.css" />
+	<link media="all" rel="stylesheet" type="text/css" href="<?php echo App::getBaseUrl()?>skin/css/style.css" />
+    <script src="<?php echo App::getBaseUrl()?>skin/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>	
+<div class="container-fluid vertical-center ">
+  <div class="row ">
+    <div class="col-md-4 offset-md-4 text-dark ">
+		<div class="loginBox  shadow p-0 mb-5 rounded-top bg-white">    
+			<div class="login">
+				<div class="loginTopBox pt-2 ps-3">
+					<div><h3>Create new Account</h3></div>
+					<p class="fs-6">
+						Have an account? <a href="login" target="_self">Log In</a>
+					</p>
+				</div>
+				<form method="POST" class="register-form">
+					<fieldset>
+						<?php if (\Session\Msg::hasMsg()): ?>
+							<div class="text-danger ps-3">
+								<?php echo \Session\Msg::readMsg(); ?>
+							</div>
+						<?php endif; ?>
+							<hr>
+							<div class="ps-3 pe-3">
+								<label for="email" class="fs-5">Email address</label>
+								<input type="email" name="email" class="form-control form-control-sm" id="email" required>
+								</div>							
+							<hr>
+							<div class="ps-3 pe-3">
+								<label for="password" class="fs-5">Password</label>
+								<input type="password" name="PW" class="form-control form-control-sm" id="password" required>
+								</div>						
+							<div class="ps-3 pe-3">
+								<label for="cpassword" class="fs-5">Confirm passwort</label>
+								<input type="password" name="checkPW" id="cpassword" class="form-control form-control-sm" id="password" required>
+								</div>						
+							<hr>
+							<div class="checkbox fs-5 ps-3">
+								<input type="checkbox" value="unchecked" name="agb" id="agree" >
+								<label for="agree">I agree to the terms and conditions</label>
+							</div>
+							<div class="bottom">
+								<div class="bottomLeft"></div>
+									<br clear="both">
+								<div class="bottomRight">
+								<input type="submit" class="loginButton" value="Register">                      
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+    </div>
+  </div>
+</div> 
+</body>
+</html>
