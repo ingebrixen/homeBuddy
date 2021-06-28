@@ -1,4 +1,4 @@
-﻿/* W3.CSS 4.15 December 2020 by Jan Egil and Borge Refsnes */
+﻿ /* W3.CSS 4.15 December 2020 by Jan Egil and Borge Refsnes 
 html {
   box-sizing: border-box;
 }
@@ -7,14 +7,14 @@ html {
 *:after {
   box-sizing: inherit;
 }
-/* Extract from normalize.css by Nicolas Gallagher and Jonathan Neal git.io/normalize */
+ Extract from normalize.css by Nicolas Gallagher and Jonathan Neal git.io/normalize 
 html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
 body {
   margin: 0;
-}
+} */
 article,
 aside,
 details,
@@ -178,12 +178,12 @@ textarea {
   font: inherit;
 }
 /* End extract */
-html,
-body {
+/*html,
+ body {
   font-family: Verdana, sans-serif;
   font-size: 15px;
   line-height: 1.5;
-}
+} */
 html {
   overflow-x: hidden;
 }
@@ -217,7 +217,7 @@ h6 {
 .w3-monospace {
   font-family: monospace;
 }
-h1,
+/* h1,
 h2,
 h3,
 h4,
@@ -226,7 +226,7 @@ h6 {
   font-family: "Segoe UI", Arial, sans-serif;
   font-weight: 400;
   margin: 10px 0;
-}
+} */
 .w3-wide {
   letter-spacing: 4px;
 }
@@ -401,7 +401,7 @@ a {
 .w3-dropdown-hover:hover > .w3-button:first-child,
 .w3-dropdown-click:hover > .w3-button:first-child {
   background-color: #ccc;
-  color: #000;
+  color: #020202f3;
 }
 .w3-dropdown-content {
   cursor: auto;
@@ -892,11 +892,11 @@ a {
 .w3-row-padding > .w3-threequarter,
 .w3-row-padding > .w3-quarter,
 .w3-row-padding > .w3-col {
-  padding: 0 8px;
+  padding: 0 12px;
 }
 .w3-container,
 .w3-panel {
-  padding: 0.01em 16px;
+  padding: 0.01em 12px;
 }
 .w3-panel {
   margin-top: 16px;
@@ -1210,8 +1210,8 @@ a {
   float: right !important;
 }
 .w3-button:hover {
-  color: #000 !important;
-  background-color: #ccc !important;
+  color: #f4a261 !important;
+  background-color: #264653 !important;
 }
 .w3-transparent,
 .w3-hover-none:hover {
