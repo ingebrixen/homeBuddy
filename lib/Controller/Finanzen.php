@@ -14,19 +14,19 @@ class Finanzen extends Base {
     {
         $this->_checkLogin();
 
-        echo $this->render('dashboard.phtml', array());
+        echo $this->render('detail.phtml', array());
     }
     public function ausgabenAction($params)
     {
         $this->_checkLogin();
 
-        echo $this->render('dashboard.phtml', array());
+        echo $this->render('detail.phtml', array());
     }
     public function vanlifeAction($params)
     {
         $this->_checkLogin();
 
-        echo $this->render('dashboard.phtml', array());
+        echo $this->render('detail.phtml', array());
     }
 
 }

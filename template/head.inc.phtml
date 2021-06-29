@@ -3,7 +3,7 @@
 
 <title>homeBuddy - Deine freundliche Haushaltshilfe</title>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="<?php echo App::getBaseUrl()?>skin/css/w3.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
 <link media="all" rel="stylesheet" type="text/css" href="<?php echo App::getBaseUrl()?>skin/css/bootstrap.css" />
@@ -15,7 +15,7 @@
 <body class="bg-light">
 
 <!-- Top container -->
-<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+<div class="w3-bar w3-top bgTop w3-large smenu" style="z-index:4">
   <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
   <span class="w3-bar-item w3-right">&nbsp</span>
 </div>
@@ -28,9 +28,9 @@
     </div>
     <div class="w3-col s8 w3-bar">
       <span>Hallo, <strong><?php echo $_SESSION['user_name']; ?></strong></span><br>
-      <a href="#" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i></a>
-      <a href="#" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
-      <a href="#" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>
+      <a href="#" class="w3-bar-item w3-button w3-circle uicon"><i class="fa fa-envelope"></i></a>
+      <a href="#" class="w3-bar-item w3-button w3-circle uicon"><i class="fa fa-user"></i></a>
+      <a href="#" class="w3-bar-item w3-button w3-circle uicon"><i class="fa fa-cog"></i></a>
     </div>
   </div>
   <hr>
@@ -40,6 +40,9 @@
   <div class="w3-bar-block">
     <!-- <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a> -->
     <a href="<?php echo App::getBaseUrl() ?>" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw iconWidth"></i>Dashboard</a>
+    <hr>
+    <a href="<?php echo App::getBaseUrl() ?>todo/" class="w3-bar-item w3-button w3-padding"><i class="fas fa-sticky-note iconWidth"></i>Notizen</a>
+    <a href="<?php echo App::getBaseUrl() ?>todo/" class="w3-bar-item w3-button w3-padding"><i class="fas fa-tasks iconWidth"></i>toDo</a>
     <hr>
     <a href="<?php echo App::getBaseUrl() ?>finanzen/" class="w3-bar-item w3-button w3-padding"><i class="fas fa-euro-sign iconWidth"></i>Finanzen</a>
 
@@ -51,31 +54,15 @@
     <a href="<?php echo App::getBaseUrl() ?>kueche/einkauf" class="w3-bar-item w3-button w3-padding"><i class="fas fa-shopping-bag iconWidth"></i>Einkauf</a>
     <a href="<?php echo App::getBaseUrl() ?>kueche/rezepte" class="w3-bar-item w3-button w3-padding"><i class="fas fa-sync iconWidth"></i>Rezept Karusell</a>
     <hr>
-    <a href="<?php echo App::getBaseUrl() ?>todo/" class="w3-bar-item w3-button w3-padding"><i class="fas fa-tasks iconWidth"></i>toDo</a>
-    <hr>
-    <a href="<?php echo App::getBaseUrl() ?>" class="w3-bar-item w3-button w3-padding"><i class="fas fa-cog iconWidth"></i>Settings</a><br><br>
+    <a href="<?php echo App::getBaseUrl() ?>" class="w3-bar-item w3-button w3-padding"><i class="fas fa-cog iconWidth"></i>Settings</a>
     <hr>
     <?php if (\Session\User::isLoggedIn()): ?>
-          <a href="<?php echo App::getBaseUrl() ?>index/logout" class="w3-padding link-dark"><i class="fa fa-power-off iconWidth"></i>Logout</a>
-          <?php else: ?>
-          <a href="<?php echo App::getBaseUrl() ?>index/login" class="w3-padding link-dark"><i class="fa fa-power-off iconWidth"></i>Login</a>
-    <?php endif; ?></span>
+    <a href="<?php echo App::getBaseUrl() ?>index/logout" class="w3-bar-item w3-button w3-padding"><i class="fa fa-power-off iconWidth"></i>Logout</a>
+    <?php else: ?>
+    <a href="<?php echo App::getBaseUrl() ?>index/login" class="w3-padding link-dark"><i class="fa fa-power-off iconWidth"></i>Login</a>
+    <?php endif; ?>
     
     
-    <div>
-    
-    <?php
-      echo '<table border=1>';
-      echo '<tr><td><b>KEY</b></td><td><b>VALUE</b></td></tr>';
-      foreach ($_SESSION as $key =>$value) 
-      {
-          echo '<tr><td>'.$key.'</td>';
-          echo '<td>'.$value.'</td></tr>';
-      }
-      echo '</table>';
-    ?>
-    
-    </div>
 
 
   </div>

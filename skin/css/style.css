@@ -1,3 +1,13 @@
+/* farbpalette: https://coolors.co/264653-2a9d8f-e9c46a-f4a261-e76f51 */
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px; 
+    line-height: 60px; 
+    background-color: #264653;
+    position: fixed;
+}
 .vertical-center {
     position: absolute;
     top: 15%;
@@ -7,7 +17,7 @@
     width: 50%;
 }
 .loginButton {    
-    background-color: #4487f9; 
+    background-color: #264653; 
     border: none;
     color: white;
     padding: 16px 32px;
@@ -21,11 +31,43 @@
     max-width: 400px;
     margin: 0 auto;    
 }
+.loginBox a {
+    color: #258af3;
+    text-decoration: none;
+}
+.dash {
+    height: 5rem; 
+}
+.dashbox {
+    height: 100%;
+}
 .iconWidth {
     width: 1.5rem;
 }
 .fh {
     height: 100% !important;
 }
-
-
+.bgTop{
+    background-color: #264653 !important;
+}
+.bgDash1 {
+    background-color: #2a9d8f !important;
+}
+.bgDash2 {
+    background-color: #e9c46a !important;
+}
+.bgDash3 {
+    background-color: #e76f51 !important;
+}
+.left {
+    float: left !important;
+}
+.right {
+    float: right !important;
+}
+.smenu {
+    color: #f1f1f1 !important;
+}
+.uicon {
+    padding: 8px !important;
+}
