@@ -1,61 +1,43 @@
 <?php   require_once($_SERVER['DOCUMENT_ROOT'].'/template/head.inc.phtml'); ?>
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:300px;margin-top:43px;">
-  <!-- Header -->
-  <header class="w3-container" style="padding-top:22px">
-    <h5><b><i class="fa fa-dashboard"></i>Dashboard</b></h5>
-  </header>
-
-  <div class="w3-row-padding w3-margin-bottom dash">
-
-      <a href="<?php echo App::getBaseUrl() ?>finanzen/haushaltskasse"> 
-        <div class="w3-third dashbox bgDash1">    
-          <div class="w3-container  w3-padding-16">
-            <div class="left">
-              Haushaltskasse: <br>
-              Du bekommst noch: 
-            </div>
-            <div class="right">
-              52 €
-              <br>
-              13 €
-            </div>
-          </div>  
-          
-        </div>
-      </a>
-      <a href="<?php echo App::getBaseUrl() ?>kueche/einkauf"> 
-        <div class="w3-third dashbox bgDash3">    
-          <div class="w3-container bgDash3 w3-padding-16">
-            <div class="left">
-              Einkauflisten vorhanden:
-            </div>
-            <div class="right">
-              2
-            </div>
-          </div>      
-        </div>
-      </a> 
-      <a href="<?php echo App::getBaseUrl() ?>finanzen/ausgaben"> 
-        <div class="w3-third dashbox bgDash2">    
-          <div class="w3-container bgDash2 w3-padding-16">
-          <div class="left">
-              Ausgaben Sarah:
-              <br>
-              Ausgaben Thomas:
-            </div>
-            <div class="right">
-              4690,00 €
-              <br>
-              4672,96 €
-            </div>
-          </div>      
-        </div>
-      </a>
-  </div>
-
   <div class="container-fluid">
-    Detail
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">wer</th>
+          <th scope="col">wann</th>
+          <th scope="col">wieviel</th>
+          <th scope="col">stand</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">3</th>
+          <td>Thomas</td>
+          <td>4.1.21</td>
+          <td>-27 €</td>
+          <td>157 €</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>sarah</td>
+          <td>2.1.21</td>
+          <td>-16 €</td>
+          <td>184 €</td>
+        </tr>
+        <tr>
+          <th scope="row">1</th>
+          <td>Thomas</td>
+          <td>1.1.21</td>
+          <td>+200 €</td>
+          <td>200 €</td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      auswahl mona/ ahr
+    </div>
   </div>
 </div>
 
@@ -63,8 +45,36 @@
   <footer class="footer mt-auto py-3 bgTop">
   <div class="container-fluid">
       <div class="right">
-        <i class="fas fa-plus-circle add lift"></i>      
+        <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          <i class="fas fa-plus-circle add lift w3-animate-bottom "></i>
+        </a>       
       </div>
+
+<!--       
+        <i class="fas fa-plus-circle add lift w3-animate-bottom "></i>   
+      -->
+
+      <!-- Modal -->
+      <div class="modal fade" style="position: relativ;" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog" >
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Understood</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
   </div>
 </footer>
 

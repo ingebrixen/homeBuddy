@@ -8,9 +8,6 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
 <link media="all" rel="stylesheet" type="text/css" href="<?php echo App::getBaseUrl()?>skin/css/bootstrap.css" />
 <link media="all" rel="stylesheet" type="text/css" href="<?php echo App::getBaseUrl()?>skin/css/style.css" />
-<script src="<?php echo App::getBaseUrl()?>skin/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js"></script>
-<!-- <script src="<?php echo App::getBaseUrl()?>skin/js/script.js"></script> -->
 
 <body class="bg-light">
 
@@ -34,7 +31,7 @@
     </div>
   </div>
   <hr>
-  <div class="w3-bar-block">
+  <div class="w3-bar-block" style="padding-bottom: 46px;">
     <!-- <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a> -->
     <a href="<?php echo App::getBaseUrl() ?>" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw iconWidth"></i>Dashboard</a>
     <hr>
@@ -55,25 +52,75 @@
     <hr>
     <?php if (\Session\User::isLoggedIn()): ?>
     <a href="<?php echo App::getBaseUrl() ?>index/logout" class="w3-bar-item w3-button w3-padding"><i class="fa fa-power-off iconWidth"></i>Logout</a>
-<!--     <br>
-    <hr> -->
+    <br>
+    <br>
     <?php else: ?>
     <a href="<?php echo App::getBaseUrl() ?>index/login" class="w3-padding link-dark"><i class="fa fa-power-off iconWidth"></i>Login</a>
-  <!--   <br>
-    <hr> -->
+    <br>
+    <br>
     <?php endif; ?>
-    
-    
-
 
   </div>
-<!--   <footer class="navfooter mt-auto py-3 bgTop">
+  <footer class="navfooter mt-auto py-3 bgTop">
     <div class="container">
       &nbsp
     </div>
-  </footer> -->
+  </footer>
 </nav>
 
 
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+  <!-- Header -->
+  <header class="w3-container" style="padding-top:22px">
+    <h5><b><i class="fa fa-dashboard"></i>Dashboard</b></h5>
+  </header>
+
+  <div class="w3-row-padding w3-margin-bottom dash w3-animate-top">
+      <a href="<?php echo App::getBaseUrl() ?>finanzen/haushaltskasse"> 
+        <div class="w3-third dashbox bgDash1">    
+          <div class="w3-container  w3-padding-16">
+            <div class="left">
+              Haushaltskasse: <br>
+              Du bekommst noch: 
+            </div>
+            <div class="right">
+              52 €
+              <br>
+              13 €
+            </div>
+          </div>  
+          
+        </div>
+      </a>
+      <a href="<?php echo App::getBaseUrl() ?>kueche/einkauf"> 
+        <div class="w3-third dashbox bgDash3">    
+          <div class="w3-container bgDash3 w3-padding-16">
+            <div class="left">
+              Einkauflisten vorhanden:
+            </div>
+            <div class="right">
+              2
+            </div>
+          </div>      
+        </div>
+      </a> 
+      <a href="<?php echo App::getBaseUrl() ?>finanzen/ausgaben"> 
+        <div class="w3-third dashbox bgDash2">    
+          <div class="w3-container bgDash2 w3-padding-16">
+          <div class="left">
+              Ausgaben Sarah:
+              <br>
+              Ausgaben Thomas:
+            </div>
+            <div class="right">
+              4690,00 €
+              <br>
+              4672,96 €
+            </div>
+          </div>      
+        </div>
+      </a>
+  </div>
