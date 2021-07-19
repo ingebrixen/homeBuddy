@@ -146,5 +146,6 @@ class Bootstrap
         //  Klasse wird über die variable _controller instanziert, da über setController die Klasse an _controller übergeben wird.
         $ctrlObj->{$this->_action}($this->_params);
         //  hier werden dann die Prameter übergeben.
+        
     }
 }

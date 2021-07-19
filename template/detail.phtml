@@ -36,48 +36,96 @@
       </tbody>
     </table>
     <div>
-      auswahl mona/ ahr
+      <p>auswahl mont/ jahr</p>
     </div>
   </div>
 </div>
+<!-- End page content -->
 
-  <!-- Footer -->
-  <footer class="footer mt-auto py-3 bgTop">
-  <div class="container-fluid">
+<!-- Footer -->
+
+
+<!-- Modal -->
+<footer class="footer mt-auto py-3 bgTop">
+<div class="container-fluid">
+
       <div class="right">
-        <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-          <i class="fas fa-plus-circle add lift w3-animate-bottom "></i>
+        <a href="#add" data-target="#id" data-toggle="modal" class="lift" onclick="document.getElementById('add').style.display='block'">
+          <i class="fas fa-plus-circle add lift"></i>
         </a>       
       </div>
+      <div id="add" class="w3-modal ">
+            <div class="modal-dialog " >
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="modalTitle">Haushaltskasse</h5>
+                  <button type="button" class="btn-close" onclick="document.getElementById('add').style.display='none'"></button>
+                </div>
+                <div class="modal-body">
+                <form id="addForm" class="addForm" method="POST">
+                  <!-- One "tab" for each step in the form: -->
+                  <div class="tab">abrechnen oder einzahlen?
+                    <div class="row justify-content-md-center">
+                      <div class="col px-5">
+                      <input type="radio" class="sr-only" name="inorout" id="abr" value="out" checked required >
+                      <label for="abr">
+                        <img src="../skin/images/haushaltskasse/out.png" alt="abrechnen" class="img-fluid" >
+                      </label>
+                      </div>
+                      <div class="col px-5">
+                      <input type="radio" class="sr-only" name="inorout" id="einz" value="in">
+                      <label for="einz">
+                          <img src="../skin/images/haushaltskasse/in.png" alt="einzahlen"  class="img-fluid" >
+                      </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tab">Wann:
+                    <p><input type="date" name="wann" class="form-control" value="<?php echo date("Y-m-d"); ?>" required></p>
+                  </div>
+                  <div class="tab">Wieviel:
+                    <p><input type="number" name="wieviel" placeholder="  €" class="form-control" required></p>    
+                    <p>Womit bezahlt?</p> 
+                    <div>
+                      <input type="radio" id="porte" name="womit" value="self" checked>
+                      <label for="porte">eigenes Geld?</label>
+                    </div>
+                    <div>
+                      <input type="radio" id="kasse" name="womit" value="kasse">
+                      <label for="kasse">Haushaltskasse?</label>
+                    </div>              
+                  </div>
+                  <div class="tab">Private Einkäufe he­r­aus­rech­nen?:
+                    <p><input type="number" name="privat" step="0.5" placeholder="€" class="form-control" ></p>              
+                  </div>
+                  <div>
+                    <div class="row">
+                      <div class="col center justify-content-md-center">
+                        <h5>Eintragen<h5>
+                      </div>                    
+                    </div>
+                  </div>
+                  <!-- Circles which indicates the steps of the form: -->
+                  <div style="text-align:center;margin-top:40px;">
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>                    
+                  </div>
+                  <hr>
+                  <div style="overflow:auto;">
+                    <div style="float:right;">
+                    <button type="button" class="btn btn-secondary" id="prevBtn" onclick="nextPrev(-1)">back</button>
+                    <button type="button" class="btn btn-primary" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                    </div>
+                  </div>
+                </form> 
+                </div>
+              </div>
+            </div>
 
-<!--       
-        <i class="fas fa-plus-circle add lift w3-animate-bottom "></i>   
-      -->
-
-      <!-- Modal -->
-      <div class="modal fade" style="position: relativ;" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog" >
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              ...
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Understood</button>
-            </div>
-          </div>
-        </div>
       </div>
-
-
-
-  </div>
 </footer>
-
-<!-- End page content -->
-<!-- Begin Footer -->
+<!-- Begin script area -->
+<script src="<?php echo App::getBaseUrl()?>skin/js/form.js"></script>
 <?php   require_once($_SERVER['DOCUMENT_ROOT'].'/template/foot.inc.phtml'); ?>

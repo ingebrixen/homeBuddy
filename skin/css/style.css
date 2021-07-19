@@ -8,16 +8,7 @@ https://coolors.co/f4f1de-e07a5f-3d405b-81b29a-f2cc8f */
     line-height: 46px; 
     position: fixed;
 }
-.add {
-    font-size: 3rem; 
-    background-color: #fff;
-    border-radius: 50%;
-    padding: 5px;
 
-}
-.lift {
-    transform: translate(0px, -44px);
-}
 .navfooter {
     position: absolute;
     bottom: 0;
@@ -92,6 +83,16 @@ https://coolors.co/f4f1de-e07a5f-3d405b-81b29a-f2cc8f */
 .right {
     float: right !important;
 }
+.add {
+    font-size: 3rem; 
+    background-color: #fff;
+    border-radius: 50%;
+    padding: 5px;
+
+}
+.lift {
+    transform: translate(0px, -44px);
+}
 .smenu {
     color: #f1f1f1 !important;
 }
@@ -100,4 +101,59 @@ https://coolors.co/f4f1de-e07a5f-3d405b-81b29a-f2cc8f */
 }
 .clear {
     clear: both;
+}
+.addForm {
+    margin: 5px auto;
+    width: 100%;
+}
+  
+input.invalid {
+    background-color: #f4a261;
+  }
+
+.tab {
+    display: none;
+}  
+.step {
+height: 15px;
+width: 15px;
+margin: 0 2px;
+background-color: #bbbbbb;
+border: none;
+border-radius: 50%;
+display: inline-block;
+opacity: 0.5;
+}  
+.step.active {
+opacity: 1;
+}  
+.step.finish {
+background-color: #2a9d8f;
+} 
+.addForm label {
+cursor: pointer;
+filter: grayscale(100%);
+}
+.addForm label:hover {
+filter: grayscale(0);
+}
+.addForm input[type="radio"]:checked + label {
+filter: grayscale(0);
+}
+.center {
+align-items: center;
+}
+.img-fluid-half {
+max-width: 30%;
+height: auto;
+}
+@media (min-width: 993px) {
+.modal-dialog {
+    transform: translate(150px, 0px)
+    }
+}
+@media (max-width: 992px) {
+    .modal-dialog {
+        animation: animatezoom 0.3s;
+        }    
 }
