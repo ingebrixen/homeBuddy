@@ -12,10 +12,12 @@ class Base
 {
     public function render(string $template, array $data)
     {
+        
         $view = new \View\Template($template);
         return $view->renderTemplate($data);
         //  $template ist der in der index übergebene Dateiname
         //  $data das Daten Array
+        
     }
     public function isPost()
     {

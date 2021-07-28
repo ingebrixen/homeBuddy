@@ -1,7 +1,7 @@
 <?php
 /**  (c) Thomas Böhme **/
 
-
+use Controller\Base;
 class Bootstrap
 {
 
@@ -68,9 +68,10 @@ class Bootstrap
         $ctrl = sprintf("\\Controller\\%s", ucfirst(strtolower($controller)));
         //var_dump($ctrl);
         if (!class_exists($ctrl)) {
-            throw new InvalidArgumentException(
+/*              throw new InvalidArgumentException(
                 "Controller unbekannt: $ctrl"
-            );
+            );  */
+            echo Base::render('404.phtml', array()); 
         }
         $this->_controller = $ctrl;
     }
@@ -93,9 +94,10 @@ class Bootstrap
         //  var_dump($reflection);
         if (!$reflection->hasMethod($actionMethod)) {
             //  Wenn die Methode nicht vorhanden ist wird der Fehler ausgeworfen, ansonsten die Methode z.B. saveAction gesetzt.
-            throw new InvalidArgumentException(
+/*             throw new InvalidArgumentException(
                 "$this->_controller hat keine Action $action"
-            );
+            ); */
+            echo Base::render('404.phtml', array()); 
         }
         //var_dump($actionMethod);
         $this->_action = $actionMethod;

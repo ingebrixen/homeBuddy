@@ -10,16 +10,18 @@ use Util\Image;
 
 class Upload extends Base {
 
-    public function indexAction($params) {
-
+    public function __construct()
+    {
         $this->_checkLogin();
+    }
+
+    public function indexAction($params) {
 
         echo $this->render('upload.phtml', array());
     }
 
     public function saveAction($params) {
 
-        $this->_checkLogin();
 
         if (!$this->isFileUpload()) {
             throw new \RuntimeException('Kein Dateiupload');
@@ -35,12 +37,4 @@ class Upload extends Base {
         $url = \App::getBaseUrl() . 'index/index/id/' . $newId;
         header('Location: ' . $url);
     }
-
-/*     protected function _checkLogin()
-    {
-        if (!User::isLoggedIn()) {
-            $url = \App::getBaseUrl() . 'index/login';
-            header('Location: ' . $url);
-        }
-    } */
 }

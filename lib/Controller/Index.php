@@ -11,6 +11,10 @@ use Session\User;
 
 class Index extends Base
 {
+    public function __construct()
+    {
+        
+    }
     public function indexAction($params)
     {   
         $this->_checkLogin();

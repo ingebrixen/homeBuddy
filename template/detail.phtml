@@ -1,70 +1,150 @@
 <?php   require_once($_SERVER['DOCUMENT_ROOT'].'/template/head.inc.phtml'); ?>
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:300px;margin-top:43px;">
-  <!-- Header -->
-  <header class="w3-container" style="padding-top:22px">
-    <h5><b><i class="fa fa-dashboard"></i>Dashboard</b></h5>
-  </header>
-
-  <div class="w3-row-padding w3-margin-bottom dash">
-
-      <a href="<?php echo App::getBaseUrl() ?>finanzen/haushaltskasse"> 
-        <div class="w3-third dashbox bgDash1">    
-          <div class="w3-container  w3-padding-16">
-            <div class="left">
-              Haushaltskasse: <br>
-              Du bekommst noch: 
-            </div>
-            <div class="right">
-              52 €
-              <br>
-              13 €
-            </div>
-          </div>  
-          
-        </div>
-      </a>
-      <a href="<?php echo App::getBaseUrl() ?>kueche/einkauf"> 
-        <div class="w3-third dashbox bgDash3">    
-          <div class="w3-container bgDash3 w3-padding-16">
-            <div class="left">
-              Einkauflisten vorhanden:
-            </div>
-            <div class="right">
-              2
-            </div>
-          </div>      
-        </div>
-      </a> 
-      <a href="<?php echo App::getBaseUrl() ?>finanzen/ausgaben"> 
-        <div class="w3-third dashbox bgDash2">    
-          <div class="w3-container bgDash2 w3-padding-16">
-          <div class="left">
-              Ausgaben Sarah:
-              <br>
-              Ausgaben Thomas:
-            </div>
-            <div class="right">
-              4690,00 €
-              <br>
-              4672,96 €
-            </div>
-          </div>      
-        </div>
-      </a>
-  </div>
-
   <div class="container-fluid">
-    Detail
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">wer</th>
+          <th scope="col">wann</th>
+          <th scope="col">wieviel</th>
+          <th scope="col">stand</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">3</th>
+          <td>Thomas</td>
+          <td>4.1.21</td>
+          <td>-27 €</td>
+          <td>157 €</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>sarah</td>
+          <td>2.1.21</td>
+          <td>-16 €</td>
+          <td>184 €</td>
+        </tr>
+        <tr>
+          <th scope="row">1</th>
+          <td>Thomas</td>
+          <td>1.1.21</td>
+          <td>+200 €</td>
+          <td>200 €</td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      <p>auswahl mont/ jahr</p>
+      <?php var_dump($_POST); ?>
+    </div>
   </div>
-  
-
-  <!-- Footer -->
-  <footer class="footer mt-auto py-3">
-  <div class="container">
-    footer
-  </div>
-</footer>
+</div>
 <!-- End page content -->
-<!-- Begin Footer -->
+
+<!-- Footer -->
+
+
+<!-- Modal -->
+<footer class="footer mt-auto py-3 bgTop">
+<div class="container-fluid">
+
+      <div class="right">
+        <a href="#add" data-target="#id" data-toggle="modal" class="lift" onclick="document.getElementById('add').style.display='block'">
+          <i class="fas fa-plus-circle add lift"></i>
+        </a>       
+      </div>
+      <div id="add" class="w3-modal ">
+            <div class="modal-dialog " >
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="modalTitle">Haushaltskasse</h5>
+                  <button type="button" class="btn-close" onclick="document.getElementById('add').style.display='none'"></button>
+                </div>
+                <div class="modal-body">
+                <form id="addForm" class="addForm" method="POST">
+                  <!-- One "tab" for each step in the form: -->
+                  <div class="tab">abrechnen oder einzahlen?
+                    <div class="row justify-content-md-center">
+                      <div class="col px-5">
+                      <input type="radio" class="sr-only" name="inorout" id="abr" value="out" checked required >
+                      <label for="abr">
+                        <img src="../skin/images/haushaltskasse/out.png" alt="abrechnen" class="img-fluid" >
+                      </label>
+                      </div>
+                      <div class="col px-5">
+                      <input type="radio" class="sr-only" name="inorout" id="einz" value="in">
+                      <label for="einz">
+                          <img src="../skin/images/haushaltskasse/in.png" alt="einzahlen"  class="img-fluid" >
+                      </label>
+                      </div>
+                    </div>
+                    <div>
+                      <input type="hidden" name="wer" value="<?php echo $_SESSION['user_name']; ?>">
+                    </div>
+                  </div>
+                  <div class="tab">Wann:
+                    <p><input type="date" name="wann" class="form-control" value="<?php echo date("Y-m-d"); ?>" required></p>
+                  </div>
+                  <div class="tab">Wieviel:
+                    <p><input type="number" name="wieviel" step="0.5" placeholder="  €" class="form-control" required></p>    
+                    <p>Womit bezahlt?</p> 
+                    <div>
+                      <input type="radio" id="porte" name="womit" value="self" checked>
+                      <label for="porte">eigenes Geld?</label>
+                    </div>
+                    <div>
+                      <input type="radio" id="kasse" name="womit" value="kasse">
+                      <label for="kasse">Haushaltskasse?</label>
+                    </div>              
+                  </div>
+                  <div class="tab">Private Einkäufe he­r­aus­rech­nen?:
+                    <p><input type="number" name="privat" step="0.5" placeholder="€" class="form-control" ></p>              
+                  </div>
+                  <div class="tab">wo warst du einkaufen?
+                    <div class="row justify-content-md-center">
+                      <div class="col px-5">
+                      <input type="radio" class="sr-only" name="wo" id="baecker" value="Baecker" required >
+                      <label for="baecker">
+                        <img src="../skin/images/haushaltskasse/bakery.png" alt="Bäcker" class="img-fluid" >
+                      </label>
+                      </div>
+                      <div class="col px-5">
+                      <input type="radio" class="sr-only" name="wo" id="fleischer" value="fleischer">
+                      <label for="fleischer">
+                          <img src="../skin/images/haushaltskasse/wurst.png" alt="Fleischer"  class="img-fluid" >
+                      </label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div>
+                        <input type="text" name="wo" id="wo" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Circles which indicates the steps of the form: -->
+                  <div style="text-align:center;margin-top:40px;">
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span> 
+                  </div>
+                  <hr>
+                  <div style="overflow:auto;">
+                    <div style="float:right;">
+                    <button type="button" class="btn btn-secondary" id="prevBtn" onclick="nextPrev(-1)">back</button>
+                    <button type="button" class="btn btn-primary" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                    </div>
+                  </div>
+                </form> 
+                </div>
+              </div>
+            </div>
+
+      </div>
+</footer>
+<!-- Begin script area -->
+<script src="<?php echo App::getBaseUrl()?>skin/js/form.js"></script>
 <?php   require_once($_SERVER['DOCUMENT_ROOT'].'/template/foot.inc.phtml'); ?>

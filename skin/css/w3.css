@@ -967,7 +967,7 @@ a {
 }
 .w3-animate-top {
   position: relative;
-  animation: animatetop 0.4s;
+  animation: animatetop 0.5s;
 }
 @keyframes animatetop {
   from {
@@ -981,7 +981,7 @@ a {
 }
 .w3-animate-left {
   position: relative;
-  animation: animateleft 0.4s;
+  animation: animateleft 0.5s;
 }
 @keyframes animateleft {
   from {
@@ -995,7 +995,7 @@ a {
 }
 .w3-animate-right {
   position: relative;
-  animation: animateright 0.4s;
+  animation: animateright 0.5s;
 }
 @keyframes animateright {
   from {
@@ -1009,7 +1009,7 @@ a {
 }
 .w3-animate-bottom {
   position: relative;
-  animation: animatebottom 0.4s;
+  animation: animatebottom 0.5s;
 }
 @keyframes animatebottom {
   from {
@@ -1210,7 +1210,7 @@ a {
   float: right !important;
 }
 .w3-button:hover {
-  color: #f4a261 !important;
+  color: #ffffff !important;
   background-color: #264653 !important;
 }
 .w3-transparent,
