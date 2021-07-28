@@ -13,10 +13,11 @@ class Index extends Base
 {
     public function __construct()
     {
-        $this->_checkLogin();
+        
     }
     public function indexAction($params)
     {   
+        $this->_checkLogin();
         // resource model instanzieren
         /** @var \Model\Resource\Bild $model */
         // $model = \App::getResourceModel('Bild');

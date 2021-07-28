@@ -37,6 +37,7 @@
     </table>
     <div>
       <p>auswahl mont/ jahr</p>
+      <?php var_dump($_POST); ?>
     </div>
   </div>
 </div>
@@ -79,12 +80,15 @@
                       </label>
                       </div>
                     </div>
+                    <div>
+                      <input type="hidden" name="wer" value="<?php echo $_SESSION['user_name']; ?>">
+                    </div>
                   </div>
                   <div class="tab">Wann:
                     <p><input type="date" name="wann" class="form-control" value="<?php echo date("Y-m-d"); ?>" required></p>
                   </div>
                   <div class="tab">Wieviel:
-                    <p><input type="number" name="wieviel" placeholder="  €" class="form-control" required></p>    
+                    <p><input type="number" name="wieviel" step="0.5" placeholder="  €" class="form-control" required></p>    
                     <p>Womit bezahlt?</p> 
                     <div>
                       <input type="radio" id="porte" name="womit" value="self" checked>
@@ -98,11 +102,25 @@
                   <div class="tab">Private Einkäufe he­r­aus­rech­nen?:
                     <p><input type="number" name="privat" step="0.5" placeholder="€" class="form-control" ></p>              
                   </div>
-                  <div>
+                  <div class="tab">wo warst du einkaufen?
+                    <div class="row justify-content-md-center">
+                      <div class="col px-5">
+                      <input type="radio" class="sr-only" name="wo" id="baecker" value="Baecker" required >
+                      <label for="baecker">
+                        <img src="../skin/images/haushaltskasse/bakery.png" alt="Bäcker" class="img-fluid" >
+                      </label>
+                      </div>
+                      <div class="col px-5">
+                      <input type="radio" class="sr-only" name="wo" id="fleischer" value="fleischer">
+                      <label for="fleischer">
+                          <img src="../skin/images/haushaltskasse/wurst.png" alt="Fleischer"  class="img-fluid" >
+                      </label>
+                      </div>
+                    </div>
                     <div class="row">
-                      <div class="col center justify-content-md-center">
-                        <h5>Eintragen<h5>
-                      </div>                    
+                      <div>
+                        <input type="text" name="wo" id="wo" class="form-control">
+                      </div>
                     </div>
                   </div>
                   <!-- Circles which indicates the steps of the form: -->
@@ -110,7 +128,8 @@
                     <span class="step"></span>
                     <span class="step"></span>
                     <span class="step"></span>
-                    <span class="step"></span>                    
+                    <span class="step"></span>
+                    <span class="step"></span> 
                   </div>
                   <hr>
                   <div style="overflow:auto;">

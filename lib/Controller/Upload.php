@@ -37,12 +37,4 @@ class Upload extends Base {
         $url = \App::getBaseUrl() . 'index/index/id/' . $newId;
         header('Location: ' . $url);
     }
-
-/*     protected function _checkLogin()
-    {
-        if (!User::isLoggedIn()) {
-            $url = \App::getBaseUrl() . 'index/login';
-            header('Location: ' . $url);
-        }
-    } */
 }
