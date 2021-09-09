@@ -2,6 +2,9 @@
 
 namespace Controller;
 
+use Model\Settler;
+use Session\User;
+
 class Finanzen extends Base {
 
     public function __construct()
@@ -14,11 +17,31 @@ class Finanzen extends Base {
         echo $this->render('dashboard.phtml', array());
     }
     public function haushaltskasseAction($params) 
-    {               
+    {       
+        if ($this->isPost()) 
+        {
+            /** @var \Model\Resource\Settler $getResource */
+            $getResource = \App::getResourceModel('Settler');
+
+            if ($getResource->addMoney('haushaltskasse', $_POST['inorout'],$_POST['wer'], $_POST['wann'], $_POST['wieviel'], $_POST['womit'], $_POST['privat'], $_POST['wo'])) {
+                echo $this->render('detail.phtml', array());
+            }
+
+        }
         echo $this->render('detail.phtml', array());
     }
     public function ausgabenAction($params)
     {
+        if ($this->isPost()) 
+        {
+            /** @var \Model\Resource\Settler $getResource */
+            $getResource = \App::getResourceModel('Settler');
+
+            if ($getResource->addMoney('ausgaben',$_POST['inorout'],$_POST['wer'], $_POST['wann'], $_POST['wieviel'], $_POST['womit'], $_POST['privat'], $_POST['wo'])) {
+                echo $this->render('detail.phtml', array());
+            }
+
+        }
         echo $this->render('detail.phtml', array());
     }
     public function vanlifeAction($params)

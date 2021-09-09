@@ -4,9 +4,10 @@
 
 namespace Model;
 
-class Abrechnen
+class Settler
 {
     private $_id = 0;
+    private $_dbname ="";
     private $_inorout = "";
     private $_wer = "";
     private $_wann = "";
@@ -29,17 +30,31 @@ class Abrechnen
     {
         $this->_id = $id;
     }
+     /**
+     * @return int
+     */
+    public function getDbName()
+    {
+        return $this->_dbname;
+    }
+    /**
+     * @param int $id
+     */
+    public function setDbName($dbname)
+    {
+        $this->_dbname = $dbname;
+    }
     /**
      * @return string
      */
-    public function getInorout()
+    public function getInOrOut()
     {
         return $this->_inorout;
     }
     /**
      * @param string $inorout
      */
-    public function setInorout($inorout)
+    public function setInOrOut($inorout)
     {
         $this->_inorout = $inorout;
     }
@@ -51,9 +66,9 @@ class Abrechnen
         return $this->_wer;
     }
     /**
-     * @param string $inorout
+     * @param string $wer
      */
-    public function setWert($wer)
+    public function setWer($wer)
     {
         $this->_wer = $wer;
     }
