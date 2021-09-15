@@ -17,18 +17,21 @@ class Finanzen extends Base {
         echo $this->render('dashboard.phtml', array());
     }
     public function haushaltskasseAction($params) 
-    {       
+    {    
+        $model = \App::getResourceModel('Settler');
+        $kasse = $model->getHaushaltsbuch();
+
         if ($this->isPost()) 
         {
             /** @var \Model\Resource\Settler $getResource */
             $getResource = \App::getResourceModel('Settler');
 
-            if ($getResource->addMoney('haushaltskasse', $_POST['inorout'],$_POST['wer'], $_POST['wann'], $_POST['wieviel'], $_POST['womit'], $_POST['privat'], $_POST['wo'])) {
-                echo $this->render('detail.phtml', array());
+            if ($getResource->addMoney($_POST['wer'], $_POST['uri'], $_POST['inorout'], $_POST['wann'], $_POST['wieviel'], $_POST['womit'], $_POST['privat'], $_POST['wo'])) {
+                
             }
-
+            echo $this->render('detail.phtml', array('kasse' => $kasse));
         }
-        echo $this->render('detail.phtml', array());
+        echo $this->render('detail.phtml', array('kasse' => $kasse));
     }
     public function ausgabenAction($params)
     {

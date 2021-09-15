@@ -11,7 +11,7 @@
           <th scope="col">stand</th>
         </tr>
       </thead>
-      <tbody>
+      <!-- <tbody>
         <tr>
           <th scope="row">3</th>
           <td>Thomas</td>
@@ -33,11 +33,24 @@
           <td>+200 €</td>
           <td>200 €</td>
         </tr>
-      </tbody>
+      </tbody> -->
+      <tbody>
+      <?php foreach ($kasse as $ausgabe): ?>
+        <tr>
+          <th scope="row"><?php echo $ausgabe->getId(); ?></th>
+          <td><?php echo $ausgabe->getWer(); ?></td>
+          <td><?php echo $ausgabe->getWann(); ?></td>
+          <td><?php echo $ausgabe->getWieviel(); ?></td>
+          <td></td>
+        </tr>
+        <?php endforeach; ?>
+      </tbody>      
     </table>
     <div>
       <p>auswahl mont/ jahr</p>
       <?php var_dump($_POST); ?>
+      <br>
+
     </div>
   </div>
 </div>
@@ -64,6 +77,8 @@
                 </div>
                 <div class="modal-body">
                 <form id="addForm" class="addForm" method="POST">
+                  <input type="hidden" name="wer" value="<?php echo $_SESSION['user_name']; ?>">
+                  <input type="hidden" name="uri" value="<?php echo $_SERVER['REQUEST_URI']; ?>">
                   <!-- One "tab" for each step in the form: -->
                   <div class="tab">abrechnen oder einzahlen?
                     <div class="row justify-content-md-center">
@@ -79,9 +94,6 @@
                           <img src="../skin/images/haushaltskasse/in.png" alt="einzahlen"  class="img-fluid" >
                       </label>
                       </div>
-                    </div>
-                    <div>
-                      <input type="hidden" name="wer" value="<?php echo $_SESSION['user_name']; ?>">
                     </div>
                   </div>
                   <div class="tab">Wann:

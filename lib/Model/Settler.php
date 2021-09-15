@@ -7,7 +7,7 @@ namespace Model;
 class Settler
 {
     private $_id = 0;
-    private $_dbname ="";
+    private $_uri = "";
     private $_inorout = "";
     private $_wer = "";
     private $_wann = "";
@@ -30,19 +30,19 @@ class Settler
     {
         $this->_id = $id;
     }
-     /**
+       /**
      * @return int
      */
-    public function getDbName()
+    public function getUri()
     {
-        return $this->_dbname;
+        return $this->_uri;
     }
     /**
      * @param int $id
      */
-    public function setDbName($dbname)
+    public function setUri($uri)
     {
-        $this->_dbname = $dbname;
+        $this->_uri = $uri;
     }
     /**
      * @return string
