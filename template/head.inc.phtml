@@ -21,7 +21,7 @@
 <nav class="w3-sidebar w3-collapse w3-white w3-animate-left mh" style="z-index:3;width:300px;" id="mySidebar"><br>
   <div class="w3-container w3-row">
     <div class="w3-col s4">
-      <img src="../skin/images/avatar2.png" class="w3-circle w3-margin-right" style="width:46px">
+      <img src="<?php echo App::getBaseUrl()?>skin/images/avatar2.png" class="w3-circle w3-margin-right" style="width:46px">
     </div>
     <div class="w3-col s8 w3-bar">
       <span>Hallo, <strong><?php echo $_SESSION['user_name']; ?></strong></span><br>
@@ -31,7 +31,7 @@
     </div>
   </div>
   <hr>
-  <div class="w3-bar-block" style="padding-bottom: 46px;">
+  <div class="w3-bar-block paddingBottom">
     <!-- <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a> -->
     <a href="<?php echo App::getBaseUrl() ?>" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw iconWidth"></i>Dashboard</a>
     <hr>

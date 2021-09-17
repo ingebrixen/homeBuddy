@@ -27,9 +27,9 @@ class Finanzen extends Base {
             $getResource = \App::getResourceModel('Settler');
 
             if ($getResource->addMoney($_POST['wer'], $_POST['uri'], $_POST['inorout'], $_POST['wann'], $_POST['wieviel'], $_POST['womit'], $_POST['privat'], $_POST['wo'])) {
-                
+                $url = \App::getBaseUrl() . 'finanzen/haushaltskasse';
+                header('Location: ' . $url);
             }
-            echo $this->render('detail.phtml', array('kasse' => $kasse));
         }
         echo $this->render('detail.phtml', array('kasse' => $kasse));
     }

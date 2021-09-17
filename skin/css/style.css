@@ -157,3 +157,6 @@ height: auto;
         animation: animatezoom 0.3s;
         }    
 }
+.paddingBottom {
+    margin-bottom: 46px;
+}
