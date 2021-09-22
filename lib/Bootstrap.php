@@ -72,7 +72,7 @@ class Bootstrap
              throw new InvalidArgumentException(
                 "Controller unbekannt: $ctrl"
             ); 
-
+            /* echo Base::render('404.phtml', array());  */
         }
         $this->_controller = $ctrl;
     }
@@ -98,7 +98,9 @@ class Bootstrap
             throw new InvalidArgumentException(
                 "$this->_controller hat keine Action $action"
             );
-/*             echo Base::render('404.phtml', array());  */
+            /* echo Base::render('404.phtml', array());  */
+
+
         }
         //var_dump($actionMethod);
         $this->_action = $actionMethod;
@@ -127,7 +129,7 @@ class Bootstrap
         for ($i=0; $i < count($splitted); $i++) {
             //  solange $i kleiner ist als die Anzahl in $splitted wird $i erhöht.
             if ($i % 2 > 0) {
-                //  zuerst wird wieder geprüft ob es sich um einen geradden oder ungeraden durchlauf handelt, wenn er gerade ist werden keine werte im Array gesetzt
+                //  zuerst wird wieder geprüft ob es sich um einen gerad en oder ungeraden durchlauf handelt, wenn er gerade ist werden keine werte im Array gesetzt
                 //  hier werden aus dem Array $splitted über den index[] die werte zugeordnet
                 //  der erste durchlauf ist leer da $i(0) / 2 keine rest hat. $i wird dann um eins erhöht $i++
                 $paramArray[$splitted[$lastIndex]] = $splitted[$i];
@@ -148,6 +150,6 @@ class Bootstrap
         $ctrlObj = new $this->_controller;
         //  Klasse wird über die variable _controller instanziert, da über setController die Klasse an _controller übergeben wird.
         $ctrlObj->{$this->_action}($this->_params);
-        //  hier werden dann die Prameter übergeben.
+        //  hier werden dann die Parameter übergeben.
     }
 }

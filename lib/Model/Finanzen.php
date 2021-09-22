@@ -4,11 +4,11 @@
 
 namespace Model;
 
-class Settler
+class Finanzen
 {
     private $_id = 0;
     private $_uri = "";
-    private $_inorout = "";
+    private $_stand = "";
     private $_wer = "";
     private $_wann = "";
     private $_wieviel = "";
@@ -47,16 +47,16 @@ class Settler
     /**
      * @return string
      */
-    public function getInOrOut()
+    public function getStand()
     {
-        return $this->_inorout;
+        return $this->_stand;
     }
     /**
-     * @param string $inorout
+     * @param string $stand
      */
-    public function setInOrOut($inorout)
+    public function setStand($stand)
     {
-        $this->_inorout = $inorout;
+        $this->_stand = $stand;
     }
     /**
      * @return string

@@ -79,7 +79,7 @@ class Index extends Base
 
     protected function _goToLogin()
     {
-        $url = \App::getBaseUrl() . 'index/login';
+        $url = \App::getBaseUrl() . '/index/login';
         header('Location: ' . $url);
     }
 

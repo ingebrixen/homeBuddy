@@ -4,10 +4,10 @@
 <title>homeBuddy - Deine freundliche Haushaltshilfe</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="<?php echo App::getBaseUrl()?>skin/css/w3.css">
+<link rel="stylesheet" href="<?php echo App::getBaseUrl() ?>/skin/css/w3.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
-<link media="all" rel="stylesheet" type="text/css" href="<?php echo App::getBaseUrl()?>skin/css/bootstrap.css" />
-<link media="all" rel="stylesheet" type="text/css" href="<?php echo App::getBaseUrl()?>skin/css/style.css" />
+<link media="all" rel="stylesheet" type="text/css" href="<?php echo App::getBaseUrl() ?>/skin/css/bootstrap.css" />
+<link media="all" rel="stylesheet" type="text/css" href="<?php echo App::getBaseUrl() ?>/skin/css/style.css" />
 
 <body class="bg-light">
 
@@ -21,7 +21,7 @@
 <nav class="w3-sidebar w3-collapse w3-white w3-animate-left mh" style="z-index:3;width:300px;" id="mySidebar"><br>
   <div class="w3-container w3-row">
     <div class="w3-col s4">
-      <img src="<?php echo App::getBaseUrl()?>skin/images/avatar2.png" class="w3-circle w3-margin-right" style="width:46px">
+      <img src="<?php echo App::getBaseUrl() ?>/skin/images/avatar2.png" class="w3-circle w3-margin-right" style="width:46px">
     </div>
     <div class="w3-col s8 w3-bar">
       <span>Hallo, <strong><?php echo $_SESSION['user_name']; ?></strong></span><br>
@@ -33,28 +33,28 @@
   <hr>
   <div class="w3-bar-block paddingBottom">
     <!-- <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a> -->
-    <a href="<?php echo App::getBaseUrl() ?>" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw iconWidth"></i>Dashboard</a>
+    <a href="<?php echo App::getBaseUrl() ?>/" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw iconWidth"></i>Dashboard</a>
     <hr>
-    <a href="<?php echo App::getBaseUrl() ?>todo/" class="w3-bar-item w3-button w3-padding"><i class="fas fa-sticky-note iconWidth"></i>Notizen</a>
-    <a href="<?php echo App::getBaseUrl() ?>todo/" class="w3-bar-item w3-button w3-padding"><i class="fas fa-tasks iconWidth"></i>toDo</a>
+    <a href="<?php echo App::getBaseUrl() ?>/todo/" class="w3-bar-item w3-button w3-padding"><i class="fas fa-sticky-note iconWidth"></i>Notizen</a>
+    <a href="<?php echo App::getBaseUrl() ?>/todo/" class="w3-bar-item w3-button w3-padding"><i class="fas fa-tasks iconWidth"></i>toDo</a>
     <hr>
-    <a href="<?php echo App::getBaseUrl() ?>finanzen/" class="w3-bar-item w3-button w3-padding"><i class="fas fa-euro-sign iconWidth"></i>Finanzen</a>
-    <a href="<?php echo App::getBaseUrl() ?>finanzen/haushaltskasse" class="w3-bar-item w3-button w3-padding"><i class="fas fa-wallet iconWidth"></i>Haushaltskasse</a>
-    <a href="<?php echo App::getBaseUrl() ?>finanzen/ausgaben" class="w3-bar-item w3-button w3-padding"><i class="fas fa-cash-register iconWidth"></i>Ausgaben allg.</a>
-    <a href="<?php echo App::getBaseUrl() ?>finanzen/vanLife" class="w3-bar-item w3-button w3-padding"><i class="fas fa-shuttle-van iconWidth"></i>Ausgaben VanLife</a>
+    <a href="<?php echo App::getBaseUrl() ?>/finanzen/" class="w3-bar-item w3-button w3-padding"><i class="fas fa-euro-sign iconWidth"></i>Finanzen</a>
+    <a href="<?php echo App::getBaseUrl() ?>/finanzen/haushaltskasse" class="w3-bar-item w3-button w3-padding"><i class="fas fa-wallet iconWidth"></i>Haushaltskasse</a>
+    <a href="<?php echo App::getBaseUrl() ?>/finanzen/ausgaben" class="w3-bar-item w3-button w3-padding"><i class="fas fa-cash-register iconWidth"></i>Ausgaben allg.</a>
+    <a href="<?php echo App::getBaseUrl() ?>/finanzen/vanLife" class="w3-bar-item w3-button w3-padding"><i class="fas fa-shuttle-van iconWidth"></i>Ausgaben VanLife</a>
     <hr>
-    <a href="<?php echo App::getBaseUrl() ?>kueche/" class="w3-bar-item w3-button w3-padding"><i class="fas fa-mug-hot iconWidth"></i>Küche</a>
-    <a href="<?php echo App::getBaseUrl() ?>kueche/einkauf" class="w3-bar-item w3-button w3-padding"><i class="fas fa-shopping-bag iconWidth"></i>Einkauf</a>
-    <a href="<?php echo App::getBaseUrl() ?>kueche/rezepte" class="w3-bar-item w3-button w3-padding"><i class="fas fa-sync iconWidth"></i>Rezept Karusell</a>
+    <a href="<?php echo App::getBaseUrl() ?>/kueche/" class="w3-bar-item w3-button w3-padding"><i class="fas fa-mug-hot iconWidth"></i>Küche</a>
+    <a href="<?php echo App::getBaseUrl() ?>/kueche/einkauf" class="w3-bar-item w3-button w3-padding"><i class="fas fa-shopping-bag iconWidth"></i>Einkauf</a>
+    <a href="<?php echo App::getBaseUrl() ?>/kueche/rezepte" class="w3-bar-item w3-button w3-padding"><i class="fas fa-sync iconWidth"></i>Rezept Karusell</a>
     <hr>
-    <a href="<?php echo App::getBaseUrl() ?>" class="w3-bar-item w3-button w3-padding"><i class="fas fa-cog iconWidth"></i>Settings</a>
+    <a href="<?php echo App::getBaseUrl() ?>/" class="w3-bar-item w3-button w3-padding"><i class="fas fa-cog iconWidth"></i>Settings</a>
     <hr>
     <?php if (\Session\User::isLoggedIn()): ?>
-    <a href="<?php echo App::getBaseUrl() ?>index/logout" class="w3-bar-item w3-button w3-padding"><i class="fa fa-power-off iconWidth"></i>Logout</a>
+    <a href="<?php echo App::getBaseUrl() ?>/index/logout" class="w3-bar-item w3-button w3-padding"><i class="fa fa-power-off iconWidth"></i>Logout</a>
     <br>
     <br>
     <?php else: ?>
-    <a href="<?php echo App::getBaseUrl() ?>index/login" class="w3-padding link-dark"><i class="fa fa-power-off iconWidth"></i>Login</a>
+    <a href="<?php echo App::getBaseUrl() ?>/index/login" class="w3-padding link-dark"><i class="fa fa-power-off iconWidth"></i>Login</a>
     <br>
     <br>
     <?php endif; ?>
@@ -78,7 +78,7 @@
   </header>
 
   <div class="w3-row-padding w3-margin-bottom dash w3-animate-top">
-      <a href="<?php echo App::getBaseUrl() ?>finanzen/haushaltskasse"> 
+      <a href="<?php echo App::getBaseUrl() ?>/finanzen/haushaltskasse"> 
         <div class="w3-third dashbox bgDash1">    
           <div class="w3-container  w3-padding-16">
             <div class="left">
@@ -94,7 +94,7 @@
           
         </div>
       </a>
-      <a href="<?php echo App::getBaseUrl() ?>kueche/einkauf"> 
+      <a href="<?php echo App::getBaseUrl() ?>/kueche/einkauf"> 
         <div class="w3-third dashbox bgDash3">    
           <div class="w3-container bgDash3 w3-padding-16">
             <div class="left">
@@ -106,7 +106,7 @@
           </div>      
         </div>
       </a> 
-      <a href="<?php echo App::getBaseUrl() ?>finanzen/ausgaben"> 
+      <a href="<?php echo App::getBaseUrl() ?>/finanzen/ausgaben"> 
         <div class="w3-third dashbox bgDash2">    
           <div class="w3-container bgDash2 w3-padding-16">
           <div class="left">

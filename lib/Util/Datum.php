@@ -2,7 +2,6 @@
 /**  (c) Thomas Böhme **/
 
 
-
 namespace Util;
 
 class Datum  
