@@ -2,7 +2,6 @@
 /**  (c) Thomas Böhme **/
 
 
-
 namespace Util;
 
 class Datum  
@@ -11,6 +10,7 @@ class Datum
     {
         $Start  = new \DateTime(date('Y-m-d')); // Datum von
         $dtEnd = new \DateTime(date('m/y'));    // Datum bis
+        $dtEnd->modify('first day of next month');
         
         $dtStart = $Start->modify('-1 year');
         

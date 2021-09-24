@@ -409,7 +409,7 @@ a {
   background-color: #fff;
   display: none;
   position: absolute;
-  min-width: 160px;
+  min-width: 100%;
   margin: 0;
   padding: 0;
   z-index: 1;
@@ -576,7 +576,7 @@ a {
 .w3-col.s12 {
   width: 99.99999%;
 }
-@media (min-width: 601px) {
+@media (min-width: 750px) {
   .w3-col.m1 {
     width: 8.33333%;
   }

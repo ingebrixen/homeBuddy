@@ -16,8 +16,7 @@ class Base
         $view = new \View\Template($template);
         return $view->renderTemplate($data);
         //  $template ist der in der index übergebene Dateiname
-        //  $data das Daten Array
-        
+        //  $data das Daten Array        
     }
     public function isPost()
     {
@@ -35,7 +34,7 @@ class Base
     protected function _checkLogin()
     {
         if (!User::isLoggedIn()) {
-            $url = \App::getBaseUrl() . 'index/login';
+            $url = \App::getBaseUrl() . '/index/login';
             header('Location: ' . $url);
         }
     }
