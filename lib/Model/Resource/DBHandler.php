@@ -22,9 +22,9 @@ class DBHandler extends Base
             $colum = $key[0];
             $value = $params[$colum];
             return "WHERE ".$colum." LIKE '".$value."%'";
-        } /* else {
-            return "";
-        } */
+        } else {
+            return " ";
+        }
     }
     private function sort()
     {
@@ -34,7 +34,7 @@ class DBHandler extends Base
     {
 
     }
-    public function selectData($uri, $params) //z.B. sortierung, anzahl einträge, standard (z.b. bei sortierung oder datumsfilter)
+    public function selectData($uri, $colum, $params) //z.B. sortierung, anzahl einträge, standard (z.b. bei sortierung oder datumsfilter)
     {    
         $table = self::getTableName($uri);      
         $where = self::setWhere($params);

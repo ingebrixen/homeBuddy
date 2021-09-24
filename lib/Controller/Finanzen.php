@@ -20,11 +20,13 @@ class Finanzen extends Base {
     {    
         $model = \App::getResourceModel('DBHandler');
         if (empty($params)) {
-            $params = ["Datum" => date('Y-m')];
-            // standard definiere, wenn kein filter angegeben ist, wird immer der aktuelle Monat ausgegeben.
+            $params = ["Datum" => date('Y-m')];            // standard definiere, wenn kein filter angegeben ist, wird immer der aktuelle Monat ausgegeben.
         }
         $kasse = $model->selectData($_SERVER['REQUEST_URI'], $params);
+        echo $this->render('haushaltskasse.phtml', array('kasse' => $kasse));
 
+        
+        
         if ($this->isPost()) 
         {
             // array(8) { ["wer"]=> string(6) "Thomas" ["uri"]=> string(24) "/finanzen/haushaltskasse" ["inorout"]=> string(3) "-" ["Datum"]=> string(10) "2021-09-18" 
@@ -36,8 +38,7 @@ class Finanzen extends Base {
                 $url = \App::getBaseUrl() . '/finanzen/haushaltskasse';
                 header('Location: ' . $url);                
             }
-        }
-        echo $this->render('haushaltskasse.phtml', array('kasse' => $kasse));
+        }        
     }
     public function ausgabenAction($params)
     {
