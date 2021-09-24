@@ -6,7 +6,7 @@
         <button onclick="getMonth()" class="btn btn-primary">Monat/ Jahr</button>
         <div id="monat" class="w3-dropdown-content w3-bar-block w3-border">
         <?php foreach (\Util\Datum::getDateRange() as $date): ?>
-          <a href="<?php echo App::getBaseUrl()."/finanzen/haushaltskasse/Datum/".$date->format('Y-m'); ?>" class="w3-bar-item w3-button"><?php echo $date->format('m/y')."\n";?></a>
+          <a href="<?php echo App::getBaseUrl()."/finanzen/haushaltskasse/datum/".$date->format('Y-m'); ?>" class="w3-bar-item w3-button"><?php echo $date->format('m/y')."\n";?></a>
         <?php endforeach; ?> 
         </div>
       </div>

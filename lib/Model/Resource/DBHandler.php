@@ -5,6 +5,7 @@ namespace Model\Resource;
 
 class DBHandler extends Base
 {
+    
     private function getTableName($uri)
     {
         $dbTable = \explode("/", $uri);
@@ -37,24 +38,25 @@ class DBHandler extends Base
     {    
         $table = self::getTableName($uri);      
         $where = self::setWhere($params);
-        $sql = "SELECT id, wer, Datum, wieviel, stand FROM $table $where ORDER BY ID DESC";
+        $sql = "SELECT * FROM $table $where ORDER BY ID DESC";
 
         $dbResult = $this->connect()->query($sql);
 
-        $listKasse = array();
-
+        $dataSet = array();
+        // dbresult array muss hier weiterverarbeitet werden und dann im Finanzen Controller verarbeitet werden 
         while ($row = $dbResult->fetch(\PDO::FETCH_ASSOC)) {
             /** @var \Model\Benutzer $benutzer */
-            $kasse = \App::getModel('Finanzen');
-            $kasse->setId($row['id']);
-            $kasse->setWer($row['wer']);
-            $kasse->setWann($row['Datum']);
-            $kasse->setWieviel($row['wieviel']);
-            $kasse->setStand($row['stand']);
+            $data = \App::getModel('Finanzen');
+            $data->setId($row['id']);
+            $data->setWer($row['wer']);
+            $data->setWann($row['datum']);
+            $data->setWieviel($row['wieviel']);
+            $data->setStand($row['stand']);
             
-            $listKasse[] = $kasse;
+            $dataSet[] = $data;
         }
-        return $listKasse;
+        return $dataSet;
+        /* return $dbResult; */
     }
     public function addData(string $wer, string $uri, string $inorout, string $wann, string $wieviel, string $womit, string $privat, string $wo)
     {
@@ -62,7 +64,7 @@ class DBHandler extends Base
         
         $table = self::getTableName($uri);
 
-        $sql = "INSERT INTO $table (wer, Datum, wieviel, womit, privat, wo) VALUES (:wer, :wann, :wieviel, :womit, :privat, :wo)";
+        $sql = "INSERT INTO $table (wer, datum, wieviel, womit, privat, wo) VALUES (:wer, :wann, :wieviel, :womit, :privat, :wo)";
 
         $connection = $this->connect();
         $statement = $connection->prepare($sql);
