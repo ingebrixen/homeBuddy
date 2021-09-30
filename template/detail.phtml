@@ -9,9 +9,9 @@
           <a href="<?php echo App::getBaseUrl().$_SERVER['REQUEST_URI']."/Datum/".$date->format('Y-m'); ?>" class="w3-bar-item w3-button"><?php echo $date->format('m/y')."\n";?></a>
          <!-- check ob schon filter/datum gesetzt ist sonst > http://localhost:3000/finanzen/haushaltskasse/filter/2021-09/filter/2021-04 
         funktion check filter
-        
+        tabellenkopf dynamisch über ausgabe array index
         --> 
-
+      
 
         <?php endforeach; ?> 
         </div>
@@ -22,26 +22,28 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">wer</th>
-          <th scope="col">wann</th>
-          <th scope="col">wieviel</th>
-          <th scope="col">stand</th>
+          <th scope="col">Wer</th>
+          <th scope="col">Wann</th>
+          <th scope="col">Wieviel</th>
+          <th scope="col">Stand</th>
         </tr>
       </thead>
       <tbody>
+      <?php var_dump($kasse); ?>
       <?php foreach ($kasse as $ausgabe): ?>
         <tr>
           <th scope="row"><?php echo $ausgabe->getId(); ?></th>
           <td><?php echo $ausgabe->getWer(); ?></td>
           <td><?php echo $ausgabe->getWann(); ?></td>
           <td><?php echo $ausgabe->getWieviel(); ?></td>
-          <td></td>
+          <td><?php echo $ausgabe->getStand(); ?></td>
         </tr>
         <?php endforeach; ?>
       </tbody>      
     </table>
   </div>
 </div>
+
 <!-- End page content -->
 
 <!-- Footer -->
@@ -71,13 +73,13 @@
                   <div class="tab">abrechnen oder einzahlen?
                     <div class="row justify-content-md-center">
                       <div class="col px-5">
-                      <input type="radio" class="sr-only" name="inorout" id="abr" value="out" checked required >
+                      <input type="radio" class="sr-only" name="inorout" id="abr" value="-" checked required >
                       <label for="abr">
                         <img src="<?php echo App::getBaseUrl() ?>/skin/images/haushaltskasse/out.png" alt="abrechnen" class="img-fluid" >
                       </label>
                       </div>
                       <div class="col px-5">
-                      <input type="radio" class="sr-only" name="inorout" id="einz" value="in">
+                      <input type="radio" class="sr-only" name="inorout" id="einz" value="+">
                       <label for="einz">
                           <img src="<?php echo App::getBaseUrl() ?>/skin/images/haushaltskasse/in.png" alt="einzahlen"  class="img-fluid" >
                       </label>

@@ -28,8 +28,8 @@
           <th scope="row"><?php echo $ausgabe->getId(); ?></th>
           <td><?php echo $ausgabe->getWer(); ?></td>
           <td><?php echo $ausgabe->getWann(); ?></td>
-          <td><?php echo $ausgabe->getWieviel(); ?></td>
-          <td><?php echo $ausgabe->getStand(); ?></td>
+          <td><?php echo $ausgabe->getWieviel(); ?> &#8364;</td>
+          <td><?php echo $ausgabe->getStand(); ?> &#8364;</td>
         </tr>
         <?php endforeach; ?>
       </tbody>      
@@ -60,7 +60,7 @@
                 <div class="modal-body">
                 <form id="addForm" class="addForm" method="POST">
                   <input type="hidden" name="wer" value="<?php echo $_SESSION['user_name']; ?>">
-                  <input type="hidden" name="uri" value="<?php echo $_SERVER['REQUEST_URI']; ?>">
+                  
                   <!-- One "tab" for each step in the form: -->
                   <div class="tab">abrechnen oder einzahlen?
                     <div class="row justify-content-md-center">
@@ -79,7 +79,7 @@
                     </div>
                   </div>
                   <div class="tab">Wann:
-                    <p><input type="date" name="wann" class="form-control" value="<?php echo date("Y-m-d"); ?>" required></p>
+                    <p><input type="date" name="datum" class="form-control" value="<?php echo date("Y-m-d"); ?>" required></p>
                   </div>
                   <div class="tab">Wieviel:
                     <p><input type="number" name="wieviel" step="0.5" placeholder="  €" class="form-control" required></p>    
