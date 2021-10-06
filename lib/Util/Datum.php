@@ -6,7 +6,7 @@ namespace Util;
 
 class Datum  
 {
-    public function getDateRange()
+    public static function getDateRange()
     {
         $Start  = new \DateTime(date('Y-m-d')); // Datum von
         $dtEnd = new \DateTime(date('m/y'));    // Datum bis
