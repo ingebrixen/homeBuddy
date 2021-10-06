@@ -17,7 +17,7 @@ class Finanzen
     private $_wo            = "";
     private $_kategorie     = "";
     private $_kommentar     = "";
-    private $_sumAusgaben   = "";
+    private $_sumWieviel   = "";
     
 
     public function getId()
@@ -108,13 +108,13 @@ class Finanzen
     {
         $this->_kommentar = $kommentar;
     }
-    public function getSumAusgaben()
+    public function getSumWieviel()
     {
-        return $this->_sumAusgaben;
+        return $this->_sumWieivel;
     }
-    public function setSumAusgaben($sumAusgaben)
+    public function setSumWieviel($sumWieivel)
     {
-        $this->_sumAusgaben = $sumAusgaben;
+        $this->_sumWieivel = $sumWieivel;
     }
 
 

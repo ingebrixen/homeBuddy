@@ -23,13 +23,13 @@
         </tr>
       </thead>
       <tbody>
-      <?php $i="0"; foreach ($data as $ausgabe): $i++;?>
+      <?php $i=count($data)+1; foreach ($data as $ausgabe): $i--;?>
         <tr>
-          <th scope="row"><?php $ausgabe->getId(); echo $i;?></th>
+          <th scope="row"><?php /* echo */ $ausgabe->getId(); echo $i;?></th>
           <td><?php echo $ausgabe->getWer(); ?></td>
           <td><?php echo date("d.m.y",strtotime($ausgabe->getWann())); ?></td>
-          <td><?php echo $ausgabe->getWieviel(); ?>€</td>
-          <td><?php echo $ausgabe->getStand(); ?>&#8364;</td>
+          <td><?php echo $ausgabe->getWieviel(); ?> &#8364;</td>
+          <td><?php echo $ausgabe->getStand(); ?> &#8364;</td>
         </tr>
         <?php endforeach; ?>
       </tbody>      

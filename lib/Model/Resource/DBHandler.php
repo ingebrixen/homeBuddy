@@ -26,19 +26,19 @@ class DBHandler extends Base
         return $_dataSet;
         /* return $dbResult; */
     }
-    public function addData($uri, array $post)
+    public function insertData($uri, array $post)
     {
         $sql = \sprintf("INSERT INTO %s (%s) VALUES (%s)", self::getTableName($uri), self::getColum($post), self::getValue($post));
         $connection = $this->connect();
         $statement = $connection->prepare($sql);
         //neue methode createBindValue
-        $keys = array_keys($post);
+/*         $keys = array_keys($post);
         foreach($keys as &$value) {
             $value = ":".$value;
         }
-        $erg = array_combine($keys, $post);
+        $arryComb = array_combine($keys, $post); */
         //methode bis hier
-        foreach ($erg as $key => &$val) {
+        foreach (self::createBindValue($post) as $key => &$val) {
             $statement->bindValue($key, $val);
         }
         $statement->execute();
@@ -47,7 +47,7 @@ class DBHandler extends Base
     }
     public function getTopAusgaben()
     {
-        $sql = "SELECT wer AS wer, sum(wieviel) AS sumAusgaben FROM ausgaben GROUP BY wer";
+        $sql = "SELECT wer, sum(wieviel) AS sumWieviel FROM ausgaben GROUP BY wer";
         $dbResult = $this->connect()->query($sql);
         $_dataSet = array();
           // dbresult array muss hier weiterverarbeitet werden und dann im Finanzen Controller verarbeitet werden 
@@ -55,16 +55,21 @@ class DBHandler extends Base
             /** @var \Model\Benutzer $benutzer */
             $data = \App::getModel('Finanzen');
             $data->setWer($row['wer']);
-            $data->setSumAusgaben($row['sumAusgaben']);
+            $data->setSumWieviel($row['sumWieviel']);
             
             $_dataSet[] = $data;
         }
         return $_dataSet;
 
     }
-    private function createBindValue()
+    private function createBindValue($post)
     {
-
+        $keys = array_keys($post);
+        foreach($keys as &$value) {
+            $value = ":".$value;
+        }
+        $arryComb = array_combine($keys, $post);
+        return $arryComb;
     }
     private function sort()
     {
