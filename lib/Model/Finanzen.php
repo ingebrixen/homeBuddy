@@ -6,15 +6,18 @@ namespace Model;
 
 class Finanzen
 {
-    private $_id        = 0;
-    private $_uri       = "";
-    private $_stand     = "";
-    private $_wer       = "";
-    private $_wann      = "";
-    private $_wieviel   = "";
-    private $_womit     = "";
-    private $_privat    = "";
-    private $_wo        = "";
+    private $_id            = 0;
+    private $_uri           = "";
+    private $_stand         = "";
+    private $_wer           = "";
+    private $_wann          = "";
+    private $_wieviel       = "";
+    private $_womit         = "";
+    private $_privat        = "";
+    private $_wo            = "";
+    private $_kategorie     = "";
+    private $_kommentar     = "";
+    private $_sumAusgaben   = "";
     
 
     public function getId()
@@ -89,5 +92,30 @@ class Finanzen
     {
         $this->_wo = $wo;
     }
+    public function getKategorie()
+    {
+        return $this->_kategorie;
+    }
+    public function setKategorie($kategorie)
+    {
+        $this->_kategorie = $kategorie;
+    }
+    public function getKommentar()
+    {
+        return $this->_kommentar;
+    }
+    public function setKommentar($kommentar)
+    {
+        $this->_kommentar = $kommentar;
+    }
+    public function getSumAusgaben()
+    {
+        return $this->_sumAusgaben;
+    }
+    public function setSumAusgaben($sumAusgaben)
+    {
+        $this->_sumAusgaben = $sumAusgaben;
+    }
+
 
 }

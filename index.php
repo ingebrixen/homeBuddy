@@ -16,6 +16,7 @@ function autoloader($class)
 spl_autoload_register('autoloader');
 
 ini_set('display_errors', true);
+ini_set('error_reporting', E_ALL);
 
 define('BASEPATH', dirname(__FILE__));
 

@@ -19,38 +19,47 @@ class Finanzen extends Base {
     public function haushaltskasseAction($params) 
     {    
         $model = \App::getResourceModel('DBHandler');
-        if (empty($params)) {
-            $params = ["Datum" => date('Y-m')];
-            // standard definiere, wenn kein filter angegeben ist, wird immer der aktuelle Monat ausgegeben.
+        if (empty($params['datum'])) {
+            $params = ["datum" => date('Y-m')];            // standard definiere, wenn kein filter angegeben ist, wird immer der aktuelle Monat ausgegeben.
         }
-        $kasse = $model->selectData($_SERVER['REQUEST_URI'], $params);
-
+        $colum = "id, wer, datum, wieviel, stand";
+        $dataSet = $model->selectData($_SERVER['REQUEST_URI'], $colum, $params);
+        
         if ($this->isPost()) 
         {
-            // array(8) { ["wer"]=> string(6) "Thomas" ["uri"]=> string(24) "/finanzen/haushaltskasse" ["inorout"]=> string(3) "-" ["Datum"]=> string(10) "2021-09-18" 
-            // ["wieviel"]=> string(3) "123" ["womit"]=> string(4) "self" ["privat"]=> string(2) "15" ["wo"]=> string(0) "" }
             /** @var \Model\Resource\DBHandler $getResource */
             $getResource = \App::getResourceModel('DBHandler');
-
-            if ($getResource->addData($_POST['wer'], $_POST['uri'], $_POST['inorout'], $_POST['wann'], $_POST['wieviel'], $_POST['womit'], $_POST['privat'], $_POST['wo'])) {
-                $url = \App::getBaseUrl() . '/finanzen/haushaltskasse';
-                header('Location: ' . $url);                
+            $_POST['wieviel'] = $_POST['inorout'].$_POST['wieviel'];
+            unset($_POST['inorout']);
+            $_POST['datum'] = date('Y-m-d', strtotime($_POST['datum']));
+        if ($getResource->addData($_SERVER['REQUEST_URI'], $_POST)) {                
+/*                 $url = \App::getBaseUrl() . '/finanzen/haushaltskasse';
+                header('Location: ' . $url);  */    
+                echo $this->render('haushaltskasse.phtml', array('data' => $dataSet));            
             }
-        }
-        echo $this->render('haushaltskasse.phtml', array('kasse' => $kasse));
+        } 
+        echo $this->render('haushaltskasse.phtml', array('data' => $dataSet));       
     }
     public function ausgabenAction($params)
     {
+        $model = \App::getResourceModel('DBHandler');
+        if (empty($params['datum'])) {
+            $params = ["datum" => date('Y-m')];            // standard definiere, wenn kein filter angegeben ist, wird immer der aktuelle Monat ausgegeben.
+        }
+        $colum = "datum, wer, wo, kategorie, wieviel, kommentar";
+        $dataSet = $model->selectData($_SERVER['REQUEST_URI'], $colum, $params);
+        
         if ($this->isPost()) 
         {
-            /** @var \Model\Resource\Settler $getResource */
-            $getResource = \App::getResourceModel('Settler');
-
-            if ($getResource->addData('ausgaben',$_POST['inorout'],$_POST['wer'], $_POST['wann'], $_POST['wieviel'], $_POST['womit'], $_POST['privat'], $_POST['wo'])) {
-                echo $this->render('detail.phtml', array());
+            /** @var \Model\Resource\DBHandler $getResource */
+            $getResource = \App::getResourceModel('DBHandler');
+            $_POST['datum'] = date('Y-m-d', strtotime($_POST['datum']));
+        if ($getResource->addData($_SERVER['REQUEST_URI'], $_POST)) {                
+                $url = \App::getBaseUrl() . '/finanzen/ausgaben';
+                header('Location: ' . $url);                
             }
-        }
-        echo $this->render('detail.phtml', array());
+        } 
+        echo $this->render('ausgaben.phtml', array('data' => $dataSet));
     }
     public function vanlifeAction($params)
     {

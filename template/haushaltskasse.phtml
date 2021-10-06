@@ -12,28 +12,29 @@
       </div>
     </div>
 
-    <table class="table table-striped mb-0">
+    <table class="table table-striped mb-0 text-center">
       <thead>
         <tr>
           <th scope="col">#</th>
           <th scope="col">Wer</th>
           <th scope="col">Wann</th>
-          <th scope="col">Wieviel</th>
+          <th scope="col">+/-</th>
           <th scope="col">Stand</th>
         </tr>
       </thead>
       <tbody>
-      <?php foreach ($kasse as $ausgabe): ?>
+      <?php $i="0"; foreach ($data as $ausgabe): $i++;?>
         <tr>
-          <th scope="row"><?php echo $ausgabe->getId(); ?></th>
+          <th scope="row"><?php $ausgabe->getId(); echo $i;?></th>
           <td><?php echo $ausgabe->getWer(); ?></td>
-          <td><?php echo $ausgabe->getWann(); ?></td>
-          <td><?php echo $ausgabe->getWieviel(); ?></td>
-          <td><?php echo $ausgabe->getStand(); ?></td>
+          <td><?php echo date("d.m.y",strtotime($ausgabe->getWann())); ?></td>
+          <td><?php echo $ausgabe->getWieviel(); ?>€</td>
+          <td><?php echo $ausgabe->getStand(); ?>&#8364;</td>
         </tr>
         <?php endforeach; ?>
       </tbody>      
     </table>
+    <?php var_dump($_POST); ?>
   </div>
 </div>
 <!-- End page content -->
@@ -60,7 +61,7 @@
                 <div class="modal-body">
                 <form id="addForm" class="addForm" method="POST">
                   <input type="hidden" name="wer" value="<?php echo $_SESSION['user_name']; ?>">
-                  <input type="hidden" name="uri" value="<?php echo $_SERVER['REQUEST_URI']; ?>">
+                  
                   <!-- One "tab" for each step in the form: -->
                   <div class="tab">abrechnen oder einzahlen?
                     <div class="row justify-content-md-center">
@@ -79,7 +80,7 @@
                     </div>
                   </div>
                   <div class="tab">Wann:
-                    <p><input type="date" name="wann" class="form-control" value="<?php echo date("Y-m-d"); ?>" required></p>
+                    <p><input type="date" name="datum" class="form-control" value="<?php echo date("Y-m-d"); ?>" required></p>
                   </div>
                   <div class="tab">Wieviel:
                     <p><input type="number" name="wieviel" step="0.5" placeholder="  €" class="form-control" required></p>    
@@ -99,23 +100,23 @@
                   <div class="tab">wo warst du einkaufen?
                     <div class="row justify-content-md-center">
                       <div class="col px-5">
-                      <input type="radio" class="sr-only" name="wo" id="baecker" value="Baecker" required >
-                      <label for="baecker">
-                        <img src="<?php echo App::getBaseUrl() ?>/skin/images/haushaltskasse/bakery.png" alt="Bäcker" class="img-fluid" >
+                      <input type="radio" class="sr-only" name="wo" id="bae" value="1" >
+                      <label for="bae">
+                        <img src="<?php echo App::getBaseUrl() ?>/skin/images/haushaltskasse/bakery.png" alt="Baecker" class="img-fluid" >
                       </label>
                       </div>
                       <div class="col px-5">
-                      <input type="radio" class="sr-only" name="wo" id="fleischer" value="fleischer">
-                      <label for="fleischer">
-                          <img src="<?php echo App::getBaseUrl() ?>/skin/images/haushaltskasse/wurst.png" alt="Fleischer"  class="img-fluid" >
+                      <input type="radio" class="sr-only" name="wo" id="fle" value="2">
+                      <label for="fle">
+                          <img src="<?php echo App::getBaseUrl() ?>/skin/images/haushaltskasse/wurst.png" alt="Fleischer" class="img-fluid" >
                       </label>
                       </div>
                     </div>
-                    <div class="row">
+<!--                     <div class="row">
                       <div>
-                        <input type="text" name="wo" id="wo" class="form-control">
+                        <input type="text" name="wo" class="form-control" >
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                   <!-- Circles which indicates the steps of the form: -->
                   <div style="text-align:center;margin-top:40px;">

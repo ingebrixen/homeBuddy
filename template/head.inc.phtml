@@ -102,23 +102,17 @@
             </div>
             <div class="right">
               2
-            </div>
+            </div><br clear="all" /> 
           </div>      
         </div>
       </a> 
       <a href="<?php echo App::getBaseUrl() ?>/finanzen/ausgaben"> 
         <div class="w3-third dashbox bgDash2">    
           <div class="w3-container bgDash2 w3-padding-16">
-          <div class="left">
-              Ausgaben Sarah:
-              <br>
-              Ausgaben Thomas:
-            </div>
-            <div class="right">
-              4690,00 €
-              <br>
-              4672,96 €
-            </div>
+              <?php foreach (\Util\Tops::topAusgaben() as $topAusgabe): ?>                
+                <div class="left"> <?php echo $topAusgabe->getWer() ?></div>
+                <div class="right"><?php echo $topAusgabe->getSumAusgaben()." &#8364;<br>"; ?> </div><br clear="all" />             
+              <?php endforeach; ?> 
           </div>      
         </div>
       </a>

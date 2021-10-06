@@ -6,13 +6,7 @@
         <button onclick="getMonth()" class="btn btn-primary">Monat/ Jahr</button>
         <div id="monat" class="w3-dropdown-content w3-bar-block w3-border">
         <?php foreach (\Util\Datum::getDateRange() as $date): ?>
-          <a href="<?php echo App::getBaseUrl().$_SERVER['REQUEST_URI']."/Datum/".$date->format('Y-m'); ?>" class="w3-bar-item w3-button"><?php echo $date->format('m/y')."\n";?></a>
-         <!-- check ob schon filter/datum gesetzt ist sonst > http://localhost:3000/finanzen/haushaltskasse/filter/2021-09/filter/2021-04 
-        funktion check filter
-        tabellenkopf dynamisch über ausgabe array index
-        --> 
-      
-
+          <a href="<?php echo App::getBaseUrl()."/finanzen/ausgaben/datum/".$date->format('Y-m'); ?>" class="w3-bar-item w3-button"><?php echo $date->format('m/y')."\n";?></a>
         <?php endforeach; ?> 
         </div>
       </div>
@@ -21,29 +15,29 @@
     <table class="table table-striped mb-0">
       <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">Wer</th>
           <th scope="col">Wann</th>
+          <th scope="col">Wer</th>
+          <th scope="col">Wo</th>
+          <th scope="col">Kategorie</th>
           <th scope="col">Wieviel</th>
-          <th scope="col">Stand</th>
+          <th scope="col">Kommentar</th>
         </tr>
       </thead>
       <tbody>
-      <?php var_dump($kasse); ?>
-      <?php foreach ($kasse as $ausgabe): ?>
+      <?php foreach ($data as $ausgabe): ?>
         <tr>
-          <th scope="row"><?php echo $ausgabe->getId(); ?></th>
+          <th scope="row"><?php echo date("d.m.y",strtotime($ausgabe->getWann())); ?></th>
           <td><?php echo $ausgabe->getWer(); ?></td>
-          <td><?php echo $ausgabe->getWann(); ?></td>
-          <td><?php echo $ausgabe->getWieviel(); ?></td>
-          <td><?php echo $ausgabe->getStand(); ?></td>
+          <td><?php echo $ausgabe->getWo(); ?></td>
+          <td><?php echo $ausgabe->getKategorie(); ?> &#8364;</td>
+          <td><?php echo $ausgabe->getWieviel(); ?> &#8364;</td>
+          <td><?php echo $ausgabe->getKommentar(); ?> &#8364;</td>
         </tr>
         <?php endforeach; ?>
       </tbody>      
     </table>
   </div>
 </div>
-
 <!-- End page content -->
 
 <!-- Footer -->
@@ -68,7 +62,7 @@
                 <div class="modal-body">
                 <form id="addForm" class="addForm" method="POST">
                   <input type="hidden" name="wer" value="<?php echo $_SESSION['user_name']; ?>">
-                  <input type="hidden" name="uri" value="<?php echo $_SERVER['REQUEST_URI']; ?>">
+                  <input type="hidden" name="stand" value="<?php echo $ausgabe->getStand(); ?>">
                   <!-- One "tab" for each step in the form: -->
                   <div class="tab">abrechnen oder einzahlen?
                     <div class="row justify-content-md-center">
@@ -87,7 +81,7 @@
                     </div>
                   </div>
                   <div class="tab">Wann:
-                    <p><input type="date" name="wann" class="form-control" value="<?php echo date("Y-m-d"); ?>" required></p>
+                    <p><input type="date" name="datum" class="form-control" value="<?php echo date("Y-m-d"); ?>" required></p>
                   </div>
                   <div class="tab">Wieviel:
                     <p><input type="number" name="wieviel" step="0.5" placeholder="  €" class="form-control" required></p>    
