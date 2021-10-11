@@ -34,7 +34,7 @@
         <tr>
           <th scope="row"><?php echo $ausgabe->getId(); ?></th>
           <td><?php echo $ausgabe->getWer(); ?></td>
-          <td><?php echo $ausgabe->getWann(); ?></td>
+          <td><?php echo $ausgabe->getDatum(); ?></td>
           <td><?php echo $ausgabe->getWieviel(); ?></td>
           <td><?php echo $ausgabe->getStand(); ?></td>
         </tr>
@@ -87,7 +87,7 @@
                     </div>
                   </div>
                   <div class="tab">Wann:
-                    <p><input type="date" name="wann" class="form-control" value="<?php echo date("Y-m-d"); ?>" required></p>
+                    <p><input type="date" name="datum" class="form-control" value="<?php echo date("Y-m-d"); ?>" required></p>
                   </div>
                   <div class="tab">Wieviel:
                     <p><input type="number" name="wieviel" step="0.5" placeholder="  €" class="form-control" required></p>    

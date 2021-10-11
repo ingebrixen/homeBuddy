@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-
+     <?php /**var_dump($data); */?>  
     <table class="table table-striped mb-0 text-center">
       <thead>
         <tr>
@@ -27,7 +27,7 @@
         <tr>
           <th scope="row"><?php /* echo */ $ausgabe->getId(); echo $i;?></th>
           <td><?php echo $ausgabe->getWer(); ?></td>
-          <td><?php echo date("d.m.y",strtotime($ausgabe->getWann())); ?></td>
+          <td><?php echo date("d.m.y",strtotime($ausgabe->getDatum())); ?></td>
           <td><?php echo $ausgabe->getWieviel(); ?> &#8364;</td>
           <td><?php echo $ausgabe->getStand(); ?> &#8364;</td>
         </tr>

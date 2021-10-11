@@ -1,6 +1,4 @@
 <?php
-/**  (c) Thomas Böhme **/
-
 
 
 namespace Util;
