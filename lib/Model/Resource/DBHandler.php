@@ -1,82 +1,74 @@
 <?php
 
+declare(strict_types=1);
 
 namespace Model\Resource;
 
 class DBHandler extends Base
 {    
-    public function selectData($uri, $colum, $params) //z.B. sortierung, anzahl einträge, standard (z.b. bei sortierung oder datumsfilter)
+    public function selectData(string $uri, string $colum, array $params) //z.B. sortierung, anzahl einträge, standard (z.b. bei sortierung oder datumsfilter)
     {    
-        $sql = \sprintf("SELECT %s FROM %s %s ORDER BY ID DESC", $colum, self::getTableName($uri), self::setWhere($params));
+        $sql = \sprintf("SELECT %s FROM %s %s ORDER BY ID DESC", $colum, self::_getTableName($uri), self::_setWhere($params));
         $dbResult = $this->connect()->query($sql);
-         
-        $_dataSet = array();
-        // dbresult array muss hier weiterverarbeitet werden und dann im Finanzen Controller verarbeitet werden 
-        while ($row = $dbResult->fetch(\PDO::FETCH_ASSOC)) {
-            /** @var \Model\Benutzer $benutzer */
-            $data = \App::getModel('Finanzen');
-            $data->setId($row['id']);
-            $data->setWer($row['wer']);
-            $data->setWann($row['datum']);
-            $data->setWieviel($row['wieviel']);
-            $data->setStand($row['stand']);
-            
-            $_dataSet[] = $data;
-        }
-        return $_dataSet;
-        /* return $dbResult; */
+        for ($set = array(); $row = $dbResult->fetch(\PDO::FETCH_ASSOC); $set[] = $row); 
+        return self::_dataSetter($set, $uri);
     }
-    public function addData($uri, array $post)
+    public function insertData(string $uri, array $post)
     {
-        $sql = \sprintf("INSERT INTO %s (%s) VALUES (%s)", self::getTableName($uri), self::getColum($post), self::getValue($post));
+        $sql = \sprintf("INSERT INTO %s (%s) VALUES (%s)", self::_getTableName($uri), self::_getColum($post), self::_getValue($post));
         $connection = $this->connect();
         $statement = $connection->prepare($sql);
-        //neue methode createBindValue
-        $keys = array_keys($post);
-        foreach($keys as &$value) {
-            $value = ":".$value;
-        }
-        $erg = array_combine($keys, $post);
-        //methode bis hier
-        foreach ($erg as $key => &$val) {
+        foreach (self::_createBindValue($post) as $key => &$val) {
             $statement->bindValue($key, $val);
         }
         $statement->execute();
 
         return $connection->lastInsertId();
     }
-    public function getTopAusgaben()
+    public function selectTopAusgaben(string $uri)
     {
-        $sql = "SELECT wer AS wer, sum(wieviel) AS sumAusgaben FROM ausgaben GROUP BY wer";
+        $sql = "SELECT wer, sum(wieviel) AS sumWieviel FROM ausgaben GROUP BY wer";
         $dbResult = $this->connect()->query($sql);
-        $_dataSet = array();
-          // dbresult array muss hier weiterverarbeitet werden und dann im Finanzen Controller verarbeitet werden 
-          while ($row = $dbResult->fetch(\PDO::FETCH_ASSOC)) {
-            /** @var \Model\Benutzer $benutzer */
-            $data = \App::getModel('Finanzen');
-            $data->setWer($row['wer']);
-            $data->setSumAusgaben($row['sumAusgaben']);
-            
-            $_dataSet[] = $data;
+        for ($set = array(); $row = $dbResult->fetch(\PDO::FETCH_ASSOC); $set[] = $row); 
+        return self::_dataSetter($set, $uri);
+
+    }
+    private function _dataSetter(array $_set, string $uri)
+    {
+        //$data->setId($row['id']);
+        $_dataSet = array(); 
+        foreach ($_set as $array){          
+                $data = \App::getModel(self::_setModelName($uri), $array);
+                $_dataSet[] = $data;
         }
         return $_dataSet;
-
     }
-    private function createBindValue()
+    private function _setModelName(string $modelUri)
+    {
+        $model = \explode("/", $modelUri);
+        $modelName = ucfirst($model[1]);
+        return $modelName;
+    }
+    private function _createBindValue(array $post)
+    {
+        $keys = array_keys($post);
+        foreach($keys as &$value) {
+            $value = ":".$value;
+        }
+        $arryComb = array_combine($keys, $post);
+        return $arryComb;
+    }
+    private function _sort()
     {
 
     }
-    private function sort()
-    {
-
-    }
-    private function getTableName($uriString)
+    private function _getTableName(string $uriString)
     {
         $dbTable = \explode("/", $uriString);
         $tableName = $dbTable[2];
         return $tableName;
     }
-    private function setWhere(array $params)
+    private function _setWhere(array $params)
     {
         // params Array Key als colum und Value als suchabfrage
         // params[datum] => params[2021-08]
@@ -90,13 +82,13 @@ class DBHandler extends Base
             return " ";
         } */
     }
-    private function getColum(array $post)        
+    private function _getColum(array $post)        
     {
         $keys = array_keys($post);
         $col = \implode(', ', $keys);
         return $col;
     }
-    private function getValue(array $post)        
+    private function _getValue(array $post)        
     {
         $keys = array_keys($post);
         foreach($keys as &$value) {

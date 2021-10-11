@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-
+    <?php /* var_dump($data); */ ?>
     <table class="table table-striped mb-0">
       <thead>
         <tr>
@@ -26,12 +26,12 @@
       <tbody>
       <?php foreach ($data as $ausgabe): ?>
         <tr>
-          <th scope="row"><?php echo date("d.m.y",strtotime($ausgabe->getWann())); ?></th>
+          <th scope="row"><?php $ausgabe->getID(); echo date("d.m.y",strtotime($ausgabe->getDatum())); ?></th>
           <td><?php echo $ausgabe->getWer(); ?></td>
           <td><?php echo $ausgabe->getWo(); ?></td>
-          <td><?php echo $ausgabe->getKategorie(); ?> &#8364;</td>
+          <td><?php echo $ausgabe->getKategorie(); ?></td>
           <td><?php echo $ausgabe->getWieviel(); ?> &#8364;</td>
-          <td><?php echo $ausgabe->getKommentar(); ?> &#8364;</td>
+          <td><?php echo $ausgabe->getKommentar(); ?> </td>
         </tr>
         <?php endforeach; ?>
       </tbody>      

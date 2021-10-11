@@ -1,5 +1,5 @@
 <?php
-/**  (c) Thomas Böhme **/
+
 
 use Controller\Base;
 class Bootstrap
@@ -43,7 +43,7 @@ class Bootstrap
         //echo var_dump($test);
 
         $controller = (strlen($controller) > 0) ? $controller : 'index';
-        $this->setController($controller);
+        $this->_setController($controller);
         //  Hier wird überprüft ob ein controller vorhanden ist.
         //  wenn $controller > 0 ist dann ist $controller = $controller ansonsten ist $controller = 'index'
         //  Bei erstaufruf der Seite ist der kontroller leer, also strlen = 0 > der $controller wird auf index gesetzt.
@@ -54,14 +54,14 @@ class Bootstrap
         // erstaufruf sieht also immer so aus:
         //  http://localhost/ => http://localhost/index/index
         $action = (strlen($action) > 0) ? $action : 'index';
-        $this->setAction($action);
+        $this->_setAction($action);
 
         //  parameter?
         if (isset($params)) {
-            $this->setParams($params);
+            $this->_setParams($params);
         }
     }
-    private function setController($controller)
+    private function _setController($controller)
     {
         //  Hier wird die Klasse bestimmt
         //  Controller\Upload
@@ -76,7 +76,7 @@ class Bootstrap
         }
         $this->_controller = $ctrl;
     }
-    private function setAction($action)
+    private function _setAction($action)
     {
         //  TODO: welche Methode in Klasse xyz?
         //  Controller\Upload::saveAction()
@@ -105,7 +105,7 @@ class Bootstrap
         //var_dump($actionMethod);
         $this->_action = $actionMethod;
     }
-    private function setParams($params)
+    private function _setParams($params)
     {
         // /index/view/id/1/filter/name
         //  params: id => 1, filter => name
@@ -148,7 +148,7 @@ class Bootstrap
     public function run()
     {
         $ctrlObj = new $this->_controller;
-        //  Klasse wird über die variable _controller instanziert, da über setController die Klasse an _controller übergeben wird.
+        //  Klasse wird über die variable _controller instanziert, da über _setController die Klasse an _controller übergeben wird.
         $ctrlObj->{$this->_action}($this->_params);
         //  hier werden dann die Parameter übergeben.
     }

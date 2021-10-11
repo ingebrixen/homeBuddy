@@ -1,6 +1,4 @@
 <?php
-/**  (c) Thomas Böhme **/
-
 
 
 namespace Util;
@@ -13,8 +11,9 @@ class Tops
 {
     public static function topAusgaben()
     {
-        $model = \App::getResourceModel('DBHandler');
-        $dataSet = $model->getTopAusgaben();
+        $model = '/finanzen/foo';
+        $resourceModel = \App::getResourceModel('DBHandler');
+        $dataSet = $resourceModel->selectTopAusgaben($model);
         
         return  $dataSet;
     }

@@ -1,5 +1,5 @@
 <?php
-/**  (c) Thomas Böhme **/
+
 
 
 

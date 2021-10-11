@@ -1,5 +1,5 @@
 <?php
-/**  (c) Thomas Böhme **/
+
 
 //  allg. stehen in Model\Resource die anbindungen an externe System z.B. Datenbanken, APIs, Warenwirtschaftssysteme etc.
 

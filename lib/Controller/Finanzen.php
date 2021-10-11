@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Controller;
 
 /* use Model\Settler; */
@@ -25,6 +27,7 @@ class Finanzen extends Base {
         $colum = "id, wer, datum, wieviel, stand";
         $dataSet = $model->selectData($_SERVER['REQUEST_URI'], $colum, $params);
         
+        
         if ($this->isPost()) 
         {
             /** @var \Model\Resource\DBHandler $getResource */
@@ -32,21 +35,18 @@ class Finanzen extends Base {
             $_POST['wieviel'] = $_POST['inorout'].$_POST['wieviel'];
             unset($_POST['inorout']);
             $_POST['datum'] = date('Y-m-d', strtotime($_POST['datum']));
-        if ($getResource->addData($_SERVER['REQUEST_URI'], $_POST)) {                
-/*                 $url = \App::getBaseUrl() . '/finanzen/haushaltskasse';
-                header('Location: ' . $url);  */    
-                echo $this->render('haushaltskasse.phtml', array('data' => $dataSet));            
-            }
+            if ($getResource->insertData($_SERVER['REQUEST_URI'], $_POST)) {                
+                    $url = \App::getBaseUrl() . '/finanzen/haushaltskasse';
+                    header('Location: ' . $url);     
+                    /* echo $this->render('haushaltskasse.phtml', array('data' => $dataSet)); */            
+                }
         } 
         echo $this->render('haushaltskasse.phtml', array('data' => $dataSet));       
     }
     public function ausgabenAction($params)
     {
         $model = \App::getResourceModel('DBHandler');
-        if (empty($params['datum'])) {
-            $params = ["datum" => date('Y-m')];            // standard definiere, wenn kein filter angegeben ist, wird immer der aktuelle Monat ausgegeben.
-        }
-        $colum = "datum, wer, wo, kategorie, wieviel, kommentar";
+        $colum = "id, datum, wer, wo, kategorie, wieviel, kommentar";
         $dataSet = $model->selectData($_SERVER['REQUEST_URI'], $colum, $params);
         
         if ($this->isPost()) 
@@ -54,7 +54,7 @@ class Finanzen extends Base {
             /** @var \Model\Resource\DBHandler $getResource */
             $getResource = \App::getResourceModel('DBHandler');
             $_POST['datum'] = date('Y-m-d', strtotime($_POST['datum']));
-        if ($getResource->addData($_SERVER['REQUEST_URI'], $_POST)) {                
+        if ($getResource->insertData($_SERVER['REQUEST_URI'], $_POST)) {                
                 $url = \App::getBaseUrl() . '/finanzen/ausgaben';
                 header('Location: ' . $url);                
             }

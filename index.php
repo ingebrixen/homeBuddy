@@ -1,6 +1,4 @@
 <?php
-/**  (c) Thomas Böhme **/
-
 
 
 function autoloader($class)

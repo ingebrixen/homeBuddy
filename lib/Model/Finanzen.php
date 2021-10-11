@@ -1,24 +1,31 @@
 <?php
-/**  (c) Thomas Böhme **/
 
 
 namespace Model;
 
 class Finanzen
 {
+
+    use ExchangeArray;
+
     private $_id            = 0;
     private $_uri           = "";
     private $_stand         = "";
     private $_wer           = "";
-    private $_wann          = "";
+    private $_datum         = "";
     private $_wieviel       = "";
     private $_womit         = "";
     private $_privat        = "";
     private $_wo            = "";
     private $_kategorie     = "";
     private $_kommentar     = "";
-    private $_sumAusgaben   = "";
-    
+    private $_sumWieviel    = "";
+
+    public function __construct(array $data)
+    {
+        $this->exchangeArray($data);
+    }
+
 
     public function getId()
     {
@@ -52,13 +59,13 @@ class Finanzen
     {
         $this->_wer = $wer;
     }
-    public function getWann()
+    public function getDatum()
     {
-        return $this->_wann;
+        return $this->_datum;
     }
-    public function setWann($wann)
+    public function setDatum($datum)
     {
-        $this->_wann = $wann;
+        $this->_datum = $datum;
     }
     public function getWieviel()
     {
@@ -108,13 +115,13 @@ class Finanzen
     {
         $this->_kommentar = $kommentar;
     }
-    public function getSumAusgaben()
+    public function getSumWieviel()
     {
-        return $this->_sumAusgaben;
+        return $this->_sumWieivel;
     }
-    public function setSumAusgaben($sumAusgaben)
+    public function setSumWieviel($sumWieivel)
     {
-        $this->_sumAusgaben = $sumAusgaben;
+        $this->_sumWieivel = $sumWieivel;
     }
 
 

@@ -1,5 +1,5 @@
 <?php
-/**  (c) Thomas Böhme **/
+
 
 
 
@@ -9,10 +9,10 @@ class App
     {
         return "http://localhost:3000";
     }
-    public static function getModel(string $model)
+    public static function getModel(string $model, array $data = [])
     {
         $class = "\\Model\\$model";
-        return new $class();
+        return new $class($data);
     }
     public static function getResourceModel(string $model)
     {
