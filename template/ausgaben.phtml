@@ -12,26 +12,22 @@
       </div>
     </div>
     <?php /* var_dump($data); */ ?>
-    <table class="table table-striped mb-0">
+    <table class="table table-striped mb-0 text-center">
       <thead>
         <tr>
           <th scope="col">Wann</th>
           <th scope="col">Wer</th>
-          <th scope="col">Wo</th>
           <th scope="col">Kategorie</th>
           <th scope="col">Wieviel</th>
-          <th scope="col">Kommentar</th>
         </tr>
       </thead>
       <tbody>
       <?php foreach ($data as $ausgabe): ?>
         <tr>
-          <th scope="row"><?php $ausgabe->getID(); echo date("d.m.y",strtotime($ausgabe->getDatum())); ?></th>
+          <td><?php $ausgabe->getID(); echo date("d.m.y",strtotime($ausgabe->getDatum())); ?></td>
           <td><?php echo $ausgabe->getWer(); ?></td>
-          <td><?php echo $ausgabe->getWo(); ?></td>
           <td><?php echo $ausgabe->getKategorie(); ?></td>
           <td><?php echo $ausgabe->getWieviel(); ?> &#8364;</td>
-          <td><?php echo $ausgabe->getKommentar(); ?> </td>
         </tr>
         <?php endforeach; ?>
       </tbody>      
