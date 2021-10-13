@@ -61,9 +61,9 @@ class Finanzen extends Base {
         } 
         echo $this->render('ausgaben.phtml', array('data' => $dataSet));
     }
-    public function vanlifeAction($params)
+    public function fredericoAction($params)
     {
-        echo $this->render('detail.phtml', array());
+        echo $this->render('dashboard.phtml', array());
     }
 
 }

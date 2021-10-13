@@ -35,10 +35,7 @@
   </div>
 </div>
 <!-- End page content -->
-
 <!-- Footer -->
-
-
 <!-- Modal -->
 <footer class="footer mt-auto py-3 bgTop">
 <div class="container-fluid">
@@ -52,76 +49,44 @@
             <div class="modal-dialog " >
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="modalTitle">Haushaltskasse</h5>
+                  <h5 class="modal-title" id="modalTitle">allg. Ausgaben</h5>
                   <button type="button" class="btn-close" onclick="document.getElementById('add').style.display='none'"></button>
                 </div>
                 <div class="modal-body">
                 <form id="addForm" class="addForm" method="POST">
                   <input type="hidden" name="wer" value="<?php echo $_SESSION['user_name']; ?>">
-                  <input type="hidden" name="stand" value="<?php echo $ausgabe->getStand(); ?>">
+                  
                   <!-- One "tab" for each step in the form: -->
-                  <div class="tab">abrechnen oder einzahlen?
-                    <div class="row justify-content-md-center">
-                      <div class="col px-5">
-                      <input type="radio" class="sr-only" name="inorout" id="abr" value="-" checked required >
-                      <label for="abr">
-                        <img src="<?php echo App::getBaseUrl() ?>/skin/images/haushaltskasse/out.png" alt="abrechnen" class="img-fluid" >
-                      </label>
-                      </div>
-                      <div class="col px-5">
-                      <input type="radio" class="sr-only" name="inorout" id="einz" value="+">
-                      <label for="einz">
-                          <img src="<?php echo App::getBaseUrl() ?>/skin/images/haushaltskasse/in.png" alt="einzahlen"  class="img-fluid" >
-                      </label>
-                      </div>
-                    </div>
-                  </div>
                   <div class="tab">Wann:
                     <p><input type="date" name="datum" class="form-control" value="<?php echo date("Y-m-d"); ?>" required></p>
-                  </div>
-                  <div class="tab">Wieviel:
-                    <p><input type="number" name="wieviel" step="0.5" placeholder="  €" class="form-control" required></p>    
-                    <p>Womit bezahlt?</p> 
-                    <div>
-                      <input type="radio" id="porte" name="womit" value="self" checked>
-                      <label for="porte">eigenes Geld?</label>
-                    </div>
-                    <div>
-                      <input type="radio" id="kasse" name="womit" value="kasse">
-                      <label for="kasse">Haushaltskasse?</label>
-                    </div>              
-                  </div>
-                  <div class="tab">Private Einkäufe he­r­aus­rech­nen?:
-                    <p><input type="number" name="privat" step="0.5" placeholder="€" class="form-control" ></p>              
+                    <p><input type="number" name="wieviel" step="0.5" placeholder="  €" class="form-control" required></p>         
                   </div>
                   <div class="tab">wo warst du einkaufen?
-                    <div class="row justify-content-md-center">
-                      <div class="col px-5">
-                      <input type="radio" class="sr-only" name="wo" id="baecker" value="Baecker" required >
-                      <label for="baecker">
-                        <img src="<?php echo App::getBaseUrl() ?>/skin/images/haushaltskasse/bakery.png" alt="Bäcker" class="img-fluid" >
-                      </label>
-                      </div>
-                      <div class="col px-5">
-                      <input type="radio" class="sr-only" name="wo" id="fleischer" value="fleischer">
-                      <label for="fleischer">
-                          <img src="<?php echo App::getBaseUrl() ?>/skin/images/haushaltskasse/wurst.png" alt="Fleischer"  class="img-fluid" >
-                      </label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div>
-                        <input type="text" name="wo" id="wo" class="form-control">
-                      </div>
-                    </div>
+                    <p>
+                      <input type="text" name="wo" id="wo" class="form-control" required>
+                    </p>
+                    <p>
+                      <select name="kategorie" id="kategorie" class="form-select" required>
+                          <option value="" selected disabled>Kategorie w&auml;hlen</option>
+                          <option value="Wohnung">Wohnung </option>
+                          <option value="Baumarkt">Baumarkt</option>
+                          <option value="ausg. Auto">ausg. Auto</option>
+                          <option value="Geschenke">Geschenke</option>
+                          <option value="Freizeit">Freizeit</option>
+                          <option value="Urlaub">Urlaub</option>
+                          <option value="gruenzeug">Gruenzeug</option>
+                          <option value="sonstiges">sonstiges</option>
+                      </select>
+                    </p>
+                  </div>
+                  <div class="tab">
+                    <textarea name="kommentar" id="kommentar" class="form-control" rows="4" placeholder="Kommentar zur Ausgabe"></textarea>
                   </div>
                   <!-- Circles which indicates the steps of the form: -->
                   <div style="text-align:center;margin-top:40px;">
                     <span class="step"></span>
                     <span class="step"></span>
                     <span class="step"></span>
-                    <span class="step"></span>
-                    <span class="step"></span> 
                   </div>
                   <hr>
                   <div style="overflow:auto;">

@@ -22,7 +22,7 @@
 				<div class="loginTopBox pt-2 ps-3">
 					<div><h3>Create new Account</h3></div>
 					<p class="fs-6">
-						Have an account? <a href="login" target="_self">Log In</a>
+						Du hast einen Account? <a href="login" target="_self">Log In</a>
 					</p>
 				</div>
 				<form method="POST" class="register-form">
@@ -34,22 +34,30 @@
 						<?php endif; ?>
 							<hr>
 							<div class="ps-3 pe-3">
-								<label for="email" class="fs-5">Email address</label>
+								<label for="email" class="fs-5">Email Addresse</label>
 								<input type="email" name="email" class="form-control form-control-sm" id="email" required>
-								</div>							
+							</div>		
+							<div class="ps-3 pe-3">
+								<label for="name" class="fs-5">Benutzername</label>
+								<input type="text" name="name" class="form-control form-control-sm" id="email" required>
+							</div>						
 							<hr>
 							<div class="ps-3 pe-3">
-								<label for="password" class="fs-5">Password</label>
+								<label for="password" class="fs-5">Passwort</label>
 								<input type="password" name="PW" class="form-control form-control-sm" id="password" required>
-								</div>						
+							</div>						
 							<div class="ps-3 pe-3">
-								<label for="cpassword" class="fs-5">Confirm passwort</label>
+								<label for="cpassword" class="fs-5">Passwort bestätigen</label>
 								<input type="password" name="checkPW" id="cpassword" class="form-control form-control-sm" id="password" required>
-								</div>						
+							</div>						
 							<hr>
 							<div class="checkbox fs-5 ps-3">
-								<input type="checkbox" value="unchecked" name="agb" id="agree" >
-								<label for="agree">I agree to the terms and conditions</label>
+								<input type="checkbox" value="unchecked" name="agb" id="agb" >
+								<label for="agb">Ich habe die <a href="#">AGBs</a> gelesen</label>
+							</div>
+							<div class="checkbox fs-5 ps-3">
+								<input type="checkbox" value="unchecked" name="dsgvo" id="dsgvo" >
+								<label for="dsgvo">Ich stimme den Datenschutzbestimmungen zu</label>
 							</div>
 							<div class="bottom">
 								<div class="bottomLeft"></div>

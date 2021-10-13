@@ -30,15 +30,16 @@ class Benutzer extends Base
 
         return false;
     }
-    public function regUser(string $email, string $password)
+    public function regUser(string $name, string $email, string $password)
     {
-        $sql = "INSERT INTO user (email, password) VALUES (:email, :password)";
+        $sql = "INSERT INTO user (name, email, password) VALUES (:name, :email, :password)";
 
         $pwHash = hash('sha3-512', $password);
 
         $connection = $this->connect();
         $statement = $connection->prepare($sql);
 
+        $statement->bindValue(':name', $name);
         $statement->bindValue(':email', $email);
         $statement->bindValue(':password', $pwHash);
 

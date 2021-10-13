@@ -8,17 +8,17 @@ class DBHandler extends Base
 {    
     public function selectData(string $uri, string $colum, array $params) //z.B. sortierung, anzahl einträge, standard (z.b. bei sortierung oder datumsfilter)
     {    
-        $sql = \sprintf("SELECT %s FROM %s %s ORDER BY ID DESC", $colum, self::_getTableName($uri), self::_setWhere($params));
+        $sql = \sprintf("SELECT %s FROM %s %s ORDER BY ID DESC", $colum, $this->_getTableName($uri), $this->_setWhere($params));
         $dbResult = $this->connect()->query($sql);
         for ($set = array(); $row = $dbResult->fetch(\PDO::FETCH_ASSOC); $set[] = $row); 
-        return self::_dataSetter($set, $uri);
+        return $this->_dataSetter($set, $uri);
     }
     public function insertData(string $uri, array $post)
     {
-        $sql = \sprintf("INSERT INTO %s (%s) VALUES (%s)", self::_getTableName($uri), self::_getColum($post), self::_getValue($post));
+        $sql = \sprintf("INSERT INTO %s (%s) VALUES (%s)", $this->_getTableName($uri), $this->_getColum($post), $this->_getValue($post));
         $connection = $this->connect();
         $statement = $connection->prepare($sql);
-        foreach (self::_createBindValue($post) as $key => &$val) {
+        foreach ($this->_createBindValue($post) as $key => &$val) {
             $statement->bindValue($key, $val);
         }
         $statement->execute();
@@ -30,7 +30,7 @@ class DBHandler extends Base
         $sql = "SELECT wer, sum(wieviel) AS sumWieviel FROM ausgaben GROUP BY wer";
         $dbResult = $this->connect()->query($sql);
         for ($set = array(); $row = $dbResult->fetch(\PDO::FETCH_ASSOC); $set[] = $row); 
-        return self::_dataSetter($set, $uri);
+        return $this->_dataSetter($set, $uri);
 
     }
     private function _dataSetter(array $_set, string $uri)
@@ -38,7 +38,7 @@ class DBHandler extends Base
         //$data->setId($row['id']);
         $_dataSet = array(); 
         foreach ($_set as $array){          
-                $data = \App::getModel(self::_setModelName($uri), $array);
+                $data = \App::getModel($this->_setModelName($uri), $array);
                 $_dataSet[] = $data;
         }
         return $_dataSet;
