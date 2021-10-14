@@ -59,9 +59,9 @@ class Index extends Base
                 \Session\Msg::setMsg('Bitte AGB akzeptieren');
                 $regOK = false;
             }
-            if ($regOK && $regResource->regUser($_POST['name'], $_POST['email'], $_POST['PW'])) {
+            if ($regOK /* && $regResource->regUser($_POST['name'], $_POST['email'], $_POST['PW']) */) {
                 \Session\Msg::setMsg('Neue Accounts können derzeit nicht angelegt werden!');
-                $this->_goToLogin();
+                /* $this->_goToLogin(); */
             }
 
         }
