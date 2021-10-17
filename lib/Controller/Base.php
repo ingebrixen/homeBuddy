@@ -31,7 +31,7 @@ class Base
             return true;
         }
     }
-    protected function _checkLogin()
+    public function _checkLogin()
     {
         if (!User::isLoggedIn()) {
             $url = \App::getBaseUrl() . '/index/login';
