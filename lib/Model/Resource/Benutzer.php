@@ -24,7 +24,6 @@ class Benutzer extends Base
             $benutzer->setEmail($row['email']);
             $benutzer->setId($row['id']);
             $benutzer->setName($row['name']);
-            var_dump($benutzer);
             return $benutzer;
         }
 
