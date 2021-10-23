@@ -15,6 +15,14 @@ class Tops
         $resourceModel = \App::getResourceModel('DBHandler');
         $dataSet = $resourceModel->selectTopAusgaben($model);
         
-        return  $dataSet;
+        return $dataSet;
+    }
+    public static function topKasse()
+    {
+        $model = 'Finanzen';
+        $resourceModel = \App::getResourceModel('DBHandler');
+        $dataSet = $resourceModel->selectTopKasse($model);
+        
+        return $dataSet;
     }
 }

@@ -9,6 +9,9 @@ use Session\User;
 
 class Finanzen extends Base {
 
+    private $_table = "";
+    private $_colum = "";
+    private $_model = "Finanzen";
     
     public function __construct()
     {
@@ -24,16 +27,23 @@ class Finanzen extends Base {
         if (empty($params['datum'])) {
             $params = ["datum" => date('Y-m')];            // standard definiere, wenn kein filter angegeben ist, wird immer der aktuelle Monat ausgegeben.
         }
-        $colum = "id, wer, datum, wieviel, stand";
-        $dataSet = $model->selectData($_SERVER['REQUEST_URI'], $colum, $params);
+        $_colum = "id, wer, datum, wieviel, stand";
+        $_table = "haushaltskasse";
+        $dataSet = $model->selectData($_SERVER['REQUEST_URI'], $_table, $_colum, $params);
         
         
         if ($this->isPost()) 
         {
+            //auswahl abrechnen oder ausgleichen
+            //jeden monat automatisch -200
+            //wenn womit = self > insertData perskonto
+            //stand = stand - wieviel
+
+
+
             /** @var \Model\Resource\DBHandler $getResource */
             $getResource = \App::getResourceModel('DBHandler');
-            $_POST['wieviel'] = $_POST['inorout'].$_POST['wieviel'];
-            unset($_POST['inorout']);
+            $_POST['wieviel'] = 0 - $_POST['wieviel'];
             $_POST['datum'] = date('Y-m-d', strtotime($_POST['datum']));
             if ($getResource->insertData($_SERVER['REQUEST_URI'], $_POST)) {                
                     $url = \App::getBaseUrl() . '/finanzen/haushaltskasse';
@@ -46,8 +56,9 @@ class Finanzen extends Base {
     public function ausgabenAction($params)
     {
         $model = \App::getResourceModel('DBHandler');
-        $colum = "id, datum, wer, wo, kategorie, wieviel, kommentar";
-        $dataSet = $model->selectData($_SERVER['REQUEST_URI'], $colum, $params);
+        $_colum = "id, datum, wer, wo, kategorie, wieviel, kommentar";
+        $_table = "ausgaben";
+        $dataSet = $model->selectData($_SERVER['REQUEST_URI'], $_table, $_colum, $params);
         
         if ($this->isPost()) 
         {

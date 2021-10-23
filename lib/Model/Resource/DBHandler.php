@@ -6,16 +6,20 @@ namespace Model\Resource;
 
 class DBHandler extends Base
 {    
-    public function selectData(string $uri, string $colum, array $params) //z.B. sortierung, anzahl einträge, standard (z.b. bei sortierung oder datumsfilter)
+    public function selectData(string $uri, string $table, string $colum, array $params) //z.B. sortierung, anzahl einträge, standard (z.b. bei sortierung oder datumsfilter)
     {    
-        $sql = \sprintf("SELECT %s FROM %s %s ORDER BY ID DESC", $colum, $this->_getTableName($uri), $this->_setWhere($params));
+        $sql = \sprintf("SELECT %s FROM %s %s ORDER BY ID DESC", $colum, $table, $this->_setWhere($params));
         $dbResult = $this->connect()->query($sql);
         for ($set = array(); $row = $dbResult->fetch(\PDO::FETCH_ASSOC); $set[] = $row); 
         return $this->_dataSetter($set, $uri);
     }
     public function insertData(string $uri, array $post)
     {
-        $sql = \sprintf("INSERT INTO %s (%s) VALUES (%s)", $this->_getTableName($uri), $this->_getColum($post), $this->_getValue($post));
+        $sql = \sprintf("INSERT INTO %s (%s) VALUES (%s)", 
+        $this->_getTableName($uri), 
+        $this->_getColum($post), 
+        $this->_getValue($post));
+        
         $connection = $this->connect();
         $statement = $connection->prepare($sql);
         foreach ($this->_createBindValue($post) as $key => &$val) {
@@ -31,7 +35,13 @@ class DBHandler extends Base
         $dbResult = $this->connect()->query($sql);
         for ($set = array(); $row = $dbResult->fetch(\PDO::FETCH_ASSOC); $set[] = $row); 
         return $this->_dataSetter($set, $uri);
-
+    }
+    public function selectTopKasse(string $uri)
+    {
+        $sql = "SELECT wer, sum(wieviel) AS sumWieviel FROM ausgaben GROUP BY wer";
+        $dbResult = $this->connect()->query($sql);
+        for ($set = array(); $row = $dbResult->fetch(\PDO::FETCH_ASSOC); $set[] = $row); 
+        return $this->_dataSetter($set, $uri);
     }
     private function _dataSetter(array $_set, string $uri)
     {

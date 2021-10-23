@@ -3,7 +3,7 @@
   <div class="container-fluid paddingBottom">
     <div class="right py-2">
       <div class="w3-dropdown-click">
-        <button onclick="getMonth()" class="btn btn-primary">Monat/ Jahr</button>
+        <button onclick="getMonth()" class="btn btn-primary">Monat/Jahr</button>
         <div id="monat" class="w3-dropdown-content w3-bar-block w3-border">
           <a href="<?php echo App::getBaseUrl()."/finanzen/ausgaben/"; ?>" class="w3-bar-item w3-button">alles</a>
         <?php foreach (\Util\Datum::getDateRange() as $date): ?>
