@@ -9,20 +9,40 @@ use Model\Resource\DBHandler;
 
 class Tops
 {
-    public static function topAusgaben()
+    private string $_model = '';
+    private string $_table = '';
+    private string $_colum = '';
+
+    public static function getTopAusgaben()
     {
-        $model = '/finanzen/foo';
+        $_model = 'Finanzen';
         $resourceModel = \App::getResourceModel('DBHandler');
-        $dataSet = $resourceModel->selectTopAusgaben($model);
+        $dataSet = $resourceModel->selectTopAusgaben($_model);
         
         return $dataSet;
     }
-    public static function topKasse()
+    public static function getTopKonto(string $userId)
     {
-        $model = 'Finanzen';
+        $_model = 'Finanzen';
+        $_table = 'persKonto';
+        $_colum = 'konto';
         $resourceModel = \App::getResourceModel('DBHandler');
-        $dataSet = $resourceModel->selectTopKasse($model);
+        $dataSet = $resourceModel->selectTopKonto($_model, $userId);
         
         return $dataSet;
     }
+    public static function getTopStand() 
+    {
+        $_model = 'Finanzen';
+        $_table = 'haushaltskasse';
+        $_colum = 'stand';
+        $resourceModel = \App::getResourceModel('DBHandler');
+        $dataSet = $resourceModel->selectTopStand($_model);
+        
+        return $dataSet;
+    }
+    public function updatePersKonto()
+    {
+
+    }    
 }

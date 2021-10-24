@@ -13,9 +13,9 @@ class User
         $benutzer = $resourceModel->authUser($email, $pass);
 
         if ($benutzer != false) {
-            $_SESSION['user_id'] = $benutzer->getId();
-            $_SESSION['user_email'] = $benutzer->getEmail();
-            $_SESSION['user_name'] = $benutzer->getName();
+            $_SESSION['userId'] = $benutzer->getId();
+            $_SESSION['userEmail'] = $benutzer->getEmail();
+            $_SESSION['userName'] = $benutzer->getName();
 
             return true;
         } else {
@@ -33,7 +33,7 @@ class User
     {
         self::initSession();
 
-        if (isset($_SESSION['user_id'])) {
+        if (isset($_SESSION['userId'])) {
             return true;
         }
 

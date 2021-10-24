@@ -85,12 +85,15 @@
                   <button type="button" class="btn-close" onclick="document.getElementById('balance').style.display='none'"></button>
                 </div>
                 <div class="modal-body">
-                <div class="text-center">ausgleichen?
-                  <div class="justify-content-md-center">
-                    Aktueller Stand: xx <br>
-                    Du kannst dir max. xx € aus der kasse nehmen<br>
-                    du musst xx einzahlen
-                    <!-- echo aus methode -->
+                  <div class="text-center">ausgleichen?
+                    <div class="justify-content-md-center">
+                      <form id="balanceForm" class="addForm" method="post"></form>
+                      Aktueller Stand: <?php echo $stand->getStand(); ?> &#8364;<br>
+                      Du kannst dir max. xx € aus der kasse nehmen<br>
+                      du musst xx einzahlen
+                      <!-- echo aus methode -->
+                      
+                      </form>
                     </div>
                   </div>
                 </div>
@@ -109,7 +112,7 @@
                 </div>
                 <div class="modal-body">
                 <form id="addForm" class="addForm" method="POST">
-                  <input type="hidden" name="wer" value="<?php echo $_SESSION['user_name']; ?>">
+                  <input type="hidden" name="wer" value="<?php echo $_SESSION['userName']; ?>">
                   
                   <!-- One "tab" for each step in the form: -->
 <!--                   <div class="tab text-center">Abrechnen oder pers. Konto ausgleichen?
@@ -173,7 +176,7 @@
                     <span class="step"></span>
                     <span class="step"></span>
                     <span class="step"></span>
-                    <span class="step"></span> 
+                    
                   </div>
                   <hr>
                   <div style="overflow:auto;">

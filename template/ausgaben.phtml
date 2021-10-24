@@ -55,33 +55,31 @@
                 </div>
                 <div class="modal-body">
                 <form id="addForm" class="addForm" method="POST">
-                  <input type="hidden" name="wer" value="<?php echo $_SESSION['user_name']; ?>">
+                  <input type="hidden" name="wer" value="<?php echo $_SESSION['userName']; ?>">
                   
                   <!-- One "tab" for each step in the form: -->
-                  <div class="tab">Wann:
+                  <div class="tab">Wann?
                     <p><input type="date" name="datum" class="form-control" value="<?php echo date("Y-m-d"); ?>" required></p>
+                      Wieviel?
                     <p><input type="number" name="wieviel" step="0.5" placeholder="  €" class="form-control" required></p>         
                   </div>
-                  <div class="tab">wo warst du einkaufen?
-                    <p>
-                      <input type="text" name="wo" id="wo" class="form-control" required>
-                    </p>
+                  <div class="tab">
                     <p>
                       <select name="kategorie" id="kategorie" class="form-select" required>
-                          <option value="" selected disabled>Kategorie w&auml;hlen</option>
-                          <option value="Wohnung">Wohnung </option>
+                          <option selected disabled >Kategorie w&auml;hlen</option>
+                          <option value="Wohnung">Wohnung</option>
                           <option value="Baumarkt">Baumarkt</option>
-                          <option value="ausg. Auto">ausg. Auto</option>
+                          <option value="Auto">Auto</option>
                           <option value="Geschenke">Geschenke</option>
                           <option value="Freizeit">Freizeit</option>
                           <option value="Urlaub">Urlaub</option>
                           <option value="Genuss">Genuss</option>
-                          <option value="sonstiges">sonstiges</option>
+                          <option value="sonstiges" required >sonstiges</option>
                       </select>
                     </p>
-                  </div>
-                  <div class="tab">
+                    <p>
                     <textarea name="kommentar" id="kommentar" class="form-control" rows="4" placeholder="Kommentar zur Ausgabe"></textarea>
+                    </p>
                   </div>
                   <!-- Circles which indicates the steps of the form: -->
                   <div style="text-align:center;margin-top:40px;">

@@ -9,9 +9,11 @@ use Session\User;
 
 class Finanzen extends Base {
 
-    private $_table = "";
-    private $_colum = "";
-    private $_model = "Finanzen";
+    private string $_table = "";
+    private string $_colum = "";
+    private string $_model = "Finanzen";
+    private string $_order = "";
+    private string $_where = "";
     
     public function __construct()
     {
@@ -29,7 +31,8 @@ class Finanzen extends Base {
         }
         $_colum = "id, wer, datum, wieviel, stand";
         $_table = "haushaltskasse";
-        $dataSet = $model->selectData($_SERVER['REQUEST_URI'], $_table, $_colum, $params);
+        $_order = "ID DESC";
+        $dataSet = $model->selectData($this->_model, $_table, $_colum, $params);
         
         
         if ($this->isPost()) 
@@ -40,12 +43,12 @@ class Finanzen extends Base {
             //stand = stand - wieviel
 
 
-
+            $_table = "haushaltskasse";
             /** @var \Model\Resource\DBHandler $getResource */
             $getResource = \App::getResourceModel('DBHandler');
             $_POST['wieviel'] = 0 - $_POST['wieviel'];
             $_POST['datum'] = date('Y-m-d', strtotime($_POST['datum']));
-            if ($getResource->insertData($_SERVER['REQUEST_URI'], $_POST)) {                
+            if ($getResource->insertData($_table, $_POST)) {                
                     $url = \App::getBaseUrl() . '/finanzen/haushaltskasse';
                     header('Location: ' . $url);     
                     /* echo $this->render('haushaltskasse.phtml', array('data' => $dataSet)); */            
@@ -58,14 +61,15 @@ class Finanzen extends Base {
         $model = \App::getResourceModel('DBHandler');
         $_colum = "id, datum, wer, wo, kategorie, wieviel, kommentar";
         $_table = "ausgaben";
-        $dataSet = $model->selectData($_SERVER['REQUEST_URI'], $_table, $_colum, $params);
+        $_order = "ID DESC";
+        $dataSet = $model->selectData($this->_model, $_table, $_colum, $params);
         
         if ($this->isPost()) 
         {
             /** @var \Model\Resource\DBHandler $getResource */
             $getResource = \App::getResourceModel('DBHandler');
             $_POST['datum'] = date('Y-m-d', strtotime($_POST['datum']));
-        if ($getResource->insertData($_SERVER['REQUEST_URI'], $_POST)) {                
+        if ($getResource->insertData($_table, $_POST)) {                
                 $url = \App::getBaseUrl() . '/finanzen/ausgaben';
                 header('Location: ' . $url);                
             }
