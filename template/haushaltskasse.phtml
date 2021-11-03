@@ -3,16 +3,15 @@
   <div class="container-fluid paddingBottom">
     <div class="right py-2">
       <div class="w3-dropdown-click">
-        <button onclick="getMonth()" class="btn btn-primary">Monat/ Jahr</button>
-        <div id="monat" class="w3-dropdown-content w3-bar-block w3-border">
-          <a href="<?php echo App::getBaseUrl()."/finanzen/haushaltskasse/"; ?>" class="w3-bar-item w3-button">alles</a>
+        <button onclick="getMonth()" class="btn btn-primary">Monat/Jahr</button>
+        <div id="monat" class="w3-dropdown-content w3-bar-block w3-border text-center">
+          <a href="<?php echo App::getBaseUrl()."/finanzen/haushaltskasse/"; ?>" class="w3-bar-item w3-button">-</a>
         <?php foreach (\Util\Datum::getDateRange() as $date): ?>
           <a href="<?php echo App::getBaseUrl()."/finanzen/haushaltskasse/datum/".$date->format('Y-m'); ?>" class="w3-bar-item w3-button"><?php echo $date->format('m/y')."\n";?></a>
         <?php endforeach; ?> 
         </div>
       </div>
-    </div>
-     <?php /**var_dump($data); */?>  
+    </div> 
     <table class="table table-striped mb-0 text-center">
       <thead>
         <tr>
@@ -41,44 +40,100 @@
 
 <!-- Footer -->
 
-
+<!-- Link und auswahl zur doppel child modal mit versch. Formularen
+ -->
 <!-- Modal -->
 <footer class="footer mt-auto py-3 bgTop">
 <div class="container-fluid">
-
       <div class="right">
-        <a href="#add" data-target="#id" data-toggle="modal" class="lift" onclick="document.getElementById('add').style.display='block'">
+        <a href="#add" data-target="#id" data-toggle="modal" class="lift" onclick="document.getElementById('choose').style.display='block'">
           <i class="fas fa-plus-circle add lift"></i>
         </a>       
       </div>
+      <div id="choose" class="w3-modal ">
+            <div class="modal-dialog " >
+              <div class="modal-content w3-card-4 w3-animate-zoom">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="modalTitle">Haushaltskasse</h5>
+                  <button type="button" class="btn-close" onclick="document.getElementById('choose').style.display='none'"></button>
+                </div>
+                <div class="modal-body">
+                <div class="text-center">Abrechnen oder pers. Konto ausgleichen?
+                  <div class="row justify-content-md-center">
+                      <div class="col p-5">
+                        <a href="#add" data-target="#id" data-toggle="modal" class="" onclick="document.getElementById('add').style.display='block'" onmouseup="document.getElementById('choose').style.display='none'">
+                          <img src="<?php echo App::getBaseUrl() ?>/skin/images/haushaltskasse/out.png" alt="abrechnen" class="img-fluid" >
+                        </a>                        
+                      </div>
+                      <div class="col p-5">
+                        <a href="#add" data-target="#id" data-toggle="modal" class="" onclick="document.getElementById('balance').style.display='block'" onmouseup="document.getElementById('choose').style.display='none'">
+                          <img src="<?php echo App::getBaseUrl() ?>/skin/images/haushaltskasse/money-transfer.png" alt="einzahlen"  class="img-fluid" >
+                        </a>                          
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+      </div>
+      <div id="balance" class="w3-modal ">
+            <div class="modal-dialog " >
+              <div class="modal-content w3-card-4 w3-animate-zoom">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="modalTitle">Haushaltskasse</h5>
+                  <button type="button" class="btn-close" onclick="document.getElementById('balance').style.display='none'"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="">
+                    <div class="justify-content-md-center">
+                      <form id="balanceForm" class="addForm" method="post">
+                        <input type="hidden" name="whichForm" value="balance">
+                        <input type="hidden" name="userId" value="<?php echo $_SESSION['userId']; ?>">
+                        <input type="hidden" name="wer" value="<?php echo $_SESSION['userName']; ?>">
+                        <input type="hidden" name="konto" value="<?php echo $konto->getKonto(); ?>">
+                        <input type="hidden" name="datum" type="date" value="<?php echo date("Y-m-d"); ?>">
+                        <input type="hidden" name="stand" value="<?php echo $stand->getStand(); ?>">
+                        <div class="lh-base pb-3">
+                            Haushaltskasse aktuell: <b><?php echo $stand->getStand(); ?>&#8364;</b><br>
+                            pers. Kontostand: <b><?php echo $konto->getKonto(); ?>&#8364;</b><br>
+                        </div>
+                        <div class="lh-sm">
+                            <?php
+                              echo \Util\Tops::calKonto($stand->getStand(), $konto->getKonto())['text'];                              
+                            ?>
+                        </div>
+                        <div class="py-4" >
+                            Betrag: 
+                            <input type="number" name="wieviel" id="wieviel" max="<?php echo \Util\Tops::calKonto($stand->getStand(), $konto->getKonto())['max']; ?>" 
+                            value="<?php echo \Util\Tops::calKonto($stand->getStand(), $konto->getKonto())['max']; ?>" class="form-control" required <?php echo \Util\Tops::calKonto($stand->getStand(), $konto->getKonto())['show']; ?> >
+                        </div>
+                      <div style="overflow:auto;">
+                        <div style="float:right;">
+                        <button type="reset" class="btn btn-secondary" id="close" onclick="document.getElementById('balance').style.display='none'">abbrechen</button>
+                        <button type="submit" class="btn btn-primary" id="submit" <?php echo \Util\Tops::calKonto($stand->getStand(), $konto->getKonto())['show']; ?> >absenden</button>
+                        </div>
+                      </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+      </div>
       <div id="add" class="w3-modal ">
             <div class="modal-dialog " >
-              <div class="modal-content">
+              <div class="modal-content w3-card-4 w3-animate-zoom">
                 <div class="modal-header">
                   <h5 class="modal-title" id="modalTitle">Haushaltskasse</h5>
                   <button type="button" class="btn-close" onclick="document.getElementById('add').style.display='none'"></button>
                 </div>
                 <div class="modal-body">
                 <form id="addForm" class="addForm" method="POST">
-                  <input type="hidden" name="wer" value="<?php echo $_SESSION['user_name']; ?>">
-                  
-                  <!-- One "tab" for each step in the form: -->
-                  <div class="tab">abrechnen oder einzahlen?
-                    <div class="row justify-content-md-center">
-                      <div class="col px-5">
-                      <input type="radio" class="sr-only" name="inorout" id="abr" value="-" checked required >
-                      <label for="abr">
-                        <img src="<?php echo App::getBaseUrl() ?>/skin/images/haushaltskasse/out.png" alt="abrechnen" class="img-fluid" >
-                      </label>
-                      </div>
-                      <div class="col px-5">
-                      <input type="radio" class="sr-only" name="inorout" id="einz" value="+">
-                      <label for="einz">
-                          <img src="<?php echo App::getBaseUrl() ?>/skin/images/haushaltskasse/in.png" alt="einzahlen"  class="img-fluid" >
-                      </label>
-                      </div>
-                    </div>
-                  </div>
+                  <input type="hidden" name="whichForm" value="add">
+                  <input type="hidden" name="wer" value="<?php echo $_SESSION['userName']; ?>">
+                  <input type="hidden" name="userId" value="<?php echo $_SESSION['userId']; ?>">
+                  <input type="hidden" name="konto" value="<?php echo $konto->getKonto(); ?>">
+                  <input type="hidden" name="stand" value="<?php echo $stand->getStand(); ?>">
                   <div class="tab">Wann:
                     <p><input type="date" name="datum" class="form-control" value="<?php echo date("Y-m-d"); ?>" required></p>
                   </div>
@@ -124,7 +179,7 @@
                     <span class="step"></span>
                     <span class="step"></span>
                     <span class="step"></span>
-                    <span class="step"></span> 
+                    
                   </div>
                   <hr>
                   <div style="overflow:auto;">

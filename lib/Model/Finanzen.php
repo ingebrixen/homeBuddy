@@ -9,7 +9,7 @@ class Finanzen
     use ExchangeArray;
 
     private $_id            = 0;
-    private $_uri           = "";
+    private $_userId        = "";
     private $_stand         = "";
     private $_wer           = "";
     private $_datum         = "";
@@ -20,28 +20,20 @@ class Finanzen
     private $_kategorie     = "";
     private $_kommentar     = "";
     private $_sumWieviel    = "";
+    private $_konto         = "";
 
     public function __construct(array $data)
     {
         $this->exchangeArray($data);
     }
 
-
     public function getId()
     {
         return $this->_id;
     }
-    public function setId($id)
+    public function getUserId()
     {
-        $this->_id = $id;
-    }
-    public function getUri()
-    {
-        return $this->_uri;
-    }
-    public function setUri($uri)
-    {
-        $this->_uri = $uri;
+        return $this->_userId;
     }
     public function getStand()
     {
@@ -122,6 +114,14 @@ class Finanzen
     public function setSumWieviel($sumWieivel)
     {
         $this->_sumWieivel = $sumWieivel;
+    }    
+    public function getKonto()
+    {
+        return $this->_konto;
+    }
+    public function setKonto($konto)
+    {
+        $this->_konto = $konto;
     }
 
 

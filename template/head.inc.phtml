@@ -14,7 +14,7 @@
 <!-- Top container -->
 <div class="w3-bar w3-top bgTop w3-large smenu" style="z-index:4">
   <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
-  <span class="w3-bar-item w3-right">&nbsp</span>
+  <span class="w3-bar-item w3-right">your Home Buddy Alpha 0.1</span>
 </div>
 
 <!-- Sidebar/menu -->
@@ -24,7 +24,7 @@
       <img src="<?php echo App::getBaseUrl() ?>/skin/images/avatar2.png" class="w3-circle w3-margin-right" style="width:46px">
     </div>
     <div class="w3-col s8 w3-bar">
-      <span>Hallo, <strong><?php echo $_SESSION['user_name']; ?></strong></span><br>
+      <span>Hallo, <strong><?php echo $_SESSION['userName']; ?></strong></span><br>
       <a href="#" class="w3-bar-item w3-button w3-circle uicon"><i class="fa fa-envelope"></i></a>
       <a href="#" class="w3-bar-item w3-button w3-circle uicon"><i class="fa fa-user"></i></a>
       <a href="#" class="w3-bar-item w3-button w3-circle uicon"><i class="fa fa-cog"></i></a>
@@ -73,8 +73,8 @@
 
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
   <!-- Header -->
-  <header class="w3-container" style="padding-top:22px">
-    <h5><b><i class="fa fa-dashboard"></i>Dashboard</b></h5>
+  <header class="w3-container" style="padding-top:12px">
+    <!-- <h5><b><i class="fa fa-dashboard"></i>Dashboard</b></h5> -->
   </header>
 
   <div class="w3-row-padding w3-margin-bottom dash w3-animate-top">
@@ -86,9 +86,12 @@
               Du bekommst noch: 
             </div>
             <div class="right">
-              52 €
-              <br>
-              13 €
+              <?php foreach (\Util\Tops::getTopStand() as $stand): ?>      
+                <div class="right"><?php echo $stand->getStand() ?> &#8364;<br></div><br clear="all" />             
+              <?php endforeach; ?> 
+              <?php foreach (\Util\Tops::getTopKonto($_SESSION['userId']) as $konto): ?>      
+                <div class="right"><?php echo $konto->getKonto() ?> &#8364;<br></div><br clear="all" />             
+              <?php endforeach; ?>           
             </div>
           </div>  
           
@@ -109,7 +112,7 @@
       <a href="<?php echo App::getBaseUrl() ?>/finanzen/ausgaben"> 
         <div class="w3-third dashbox bgDash2">    
           <div class="w3-container bgDash2 w3-padding-16">
-              <?php foreach (\Util\Tops::topAusgaben() as $topAusgabe): ?>                
+              <?php foreach (\Util\Tops::getTopAusgaben() as $topAusgabe): ?>                
                 <div class="left"> <?php echo $topAusgabe->getWer() ?></div>
                 <div class="right"><?php echo $topAusgabe->getSumWieviel()." &#8364;<br>"; ?> </div><br clear="all" />             
               <?php endforeach; ?> 

@@ -15,3 +15,4 @@ https://www.php-einfach.de/experte/php-codebeispiele/loginscript/angemeldet-blei
 https://www.php-einfach.de/experte/php-sicherheit/authentifizierung-und-autorisierung-in-php/
 
 https://www.php.net/manual/de/function.session-regenerate-id.php
+
