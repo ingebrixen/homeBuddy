@@ -14,7 +14,7 @@
 <!-- Top container -->
 <div class="w3-bar w3-top bgTop w3-large smenu" style="z-index:4">
   <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
-  <span class="w3-bar-item w3-right">&nbsp</span>
+  <span class="w3-bar-item w3-right">your Home Buddy Alpha 0.1</span>
 </div>
 
 <!-- Sidebar/menu -->
@@ -87,10 +87,10 @@
             </div>
             <div class="right">
               <?php foreach (\Util\Tops::getTopStand() as $stand): ?>      
-                <div class="right"><?php var_dump($stand);echo $stand->getStand()." &#8364;<br>"; ?> </div><br clear="all" />             
+                <div class="right"><?php echo $stand->getStand() ?> &#8364;<br></div><br clear="all" />             
               <?php endforeach; ?> 
               <?php foreach (\Util\Tops::getTopKonto($_SESSION['userId']) as $konto): ?>      
-                <div class="right"><?php echo $konto->getKonto()." &#8364;<br>"; ?> </div><br clear="all" />             
+                <div class="right"><?php echo $konto->getKonto() ?> &#8364;<br></div><br clear="all" />             
               <?php endforeach; ?>           
             </div>
           </div>  

@@ -5,7 +5,7 @@
       <div class="w3-dropdown-click">
         <button onclick="getMonth()" class="btn btn-primary">Monat/Jahr</button>
         <div id="monat" class="w3-dropdown-content w3-bar-block w3-border">
-          <a href="<?php echo App::getBaseUrl()."/finanzen/ausgaben/"; ?>" class="w3-bar-item w3-button">alles</a>
+          <a href="<?php echo App::getBaseUrl()."/finanzen/ausgaben/"; ?>" class="w3-bar-item w3-button">-</a>
         <?php foreach (\Util\Datum::getDateRange() as $date): ?>
           <a href="<?php echo App::getBaseUrl()."/finanzen/ausgaben/datum/".$date->format('Y-m'); ?>" class="w3-bar-item w3-button"><?php echo $date->format('m/y')."\n";?></a>
         <?php endforeach; ?> 
@@ -83,7 +83,6 @@
                   </div>
                   <!-- Circles which indicates the steps of the form: -->
                   <div style="text-align:center;margin-top:40px;">
-                    <span class="step"></span>
                     <span class="step"></span>
                     <span class="step"></span>
                   </div>

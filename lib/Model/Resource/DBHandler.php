@@ -20,6 +20,7 @@ class DBHandler extends Base
         for ($set = array(); $row = $dbResult->fetch(\PDO::FETCH_ASSOC); $set[] = $row); 
 
         return $this->_dataSetter($set, $model);
+        $this->connection = null;
     }
     public function insertData(string $table, array $post)
     {
@@ -36,44 +37,28 @@ class DBHandler extends Base
         $statement->execute();
 
         return $connection->lastInsertId();
+        $this->connection = null;
     }
-    public function updateData(string $table, array $post)
+    public function updateData(string $table, string $colum, string $newKonto, string $id)
     {
-        $id = $post['id]'];
-        unset($post['id']);
-        $sql = \sprintf("UPDATE %s SET %s=%s WHERE id = %s",
-        $table, $this->_getColum($post), $this->_getValue($post), $id
-    );
-    }
-    public function selectTopAusgaben(string $model)
-    {
-        $sql = "SELECT wer, sum(wieviel) AS sumWieviel FROM ausgaben GROUP BY wer";
+        $sql = \sprintf("UPDATE %s SET %s = %s WHERE id = %s",
+        $table, $colum, $newKonto, $id);
+        $connection = $this->connect();
+        $update = $connection->prepare($sql);
 
+        $update->execute();
+        $this->connection = null;
+
+        /* return $connection->lastInsertId(); */
+    }
+    public function selectTops(string $model, string $query)
+    {
+        $sql = $query;
         $dbResult = $this->connect()->query($sql);
         for ($set = array(); $row = $dbResult->fetch(\PDO::FETCH_ASSOC); $set[] = $row); 
 
         return $this->_dataSetter($set, $model);
     }
-    public function selectTopKonto(string $model, string $userId)
-    {
-        $sql = "SELECT konto FROM persKonto WHERE userId = $userId";
-
-        $dbResult = $this->connect()->query($sql);
-        for ($set = array(); $row = $dbResult->fetch(\PDO::FETCH_ASSOC); $set[] = $row); 
-
-        return $this->_dataSetter($set, $model);
-    }
-    public function selectTopStand(string $model)
-    {
-        $sql = "SELECT stand FROM haushaltskasse ORDER BY ID DESC LIMIT 1";
-
-        $dbResult = $this->connect()->query($sql);
-        for ($set = array(); $row = $dbResult->fetch(\PDO::FETCH_ASSOC); $set[] = $row); 
-
-        return $this->_dataSetter($set, $model);
-    }
-
-
     private function _dataSetter(array $_set, string $model)
     {
         //$data->setId($row['id']);
