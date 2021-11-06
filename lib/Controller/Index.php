@@ -31,7 +31,7 @@ class Index extends Base
     }
     public function registerAction($params)
     {   
-        $regAllowed = true; 
+        $regAllowed = false; 
 
         if ($regAllowed) {
             if ($this->isPost()) 
