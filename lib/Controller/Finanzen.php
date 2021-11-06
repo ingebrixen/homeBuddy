@@ -44,16 +44,47 @@ class Finanzen extends Base {
             $getResource = \App::getResourceModel('DBHandler');
          switch ($_POST) {
 
-                case $_POST['whichForm'] == 'balance':
+                case $_POST['whichForm'] == 'balance' && $_POST['konto'] == '0.00':
                     unset($_POST['whichForm']);
-                    $newKonto =  strval($_POST['konto'] + $_POST['wieviel']);
+                    $newKonto =  strval(\abs($_POST['konto']) + $_POST['wieviel']);
                     $table = 'persKonto';
                     $colum = 'konto';
-                    $getResource->updateData($table, $colum, $newKonto, $_POST['userId']);
+                    $getResource->updateData($table, $colum, $newKonto, $_POST['uid']);
+
+
+                    unset($_POST['konto'],$_POST['uid']);
+
+
+                    $_POST['stand'] = $_POST['stand'] + $_POST['wieviel'];
+                    if ( $getResource->insertData($this->_table, $_POST) ) {                
+                    $url = \App::getBaseUrl() . '/finanzen/haushaltskasse';
+                    header('Location: ' . $url);     
+                    };
+
                     break;
 
-                case $_POST['whichForm'] == 'add' && $_POST['womit'] == 'kasse':
+                case $_POST['whichForm'] == 'balance':
                     unset($_POST['whichForm']);
+                    $newKonto =  strval(\abs($_POST['konto']) + $_POST['wieviel']);
+                    $table = 'persKonto';
+                    $colum = 'konto';
+                    $getResource->updateData($table, $colum, $newKonto, $_POST['uid']);
+
+
+                    unset($_POST['konto'],$_POST['uid']);
+
+                    $_POST['wieviel'] = \abs($_POST['wieviel']);
+
+                    $_POST['stand'] = $_POST['stand'] + $_POST['wieviel'];
+                    if ( $getResource->insertData($this->_table, $_POST) ) {                
+                    $url = \App::getBaseUrl() . '/finanzen/haushaltskasse';
+                    header('Location: ' . $url);     
+                    };
+
+                    break;            
+
+                case $_POST['whichForm'] == 'add' && $_POST['womit'] == 'kasse':
+                    unset($_POST['konto'],$_POST['uid'],$_POST['whichForm']);
                     $_POST['stand'] = $_POST['stand'] + $_POST['wieviel'];
                     if ( $getResource->insertData($this->_table, $_POST) ) {                
                     $url = \App::getBaseUrl() . '/finanzen/haushaltskasse';
@@ -66,9 +97,9 @@ class Finanzen extends Base {
                     $newKonto =  strval($_POST['konto'] - $_POST['wieviel']);
                     $table = 'persKonto';
                     $colum = 'konto';
-                    $getResource->updateData($table, $colum, $newKonto, $_POST['userId']);
+                    $getResource->updateData($table, $colum, $newKonto, $_POST['uid']);
                     
-                    unset($_POST['userId'], $_POST['konto']);
+                    unset($_POST['uid'], $_POST['konto']);
                     $_POST['stand'] = $_POST['stand'] + $_POST['wieviel'];
                     if ( $getResource->insertData($this->_table, $_POST) ) {                
                     $url = \App::getBaseUrl() . '/finanzen/haushaltskasse';
@@ -77,17 +108,6 @@ class Finanzen extends Base {
                     break;
                     
                 }   
-            
-            /** @var \Model\Resource\DBHandler $getResource */            
-
-            
-            
-            //$getResource = \App::getResourceModel('DBHandler');
-            /* if ($getResource->insertData($this->_table, $_POST)) {                
-                    $url = \App::getBaseUrl() . '/finanzen/haushaltskasse';
-                    header('Location: ' . $url);     
-                    /* echo $this->render('haushaltskasse.phtml', array('data' => $dataSet)); 
-                } */
         } 
         echo $this->render('haushaltskasse.phtml', array('data' => $dataSet));       
     }
