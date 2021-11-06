@@ -41,7 +41,7 @@ class DBHandler extends Base
     }
     public function updateData(string $table, string $colum, string $newKonto, string $id)
     {
-        $sql = \sprintf("UPDATE %s SET %s = %s WHERE id = %s",
+        $sql = \sprintf("UPDATE %s SET %s = %s WHERE uid = %s",
         $table, $colum, $newKonto, $id);
         $connection = $this->connect();
         $update = $connection->prepare($sql);

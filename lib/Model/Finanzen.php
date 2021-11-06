@@ -9,7 +9,7 @@ class Finanzen
     use ExchangeArray;
 
     private $_id            = 0;
-    private $_userId        = "";
+    private $_uid           = "";
     private $_stand         = "";
     private $_wer           = "";
     private $_datum         = "";
@@ -31,9 +31,9 @@ class Finanzen
     {
         return $this->_id;
     }
-    public function getUserId()
+    public function getUid()
     {
-        return $this->_userId;
+        return $this->_uid;
     }
     public function getStand()
     {

@@ -35,7 +35,7 @@
     <!-- <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a> -->
     <a href="<?php echo App::getBaseUrl() ?>/" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw iconWidth"></i>Dashboard</a>
     <hr>
-    <a href="<?php echo App::getBaseUrl() ?>/todo/" class="w3-bar-item w3-button w3-padding"><i class="fas fa-sticky-note iconWidth"></i>Notizen</a>
+    <a href="<?php echo App::getBaseUrl() ?>/notes/" class="w3-bar-item w3-button w3-padding"><i class="fas fa-sticky-note iconWidth"></i>Notizen</a>
     <a href="<?php echo App::getBaseUrl() ?>/todo/" class="w3-bar-item w3-button w3-padding"><i class="fas fa-tasks iconWidth"></i>toDo</a>
     <hr>
     <a href="<?php echo App::getBaseUrl() ?>/finanzen/" class="w3-bar-item w3-button w3-padding"><i class="fas fa-euro-sign iconWidth"></i>Finanzen</a>
@@ -49,16 +49,9 @@
     <hr>
     <a href="<?php echo App::getBaseUrl() ?>/" class="w3-bar-item w3-button w3-padding"><i class="fas fa-cog iconWidth"></i>Settings</a>
     <hr>
-    <?php if (\Session\User::isLoggedIn()): ?>
     <a href="<?php echo App::getBaseUrl() ?>/index/logout" class="w3-bar-item w3-button w3-padding"><i class="fa fa-power-off iconWidth"></i>Logout</a>
     <br>
     <br>
-    <?php else: ?>
-    <a href="<?php echo App::getBaseUrl() ?>/index/login" class="w3-padding link-dark"><i class="fa fa-power-off iconWidth"></i>Login</a>
-    <br>
-    <br>
-    <?php endif; ?>
-
   </div>
   <footer class="navfooter mt-auto py-3 bgTop">
     <div class="container">

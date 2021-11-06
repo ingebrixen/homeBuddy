@@ -46,14 +46,16 @@ class Finanzen extends Base {
 
                 case $_POST['whichForm'] == 'balance':
                     unset($_POST['whichForm']);
-                    $newKonto =  strval($_POST['konto'] + $_POST['wieviel']);
+                    $newKonto =  strval(\abs($_POST['konto']) + $_POST['wieviel']);
                     $table = 'persKonto';
                     $colum = 'konto';
-                    $getResource->updateData($table, $colum, $newKonto, $_POST['userId']);
+                    $getResource->updateData($table, $colum, $newKonto, $_POST['uid']);
                     break;
 
+                    //einzahlen fehlt. > bal form bei einzahlung muss betrag in kasse gutschreiben
+
                 case $_POST['whichForm'] == 'add' && $_POST['womit'] == 'kasse':
-                    unset($_POST['whichForm']);
+                    unset($_POST['konto'],$_POST['uid'],$_POST['whichForm']);
                     $_POST['stand'] = $_POST['stand'] + $_POST['wieviel'];
                     if ( $getResource->insertData($this->_table, $_POST) ) {                
                     $url = \App::getBaseUrl() . '/finanzen/haushaltskasse';
@@ -66,9 +68,9 @@ class Finanzen extends Base {
                     $newKonto =  strval($_POST['konto'] - $_POST['wieviel']);
                     $table = 'persKonto';
                     $colum = 'konto';
-                    $getResource->updateData($table, $colum, $newKonto, $_POST['userId']);
+                    $getResource->updateData($table, $colum, $newKonto, $_POST['uid']);
                     
-                    unset($_POST['userId'], $_POST['konto']);
+                    unset($_POST['uid'], $_POST['konto']);
                     $_POST['stand'] = $_POST['stand'] + $_POST['wieviel'];
                     if ( $getResource->insertData($this->_table, $_POST) ) {                
                     $url = \App::getBaseUrl() . '/finanzen/haushaltskasse';
