@@ -7,7 +7,7 @@ class App
 {
     public static function getBaseUrl()
     {
-        return "http://localhost:3000";
+        return HOST;
     }
     public static function getModel(string $model, array $data = [])
     {

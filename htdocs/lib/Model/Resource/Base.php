@@ -6,10 +6,10 @@
 namespace Model\Resource;
 class Base
 {
-    private $dbuser = "homeBuddy_db_user";
-    private $dbpass = "T80e,mefgtb";
-    private $dbname = "homeBuddy";
-    private $dbhost = "localhost";
+    private $dbuser = DBUSER;
+    private $dbpass = DBPWD;
+    private $dbname = DBNAME;
+    private $dbhost = DBHOST;
 
 
     protected function connect()

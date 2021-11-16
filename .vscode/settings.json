@@ -1,18 +1,4 @@
 {
-    "sqltools.connections": [
-        {
-            "mysqlOptions": {
-                "authProtocol": "default"
-            },
-            "previewLimit": 50,
-            "server": "10.0.0.2",
-            "port": 3306,
-            "driver": "MariaDB",
-            "name": "raspi",
-            "username": "root",
-            "password": "ov&3ADu07XOO!;",
-            "database": "homeBuddy"
-        }
-    ],
+
     "phpserver.relativePath": ""
 }
