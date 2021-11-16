@@ -16,3 +16,4 @@ https://www.php-einfach.de/experte/php-sicherheit/authentifizierung-und-autorisi
 
 https://www.php.net/manual/de/function.session-regenerate-id.php
 
+test
