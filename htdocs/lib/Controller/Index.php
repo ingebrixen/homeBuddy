@@ -26,7 +26,7 @@ class Index extends Base
         // $bilder = $model->getBilder();
         
         // bilder darstellen/ template
-        echo $this->render('dashboard.phtml', array());
+        echo $this->render('portal.phtml', array());
         //  bilder.phtml und das assoziative array werden als parameter an render in Base übergeben
     }
     public function registerAction($params)

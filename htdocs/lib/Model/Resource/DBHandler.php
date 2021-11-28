@@ -8,13 +8,14 @@ class DBHandler extends Base
 {    
     //private $_order = "";
 
-    public function selectData(string $model, string $table, string $colum, array $params) 
+    public function selectData(string $model, string $table, string $colum, array $params, $order = '') 
     //z.B. sortierung, anzahl einträge, standard (z.b. bei sortierung oder datumsfilter)
     {    
-        $sql = \sprintf("SELECT %s FROM %s %s ORDER BY id DESC", 
+        $sql = \sprintf("SELECT %s FROM %s %s %s", 
         $colum, 
         $table, 
-        $this->_setWhere($params));
+        $this->_setWhere($params),
+        $order);
 
         $dbResult = $this->connect()->query($sql);
         for ($set = array(); $row = $dbResult->fetch(\PDO::FETCH_ASSOC); $set[] = $row); 
@@ -39,9 +40,9 @@ class DBHandler extends Base
         return $connection->lastInsertId();
         $this->connection = null;
     }
-    public function updateData(string $table, string $colum, string $newKonto, string $id)
+    public function updateData(string $table, string $colum, string $newKonto = '', string $id)
     {
-        $sql = \sprintf("UPDATE %s SET %s = %s WHERE uid = %s",
+        $sql = \sprintf("UPDATE %s SET %s = %s WHERE id = %s",
         $table, $colum, $newKonto, $id);
         $connection = $this->connect();
         $update = $connection->prepare($sql);

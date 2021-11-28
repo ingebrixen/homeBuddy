@@ -9,15 +9,13 @@ use Model\Resource\DBHandler;
 
 class Tops
 {
-    private string $_model = 'Finanzen';
-    private string $_table = '';
-    private string $_colum = '';
-    private string $_userId = '';
 
     public static function getTopAusgaben()
     {
         $_model = 'Finanzen';
-        $query = 'SELECT wer, sum(wieviel) AS sumWieviel FROM ausgaben GROUP BY wer';
+        $_table = 'sumAusg';
+        $_colum = 'wer, sumAusgaben';
+        $query = 'SELECT '.$_colum.' FROM '.$_table;
         $resourceModel = \App::getResourceModel('DBHandler');
         $dataSet = $resourceModel->selectTops($_model, $query);
         
@@ -27,8 +25,8 @@ class Tops
     {
         $_model = 'Finanzen';
         $_table = 'persKonto';
-        $_colum = 'konto';
-        $query = 'SELECT konto FROM persKonto WHERE uid = '.$userId.'';
+        $_colum = 'konto, lend';
+        $query = 'SELECT '.$_colum.' FROM '.$_table.' WHERE id = '.$userId;
         $resourceModel = \App::getResourceModel('DBHandler');
         $dataSet = $resourceModel->selectTops($_model, $query);
         
@@ -37,9 +35,9 @@ class Tops
     public static function getTopStand() 
     {
         $_model = 'Finanzen';
-        $_table = 'haushaltskasse';
-        $_colum = 'stand';
-        $query = 'SELECT stand FROM haushaltskasse ORDER BY ID DESC LIMIT 1';
+        $_table = 'sumStand';
+        $_colum = 'Stand';
+        $query = 'SELECT '.$_colum.' FROM '.$_table;
         $resourceModel = \App::getResourceModel('DBHandler');
         $dataSet = $resourceModel->selectTops($_model, $query);
         
