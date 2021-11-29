@@ -35,9 +35,9 @@ class Tops
     public static function getTopStand() 
     {
         $_model = 'Finanzen';
-        $_table = 'sumStand';
-        $_colum = 'Stand';
-        $query = 'SELECT '.$_colum.' FROM '.$_table;
+        $_table = 'haushaltskasse';
+        $_colum = 'stand';
+        $query = 'SELECT '.$_colum.' FROM '.$_table.' ORDER BY ID DESC LIMIT 1' ;
         $resourceModel = \App::getResourceModel('DBHandler');
         $dataSet = $resourceModel->selectTops($_model, $query);
         

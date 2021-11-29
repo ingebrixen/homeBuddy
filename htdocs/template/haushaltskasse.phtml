@@ -29,7 +29,11 @@
           <td><?php echo $ausgabe->getWer(); ?></td>
           <td><?php echo date("d.m.y",strtotime($ausgabe->getDatum())); ?></td>
           <?php if ($ausgabe->getWomit() == 'lend') {
-            echo "<td style='color:red'>{$ausgabe->getWieviel()} &#8364;</td>";
+              if ($ausgabe->getWieviel() > '0') {
+                echo "<td style='color:green'>{$ausgabe->getWieviel()} &#8364;</td>";
+              } else {
+                echo "<td style='color:red'>{$ausgabe->getWieviel()} &#8364;</td>";
+              }            
           } else {
             echo "<td>{$ausgabe->getWieviel()} &#8364;</td>";
           }; ?>
@@ -39,8 +43,8 @@
       </tbody>      
     </table> 
     <div class="center">
-      <div class="center fs-6" style="color:red">rot = geld geliehen</div>
-      <div class="center fs-6" style="color:green">grün = geld zurückgezahlt</div>
+      <div class="center fs-6" style="color:red">rot = geliehen</div>
+      <div class="center fs-6" style="color:green">grün = zurückgezahlt</div>
     </div>
     <nav aria-label="kasse" class="py-3">
       <ul class="pagination pagination-sm justify-content-center">

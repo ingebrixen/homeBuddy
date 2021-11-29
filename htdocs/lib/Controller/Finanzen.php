@@ -76,23 +76,30 @@ class Finanzen extends Base {
                     //  Fehler: wenn schon geld geliehen wurde und man einkaufen geht, wird zwar lend und konto auf null gesetzt, 
                     //  der Betrag aber extra noch von der kasse abgezogen. somit hat man eine doppelte ausgabe obwohl das geld 
                     //  nur ausgeglichen wurde
-
-
-
-
                     if ($_POST['lend'] < '0.00') { 
-                        if (abs($_POST['lend']) > $_POST['wieviel']) {
+                        //  wenn lend +10 > ausgabe 5
+                        if (abs($_POST['lend']) >= $_POST['wieviel']) {
+                            
                             $_lend = $_konto = strval($_POST['wieviel'] + $_POST['lend']);
+                            $_POST['womit'] = 'lend';
                         }
                         $_konto = strval($_POST['wieviel'] + $_POST['lend']);
                         $_lend = '0.00';
+                        $rest = $_POST['lend'] + $_POST['wieviel'];
+                        $_POST['wieviel'] = abs($_POST['lend']);
+                        $_POST['womit'] = 'lend';
+                        //  ausgleich ausführen > rest muss konto gutgeschrieben und von der kasse abgezogen werden.
+                        unset($_POST['whichForm'], $_POST['lend'], $_POST['konto'],$_POST['uid']);
+                        $ausgleich = \App::getResourceModel('DBHandler'); 
+                        $ausgleich->insertData('haushaltskasse', $_POST);
+                        $_POST['womit'] = 'self';
+                        $_POST['wieviel'] = 0 - $rest;
+                        $_POST['stand'] = $_POST['stand'] + $_POST['wieviel'];
                     } else {
                         $_konto =  strval($_POST['wieviel'] + $_POST['konto']); 
-                        $_lend = '0.00';  
+                        $_lend = '0.00';
+                        $_POST['stand'] = $_POST['stand'] + $_POST['wieviel'];  
                     }
-                    $_POST['wieviel'] = strval(0 - $_POST['wieviel']);
-                    $_POST['stand'] = $_POST['stand'] + $_POST['wieviel'];
-
                     unset($_POST['whichForm'], $_POST['lend'], $_POST['konto'],$_POST['uid']); 
                     $updateLend = $updateKonto = $updateKasse =\App::getResourceModel('DBHandler');
 
@@ -102,7 +109,6 @@ class Finanzen extends Base {
                         $url = \App::getBaseUrl() . '/finanzen/haushaltskasse';
                         header('Location: ' . $url); 
                     }
-
                     break;
                 case $_POST['whichForm'] == 'add' && $_POST['womit'] == 'kasse':
                     //  Bezahlung erfolgt mit Haushaltsportemonnaie
@@ -116,8 +122,7 @@ class Finanzen extends Base {
                     if ($updateKasse->insertData('haushaltskasse', $_POST)) {
                         $url = \App::getBaseUrl() . '/finanzen/haushaltskasse';
                         header('Location: ' . $url); 
-                    }                    
-                
+                    }
                     break;                    
                 case $_POST['whichForm'] == 'balance':
                     $_uid = $_POST['uid'];
