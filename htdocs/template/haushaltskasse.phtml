@@ -28,12 +28,41 @@
           <th scope="row"><?php /* echo */ $ausgabe->getId(); echo $i;?></th>
           <td><?php echo $ausgabe->getWer(); ?></td>
           <td><?php echo date("d.m.y",strtotime($ausgabe->getDatum())); ?></td>
-          <td><?php echo $ausgabe->getWieviel(); ?> &#8364;</td>
+          <?php if ($ausgabe->getWomit() == 'lend') {
+              if ($ausgabe->getWieviel() > '0') {
+                echo "<td style='color:green'>{$ausgabe->getWieviel()} &#8364;</td>";
+              } else {
+                echo "<td style='color:red'>{$ausgabe->getWieviel()} &#8364;</td>";
+              }            
+          } else {
+            echo "<td>{$ausgabe->getWieviel()} &#8364;</td>";
+          }; ?>
           <td><?php echo $ausgabe->getStand(); ?> &#8364;</td>
         </tr>
-        <?php endforeach; ?>
+      <?php endforeach; ?>
       </tbody>      
     </table> 
+    <div class="center">
+      <div class="center fs-6" style="color:red">rot = geliehen</div>
+      <div class="center fs-6" style="color:green">grün = zurückgezahlt</div>
+    </div>
+    <nav aria-label="kasse" class="py-3">
+      <ul class="pagination pagination-sm justify-content-center">
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
   </div>
 </div>
 <!-- End page content -->
@@ -93,6 +122,7 @@
                         <input type="hidden" name="konto" value="<?php echo $konto->getKonto(); ?>">
                         <input type="hidden" name="datum" type="date" value="<?php echo date("Y-m-d"); ?>">
                         <input type="hidden" name="stand" value="<?php echo $stand->getStand(); ?>">
+                        <input type="hidden" name="lend" value="<?php echo $konto->getLend(); ?>">
                         <div class="lh-base pb-3">
                             Haushaltskasse aktuell: <b><?php echo $stand->getStand(); ?>&#8364;</b><br>
                             pers. Kontostand: <b><?php echo $konto->getKonto(); ?>&#8364;</b><br>
@@ -134,6 +164,7 @@
                   <input type="hidden" name="uid" value="<?php echo $_SESSION['userId']; ?>">
                   <input type="hidden" name="konto" value="<?php echo $konto->getKonto(); ?>">
                   <input type="hidden" name="stand" value="<?php echo $stand->getStand(); ?>">
+                  <input type="hidden" name="lend" value="<?php echo $konto->getLend(); ?>">
                   <div class="tab">Wann:
                     <p><input type="date" name="datum" class="form-control" value="<?php echo date("Y-m-d"); ?>" required></p>
                   </div>

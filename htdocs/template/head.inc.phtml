@@ -14,7 +14,7 @@
 <!-- Top container -->
 <div class="w3-bar w3-top bgTop w3-large smenu" style="z-index:4">
   <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
-  <span class="w3-bar-item w3-right">your Home Buddy Alpha 1.1</span>
+  <span class="w3-bar-item w3-right">your Home Buddy Alpha 1.2</span>
 </div>
 
 <!-- Sidebar/menu -->
@@ -76,7 +76,7 @@
           <div class="w3-container  w3-padding-16">
             <div class="left">
               Haushaltskasse: <br>
-              Du bekommst noch: 
+              Dein Kontostand: 
             </div>
             <div class="right">
               <?php foreach (\Util\Tops::getTopStand() as $stand): ?>      
@@ -107,7 +107,7 @@
           <div class="w3-container bgDash2 w3-padding-16">
               <?php foreach (\Util\Tops::getTopAusgaben() as $topAusgabe): ?>                
                 <div class="left"> <?php echo $topAusgabe->getWer() ?></div>
-                <div class="right"><?php echo $topAusgabe->getSumWieviel()." &#8364;<br>"; ?> </div><br clear="all" />             
+                <div class="right"><?php echo $topAusgabe->getSumAusgaben()." &#8364;<br>"; ?> </div><br clear="all" />             
               <?php endforeach; ?> 
           </div>      
         </div>

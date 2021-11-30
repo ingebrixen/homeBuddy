@@ -96,6 +96,9 @@ background: #555;
 .right {
     float: right !important;
 }
+.center {
+    align-items: center !important;
+    }
 .add {
     font-size: 3rem; 
     background-color: #fff;
@@ -149,9 +152,6 @@ filter: grayscale(0);
 }
 .addForm input[type="radio"]:checked + label {
 filter: grayscale(0);
-}
-.center {
-align-items: center;
 }
 .img-fluid-half {
 max-width: 30%;

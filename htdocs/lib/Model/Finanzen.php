@@ -19,8 +19,10 @@ class Finanzen
     private $_wo            = "";
     private $_kategorie     = "";
     private $_kommentar     = "";
-    private $_sumWieviel    = "";
+    private $_sumAusgaben   = "";
     private $_konto         = "";
+    private $_lend          = "";
+    private $_sumKat        = "";
 
     public function __construct(array $data)
     {
@@ -107,13 +109,13 @@ class Finanzen
     {
         $this->_kommentar = $kommentar;
     }
-    public function getSumWieviel()
+    public function getSumAusgaben()
     {
-        return $this->_sumWieivel;
+        return $this->_sumAusgaben;
     }
-    public function setSumWieviel($sumWieivel)
+    public function setSumAusgaben($sumAusgaben)
     {
-        $this->_sumWieivel = $sumWieivel;
+        $this->_sumAusgaben = $sumAusgaben;
     }    
     public function getKonto()
     {
@@ -123,6 +125,20 @@ class Finanzen
     {
         $this->_konto = $konto;
     }
-
-
+    public function getLend()
+    {
+        return $this->_lend;
+    }
+    public function setLend($lend)
+    {
+        $this->_lend = $lend;
+    }
+    public function getSumKat()
+    {
+        return $this->_sumKat;
+    }
+    public function setSumKat($sumKat)
+    {
+        $this->_sumKat = $sumKat;
+    }
 }
