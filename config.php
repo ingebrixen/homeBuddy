@@ -1,10 +1,10 @@
 <?php
 /**  (c) Thomas Böhme **/
 
-define('DBUSER','root');
-define('DBPWD','root');
-define('DBNAME','db');
-define('DBHOST','db');
+define('DBUSER','homeBuddy_db_user');
+define('DBPWD','T80e,mefgtb');
+define('DBNAME','homeBuddy');
+define('DBHOST','localhost');
 
 define('HOST', 'https://buddy.ingebrixen.de');
 
