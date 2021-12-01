@@ -6,6 +6,6 @@ define('DBPWD','root');
 define('DBNAME','db');
 define('DBHOST','db');
 
-define('HOST', 'https://homebuddy.ddev.site');
+define('HOST', 'https://buddy.ingebrixen.de');
 
 define('regOption', false); //Anlegen neuer Accounts erlaubt?
