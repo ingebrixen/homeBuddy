@@ -20,14 +20,14 @@ class Finanzen extends Base {
     }
     public function indexAction($params)
     {
-        $this->_table = "sumByKat";
+        $_table = "sumByKat";
 
         $_colum = "kategorie, sumKat";
 
         $model = \App::getResourceModel('DBHandler');
-        $dataSet = $model->selectData($this->_model, $this->_table, $_colum, $params);
+        $sumByKat = $model->selectData($this->_model, $_table, $_colum, $params);
 
-        echo $this->render('dashboard.phtml', array('data' => $dataSet));
+        echo $this->render('dashboard.phtml', array('data' => $sumByKat));
     }
     public function haushaltskasseAction($params) 
     {    
