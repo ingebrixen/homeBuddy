@@ -44,7 +44,12 @@ class Finanzen extends Base {
         
         
         if ($this->isPost()) 
-        {      
+        {
+
+            //  Fehler: wenn schon eingekauft, bevor eingezahlt wurde, darf die einzahlung nicht vom Stand abgezogen werden.
+
+
+            
             $_POST['wieviel'] = isset($_POST['privat']) ? $_POST['wieviel'] - $_POST['privat'] : $_POST['wieviel'];
             unset($_POST['privat']);
             $_POST['datum'] = date('Y-m-d', strtotime($_POST['datum']));

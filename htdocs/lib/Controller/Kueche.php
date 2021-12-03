@@ -26,7 +26,7 @@ class Kueche extends Base {
     public function rezepteAction($params) 
     {
 
-        echo $this->render('dashboard.phtml', array());
+        echo $this->render('rezepte.phtml', array());
     }
 
 }
