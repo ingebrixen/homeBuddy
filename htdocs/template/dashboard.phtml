@@ -1,6 +1,5 @@
 <?php   require_once($_SERVER['DOCUMENT_ROOT'].'/template/head.inc.phtml'); ?>
 <!-- !PAGE CONTENT! -->
-
   <div class="container-fluid paddingBottom">
     <div class="row">
       <div class="col"><canvas id="sumByKat" ></canvas></div>
@@ -19,20 +18,77 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-const ctx = document.getElementById('sumByKat');
-const myChart = new Chart(ctx, {
+const sbk = document.getElementById('sumByKat');
+const sbkChart = new Chart(sbk, {
     type: 'bar',
     data: {
         labels: [
-          <?php foreach ($data as $sumByKat): ?>
-            '<?php echo $sumByKat->getKategorie(); ?>',       
+          <?php foreach ($data[0] as $kategorie): ?>
+            <?php foreach ($kategorie as $kat): ?>
+              '<?php echo $kat->getKategorie();?>',  
+              <?php endforeach; ?> 
           <?php endforeach; ?>
         ],
         datasets: [{
             label: '€',            
             data: [
-              <?php foreach ($data as $sumByKat): ?>
-                <?php echo $sumByKat->getSumKat(); ?>,       
+              <?php foreach ($data[0] as $summe): ?>
+                <?php foreach ($kategorie as $sum): ?>
+                  '<?php echo $sum->getSumKat(); ?>',  
+                <?php endforeach; ?>      
+              <?php endforeach; ?>
+            ],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        tooltips: {
+          displayColors: false
+        },
+        plugins: {
+            legend: {
+                display: false,
+            }
+            
+        }
+        
+    }
+    
+});
+const sM = document.getElementById('sumMonth');
+const monthSumChart = new Chart(sM, {
+    type: 'bar',
+    data: {
+        labels: [
+          <?php foreach ($data[1] as $monat): ?>
+            <?php foreach ($monat as $mon): ?>
+              '<?php echo $mon->getMonat();?>',  
+              <?php endforeach; ?> 
+          <?php endforeach; ?>
+        ],
+        datasets: [{
+            label: '€',            
+            data: [
+              <?php foreach ($data[1] as $summe): ?>
+                <?php foreach ($summe as $sum): ?>
+                  '<?php echo $sum->getSumme(); ?>',  
+                <?php endforeach; ?>      
               <?php endforeach; ?>
             ],
             backgroundColor: [

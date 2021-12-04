@@ -25,7 +25,12 @@
     </div>
     <div class="w3-col s8 w3-bar">
       <span>Hallo, <strong><?php echo $_SESSION['userName']; ?></strong></span><br>
-      <a href="#" class="w3-bar-item w3-button w3-circle uicon"><i class="fa fa-envelope"></i></a>
+      <a href="#" class="w3-bar-item w3-button w3-circle uicon"><i class="fa fa-envelope"></i>
+        <span class="position-absolute translate-middle badge rounded-pill border border-light bg-danger" style="font-size: 0.8em" >
+          3
+          <span class="visually-hidden">unread messages</span>
+        </span>
+      </a>
       <a href="#" class="w3-bar-item w3-button w3-circle uicon"><i class="fa fa-user"></i></a>
       <a href="#" class="w3-bar-item w3-button w3-circle uicon"><i class="fa fa-cog"></i></a>
     </div>
