@@ -32,6 +32,7 @@ class DBHandler extends Base
         
         $connection = $this->connect();
         $statement = $connection->prepare($sql);
+        
         foreach ($this->_createBindValue($post) as $key => $val) {
             $statement->bindValue($key, $val);
         }
@@ -52,9 +53,8 @@ class DBHandler extends Base
 
         /* return $connection->lastInsertId(); */
     }
-    public function selectTops(string $model, string $query)
+    public function selectTops(string $model, string $sql)
     {
-        $sql = $query;
         $dbResult = $this->connect()->query($sql);
         for ($set = array(); $row = $dbResult->fetch(\PDO::FETCH_ASSOC); $set[] = $row); 
 

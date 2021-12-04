@@ -15,7 +15,6 @@ class Finanzen
     private $_datum         = "";
     private $_wieviel       = "";
     private $_womit         = "";
-    private $_privat        = "";
     private $_wo            = "";
     private $_kategorie     = "";
     private $_kommentar     = "";
@@ -23,6 +22,8 @@ class Finanzen
     private $_konto         = "";
     private $_lend          = "";
     private $_sumKat        = "";
+    private $_monat         = "";
+    private $_summe          = "";
 
     public function __construct(array $data)
     {
@@ -76,14 +77,6 @@ class Finanzen
     public function setWomit($womit)
     {
         $this->_womit = $womit;
-    } 
-    public function getPrivat()
-    {
-        return $this->_privat;
-    }
-    public function setPrivat($privat)
-    {
-        $this->_privat = $privat;
     }
     public function getWo()
     {
@@ -133,6 +126,7 @@ class Finanzen
     {
         $this->_lend = $lend;
     }
+    
     public function getSumKat()
     {
         return $this->_sumKat;
@@ -140,5 +134,21 @@ class Finanzen
     public function setSumKat($sumKat)
     {
         $this->_sumKat = $sumKat;
+    }
+    public function getMonat()
+    {
+        return $this->_monat;
+    }
+    public function setMonat($monat)
+    {
+        $this->_monat = $monat;
+    }
+    public function getSumme()
+    {
+        return $this->_summe;
+    }
+    public function setSumme($summe)
+    {
+        $this->_summe = $summe;
     }
 }

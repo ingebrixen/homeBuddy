@@ -20,14 +20,22 @@ class Finanzen extends Base {
     }
     public function indexAction($params)
     {
-        $this->_table = "sumByKat";
+        $stats = [];
 
+        $_table = "sumByKat";
         $_colum = "kategorie, sumKat";
 
         $model = \App::getResourceModel('DBHandler');
-        $dataSet = $model->selectData($this->_model, $this->_table, $_colum, $params);
+        $sumByKat = $model->selectData($this->_model, $_table, $_colum, $params);
 
-        echo $this->render('dashboard.phtml', array('data' => $dataSet));
+        $_table = "sumMonth";
+        $_colum = "Monat, Summe";
+
+        $sumMonth = $model->selectData($this->_model, $_table, $_colum, $params);
+
+        $stats = array(array($sumByKat), array($sumMonth));
+
+        echo $this->render('dashboard.phtml', array('data' => $stats));
     }
     public function haushaltskasseAction($params) 
     {    
@@ -44,7 +52,12 @@ class Finanzen extends Base {
         
         
         if ($this->isPost()) 
-        {      
+        {
+
+            //  Fehler: wenn schon eingekauft, bevor eingezahlt wurde, darf die einzahlung nicht vom Stand abgezogen werden.
+
+
+            
             $_POST['wieviel'] = isset($_POST['privat']) ? $_POST['wieviel'] - $_POST['privat'] : $_POST['wieviel'];
             unset($_POST['privat']);
             $_POST['datum'] = date('Y-m-d', strtotime($_POST['datum']));
