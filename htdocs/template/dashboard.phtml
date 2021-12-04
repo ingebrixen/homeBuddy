@@ -19,41 +19,45 @@
 
 <script>
 const sbk = document.getElementById('sumByKat');
-const sbkChart = new Chart(sbk, {
-    type: 'bar',
-    data: {
-        labels: [
-          <?php foreach ($data[0] as $kategorie): ?>
-            <?php foreach ($kategorie as $kat): ?>
-              '<?php echo $kat->getKategorie();?>',  
-              <?php endforeach; ?> 
-          <?php endforeach; ?>
-        ],
-        datasets: [{
-            label: '€',            
-            data: [
-              <?php foreach ($data[0] as $summe): ?>
-                <?php foreach ($kategorie as $sum): ?>
-                  '<?php echo $sum->getSumKat(); ?>',  
-                <?php endforeach; ?>      
-              <?php endforeach; ?>
-            ],
-            backgroundColor: [
+var bgColor = [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
                 'rgba(255, 206, 86, 0.2)',
                 'rgba(75, 192, 192, 0.2)',
                 'rgba(153, 102, 255, 0.2)',
                 'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
+            ]; 
+var boColor = [
                 'rgba(255, 99, 132, 1)',
                 'rgba(54, 162, 235, 1)',
                 'rgba(255, 206, 86, 1)',
                 'rgba(75, 192, 192, 1)',
                 'rgba(153, 102, 255, 1)',
                 'rgba(255, 159, 64, 1)'
+            ];
+const sbkChart = new Chart(sbk, {
+    type: 'bar',
+    data: {
+        labels: [
+          <?php foreach ($data[0] as $kategorie){
+                  foreach ($kategorie as $kat){
+                    echo "'{$kat->getKategorie()}',";
+                    }
+                }
+          ?>
+        ],
+        datasets: [{
+            label: '€',            
+            data: [
+              <?php foreach ($data[0] as $summe){
+                  foreach ($summe as $sum){
+                    echo "'{$sum->getSumKat()}',";
+                    }
+                }
+              ?>              
             ],
+            backgroundColor: bgColor,
+            borderColor: boColor,
             borderWidth: 1
         }]
     },
@@ -64,49 +68,34 @@ const sbkChart = new Chart(sbk, {
         plugins: {
             legend: {
                 display: false,
-            }
-            
-        }
-        
-    }
-    
+            }            
+        }        
+    }    
 });
 const sM = document.getElementById('sumMonth');
 const monthSumChart = new Chart(sM, {
     type: 'bar',
     data: {
         labels: [
-          <?php foreach ($data[1] as $monat): ?>
-            <?php foreach ($monat as $mon): ?>
-              '<?php echo $mon->getMonat();?>',  
-              <?php endforeach; ?> 
-          <?php endforeach; ?>
+          <?php foreach ($data[1] as $monat){
+                  foreach ($monat as $mon){
+                    echo "'{$mon->getMonat()}',";
+                    }
+                }
+          ?>
         ],
         datasets: [{
             label: '€',            
             data: [
-              <?php foreach ($data[1] as $summe): ?>
-                <?php foreach ($summe as $sum): ?>
-                  '<?php echo $sum->getSumme(); ?>',  
-                <?php endforeach; ?>      
-              <?php endforeach; ?>
+              <?php foreach ($data[1] as $summe){
+                  foreach ($summe as $sum){
+                    echo "'{$sum->getSumme()}',";
+                    }
+                }
+              ?>              
             ],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
+            backgroundColor: bgColor,
+            borderColor: boColor,
             borderWidth: 1
         }]
     },
@@ -117,12 +106,9 @@ const monthSumChart = new Chart(sM, {
         plugins: {
             legend: {
                 display: false,
-            }
-            
-        }
-        
-    }
-    
+            }            
+        }        
+    }    
 });
 </script>
 <?php   require_once($_SERVER['DOCUMENT_ROOT'].'/template/foot.inc.phtml'); ?>
