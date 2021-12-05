@@ -1,9 +1,9 @@
 <?php   require_once($_SERVER['DOCUMENT_ROOT'].'/template/head.inc.phtml'); ?>
 <!-- !PAGE CONTENT! -->
   <div class="container-fluid paddingBottom">
-    <div class="row">
-      <div class="col"><canvas id="sumByKat" ></canvas></div>
+    <div class="row">      
       <div class="col"><canvas id="sumMonth" ></canvas></div>
+      <div class="col"><canvas id="sumByKat" ></canvas></div>
     </div>    
   </div>
 </div>
@@ -19,6 +19,7 @@
 
 <script>
 const sbk = document.getElementById('sumByKat');
+const sM = document.getElementById('sumMonth');
 var bgColor = [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -58,10 +59,11 @@ const sbkChart = new Chart(sbk, {
             ],
             backgroundColor: bgColor,
             borderColor: boColor,
-            borderWidth: 1
+            borderWidth: 1,
         }]
     },
     options: {
+        responsive: true,
         tooltips: {
           displayColors: false
         },
@@ -72,7 +74,7 @@ const sbkChart = new Chart(sbk, {
         }        
     }    
 });
-const sM = document.getElementById('sumMonth');
+
 const monthSumChart = new Chart(sM, {
     type: 'line',
     data: {
@@ -96,10 +98,14 @@ const monthSumChart = new Chart(sM, {
             ],
             backgroundColor: bgColor,
             borderColor: boColor,
-            borderWidth: 1
+            borderWidth: 1,
+            fill: true,
+            stepped: false,
+            tension: 0.5
         }]
     },
     options: {
+        responsive: true,
         tooltips: {
           displayColors: false
         },
