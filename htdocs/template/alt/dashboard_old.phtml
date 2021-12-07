@@ -1,0 +1,119 @@
+<?php   require_once($_SERVER['DOCUMENT_ROOT'].'/template/head.inc.phtml'); ?>
+<!-- !PAGE CONTENT! -->
+  <div class="container-fluid paddingBottom">
+    <div class="row row-cols-1 row-cols-md-3">      
+      <div class="col"><canvas id="sumMonth" ></canvas></div>
+      <div class="col"><canvas id="sumByKat" ></canvas></div>
+    </div>    
+  </div>
+</div>
+<footer class="footer mt-auto py-3 bgTop">
+    <div class="container">
+      &nbsp
+    </div>
+</footer>
+<!-- End page content -->
+<!-- Begin Footer -->
+<!-- Begin script area -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const sbk = document.getElementById('sumByKat');
+const sM = document.getElementById('sumMonth');
+var bgColor = [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ]; 
+var boColor = [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ];
+const sbkChart = new Chart(sbk, {
+    type: 'bar',
+    data: {
+        labels: [
+          <?php foreach ($data[0] as $kategorie){
+                  foreach ($kategorie as $kat){
+                    echo "'{$kat->getKategorie()}',";
+                    }
+                }
+          ?>
+        ],
+        datasets: [{
+            label: '€',            
+            data: [
+              <?php foreach ($data[0] as $summe){
+                  foreach ($summe as $sum){
+                    echo "'{$sum->getSumKat()}',";
+                    }
+                }
+              ?>              
+            ],
+            backgroundColor: bgColor,
+            borderColor: boColor,
+            borderWidth: 1,
+        }]
+    },
+    options: {
+        responsive: false,
+        tooltips: {
+          displayColors: false
+        },
+        plugins: {
+            legend: {
+                display: false,
+            }            
+        }        
+    }    
+});
+
+const monthSumChart = new Chart(sM, {
+    type: 'line',
+    data: {
+        labels: [
+          <?php foreach ($data[1] as $monat){
+                  foreach ($monat as $mon){
+                    echo "'{$mon->getMonat()}',";
+                    }
+                }
+          ?>
+        ],
+        datasets: [{
+            label: '€',            
+            data: [
+              <?php foreach ($data[1] as $summe){
+                  foreach ($summe as $sum){
+                    echo "'{$sum->getSumme()}',";
+                    }
+                }
+              ?>              
+            ],
+            backgroundColor: bgColor,
+            borderColor: boColor,
+            borderWidth: 1,
+            fill: true,
+            stepped: false,
+            tension: 0.5
+        }]
+    },
+    options: {
+        responsive: false,
+        tooltips: {
+          displayColors: false
+        },
+        plugins: {
+            legend: {
+                display: false,
+            }            
+        }        
+    }    
+});
+</script>
+<?php   require_once($_SERVER['DOCUMENT_ROOT'].'/template/foot.inc.phtml'); ?>

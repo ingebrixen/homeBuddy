@@ -4,6 +4,9 @@
 <title>homeBuddy - Deine freundliche Haushaltshilfe</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="icon" type="image/x-icon" href="<?php echo App::getBaseUrl() ?>/skin/images/favicon.ico">
+<link rel="icon" type="image/png" href="<?php echo App::getBaseUrl() ?>/skin/images/favicon.png" sizes="32x32">
+<link rel="icon" type="image/png" href="<?php echo App::getBaseUrl() ?>/skin/images/favicon.png" sizes="96x96">
 <link rel="stylesheet" href="<?php echo App::getBaseUrl() ?>/skin/css/w3.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
 <link media="all" rel="stylesheet" type="text/css" href="<?php echo App::getBaseUrl() ?>/skin/css/bootstrap.css" />
@@ -40,14 +43,30 @@
     <a href="<?php echo App::getBaseUrl() ?>/notes/" class="w3-bar-item w3-button w3-padding"><i class="fas fa-sticky-note iconWidth"></i>Notizen</a>
     <a href="<?php echo App::getBaseUrl() ?>/todo/" class="w3-bar-item w3-button w3-padding"><i class="fas fa-tasks iconWidth"></i>toDo</a>
     <hr>
-    <a href="<?php echo App::getBaseUrl() ?>/finanzen/" class="w3-bar-item w3-button w3-padding"><i class="fas fa-euro-sign iconWidth"></i>Finanzen</a>
-    <a href="<?php echo App::getBaseUrl() ?>/finanzen/haushaltskasse" class="w3-bar-item w3-button w3-padding"><i class="fas fa-wallet iconWidth"></i>Haushaltskasse</a>
-    <a href="<?php echo App::getBaseUrl() ?>/finanzen/ausgaben" class="w3-bar-item w3-button w3-padding"><i class="fas fa-cash-register iconWidth"></i>Ausgaben allg.</a>
-    <a href="<?php echo App::getBaseUrl() ?>/finanzen/frederico" class="w3-bar-item w3-button w3-padding"><i class="fas fa-shuttle-van iconWidth"></i>Frederico</a>
+    <div class="w3-bar-item w3-button" onclick="finDrop()">
+      <i class="fas fa-euro-sign iconWidth"></i>Finanzen <i class="fa fa-caret-down"></i></div>
+      <div id="finDrop" class="w3-hide w3-white">
+      <a href="<?php echo App::getBaseUrl() ?>/finanzen/" class="w3-bar-item w3-button w3-padding">&nbsp; &nbsp; &nbsp; &nbsp;<i class="fas fa-chart-line iconWidth"></i>Auswertung</a>
+      <a href="<?php echo App::getBaseUrl() ?>/finanzen/haushaltskasse" class="w3-bar-item w3-button w3-padding">&nbsp; &nbsp; &nbsp; &nbsp;<i class="fas fa-wallet iconWidth"></i>Haushaltskasse</a>
+      <a href="<?php echo App::getBaseUrl() ?>/finanzen/ausgaben" class="w3-bar-item w3-button w3-padding">&nbsp; &nbsp; &nbsp; &nbsp;<i class="fas fa-cash-register iconWidth"></i>Ausgaben allg.</a>
+      <a href="<?php echo App::getBaseUrl() ?>/finanzen/frederico" class="w3-bar-item w3-button w3-padding">&nbsp; &nbsp; &nbsp; &nbsp;<i class="fas fa-shuttle-van iconWidth"></i>Frederico</a>
+      </div>
     <hr>
-    <a href="<?php echo App::getBaseUrl() ?>/kueche/" class="w3-bar-item w3-button w3-padding"><i class="fas fa-mug-hot iconWidth"></i>Küche</a>
-    <a href="<?php echo App::getBaseUrl() ?>/kueche/einkauf" class="w3-bar-item w3-button w3-padding"><i class="fas fa-shopping-cart iconWidth"></i>Einkauf</a>
-    <a href="<?php echo App::getBaseUrl() ?>/kueche/rezepte" class="w3-bar-item w3-button w3-padding"><i class="fas fa-sync iconWidth"></i>Rezept Karusell</a>
+    <div class="w3-bar-item w3-button" onclick="kitDrop()">
+      <i class="fas fa-mug-hot iconWidth"></i>K&uuml;che <i class="fa fa-caret-down"></i></div>
+      <div id="kitDrop" class="w3-hide w3-white">
+      <a href="<?php echo App::getBaseUrl() ?>/kueche/" class="w3-bar-item w3-button w3-padding">&nbsp; &nbsp; &nbsp; &nbsp;<i class="fas fa-mug-hot iconWidth"></i>&Uuml;bersicht</a>
+      <a href="<?php echo App::getBaseUrl() ?>/kueche/einkauf" class="w3-bar-item w3-button w3-padding">&nbsp; &nbsp; &nbsp; &nbsp;<i class="fas fa-shopping-cart iconWidth"></i>Einkauf</a>
+      <a href="<?php echo App::getBaseUrl() ?>/kueche/rezepte" class="w3-bar-item w3-button w3-padding">&nbsp; &nbsp; &nbsp; &nbsp;<i class="fas fa-sync iconWidth"></i>Rezept Karusell</a>
+      </div>
+      <hr>
+    <div class="w3-bar-item w3-button" onclick="wohDrop()">
+      <i class="fas fa-laptop-house iconWidth"></i>Wohnung <i class="fa fa-caret-down"></i></div>
+      <div id="wohDrop" class="w3-hide w3-white">
+      <a href="<?php echo App::getBaseUrl() ?>/kueche/" class="w3-bar-item w3-button w3-padding">&nbsp; &nbsp; &nbsp; &nbsp;<i class="fas fa-chart-bar iconWidth"></i>&Uuml;bersicht</a>
+      <a href="<?php echo App::getBaseUrl() ?>/kueche/einkauf" class="w3-bar-item w3-button w3-padding">&nbsp; &nbsp; &nbsp; &nbsp;<i class="fas fa-shower iconWidth"></i>Wasser</a>
+      <a href="<?php echo App::getBaseUrl() ?>/kueche/rezepte" class="w3-bar-item w3-button w3-padding">&nbsp; &nbsp; &nbsp; &nbsp;<i class="fas fa-temperature-high iconWidth"></i>Heizung</a>
+      </div>
     <hr>
     <a href="<?php echo App::getBaseUrl() ?>/" class="w3-bar-item w3-button w3-padding"><i class="fas fa-cog iconWidth"></i>Settings</a>
     <hr>
