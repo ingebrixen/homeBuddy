@@ -1,10 +1,17 @@
 <?php   require_once($_SERVER['DOCUMENT_ROOT'].'/template/head.inc.phtml'); ?>
 <!-- !PAGE CONTENT! -->
+
   <div class="container-fluid paddingBottom">
-    <div class="row row-cols-1 row-cols-md-3 g-4">      
-      <div class="col"><canvas id="sumMonth" ></canvas></div>
-      <div class="col"><canvas id="sumByKat" ></canvas></div>
-    </div>    
+    <div class="w3-row">
+      <div class="w3-col m4 l4">
+        <div>Kassenstand am Monatsende</div>
+        <canvas id="sumMonth" ></canvas>
+      </div>
+      <div class="w3-col m4 l4">
+        <div>Ausgaben kategorisiert</div>
+        <canvas id="sumByKat" ></canvas>
+      </div>
+    </div>
   </div>
 </div>
 <footer class="footer mt-auto py-3 bgTop">
@@ -16,7 +23,6 @@
 <!-- Begin Footer -->
 <!-- Begin script area -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <script>
 const sbk = document.getElementById('sumByKat');
 const sM = document.getElementById('sumMonth');
