@@ -55,10 +55,12 @@ class Finanzen extends Base {
         {
 
             //  Fehler: wenn schon eingekauft, bevor eingezahlt wurde, darf die einzahlung nicht vom Stand abgezogen werden.
-
+            if ($_POST['privat'] > '0.00') {
+                $_POST['wieviel'] = $_POST['wieviel'] - $_POST['privat'];
+            }
 
             
-            $_POST['wieviel'] = isset($_POST['privat']) ? $_POST['wieviel'] - $_POST['privat'] : $_POST['wieviel'];
+            //$_POST['wieviel'] = isset($_POST['privat']) ? $_POST['wieviel'] - $_POST['privat'] : $_POST['wieviel'];
             unset($_POST['privat']);
             $_POST['datum'] = date('Y-m-d', strtotime($_POST['datum']));
             switch ($_POST) {
