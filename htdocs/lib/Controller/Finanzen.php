@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace Controller;
 
-use Session\User;
+//use Session\User;
+use Util\Kassierer;
+use Util\Pagination;
 
 class Finanzen extends Base {
 
-    private string $_table = "";
-    private string $_colum = "";
+    private string $_table;
+    private string $_colum;
     private string $_model = "Finanzen";
-    private string $_order = "";
-    private string $_where = "";
+    private string $_order;
+    private string $_where;
     
     public function __construct()
     {
@@ -49,8 +51,9 @@ class Finanzen extends Base {
         $_order = "ORDER BY ID DESC";
 
         $dataSet = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order);
-        
-        
+
+
+
         if ($this->isPost()) 
         {
 
@@ -59,8 +62,6 @@ class Finanzen extends Base {
                 $_POST['wieviel'] = $_POST['wieviel'] - $_POST['privat'];
             }
 
-            
-            //$_POST['wieviel'] = isset($_POST['privat']) ? $_POST['wieviel'] - $_POST['privat'] : $_POST['wieviel'];
             unset($_POST['privat']);
             $_POST['datum'] = date('Y-m-d', strtotime($_POST['datum']));
             switch ($_POST) {
@@ -133,7 +134,7 @@ class Finanzen extends Base {
                                     }
                                     //  Es sind schulden vorhanden > Eintrag in kasse > womit = lend
                                     //  wenn lend kleiner ist als konto fehlt hier auch die monatliche zahlung > Eintrag Kasse
-                                    break;                                
+                                    break;
                                 default:    //  WORKING
                                     //  es sind keine schulden vorhanden > einfach Eintrag in kasse 
                                     echo "alles iO";
@@ -142,13 +143,13 @@ class Finanzen extends Base {
                                     break;
                             }
                         unset($_POST['whichForm'], $_POST['lend'], $_POST['konto'],$_POST['uid']);
-                        $_POST['stand'] = $_POST['stand'] + $_POST['wieviel'];                        
+                        $_POST['stand'] = $_POST['stand'] + $_POST['wieviel'];
                         if ($updateKasse->insertData('haushaltskasse', $_POST)) {
                             $url = \App::getBaseUrl() . '/finanzen/haushaltskasse';
                             header('Location: ' . $url); 
-                        };                            
+                        };
                         break;
-                    }                   
+                    }
                     if ($updateKonto->updateData('persKonto', 'konto', $_konto, $_uid)) {
                         $url = \App::getBaseUrl() . '/finanzen/haushaltskasse';
                         header('Location: ' . $url); 

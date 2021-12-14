@@ -3,7 +3,7 @@
 
 namespace Util;
 
-use Model\Finanzen;
+//use Model\Finanzen;
 use Model\Resource\DBHandler;
 
 
