@@ -50,9 +50,9 @@ class Finanzen extends Base {
 
         $data = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order);
 
-        $pagination = new Pagination();
-        $pagination->getAllItems($data);
-
+        $pagination = new Pagination($data);
+        $pagination->getPages(); 
+        
         if ($this->isPost()) 
         {
 
@@ -233,8 +233,8 @@ class Finanzen extends Base {
         $model = \App::getResourceModel('DBHandler');
         $data = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order);
 
-        $pagination = new Pagination();
-        $pagination->getAllItems($data);
+        $pagination = new Pagination($data);
+        $pagination->getPages();
 
         //$dataSet = array('pagination' => $pagination, 'data' => $data);
         
