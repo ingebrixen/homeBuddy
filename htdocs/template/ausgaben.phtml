@@ -12,7 +12,6 @@
         </div>
       </div>
     </div>
-    <?php /* var_dump($data); */ ?>
     <table class="table table-striped mb-0 text-center">
       <thead>
         <tr>
@@ -23,7 +22,7 @@
         </tr>
       </thead>
       <tbody>
-      <?php foreach ($data as $ausgabe): ?>
+      <?php foreach ($dataSet as $ausgabe): ?>
         <tr>
           <td><?php $ausgabe->getID(); echo date("d.m.y",strtotime($ausgabe->getDatum())); ?></td>
           <td><?php echo $ausgabe->getWer(); ?></td>
@@ -90,7 +89,7 @@
                           <option value="Geschenke">Geschenke</option>
                           <option value="Freizeit">Freizeit</option>
                           <option value="Urlaub">Urlaub</option>
-                          <option value="Genuss">Luxus</option>
+                          <option value="Luxus">Luxus</option>
                           <option value="sonstiges" required >sonstiges</option>
                       </select>
                     </p>

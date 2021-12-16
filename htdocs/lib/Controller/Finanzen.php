@@ -35,9 +35,7 @@ class Finanzen extends Base {
 
         $sumMonth = $model->selectData($this->_model, $_table, $_colum, $params);
 
-        $stats = array(array($sumByKat), array($sumMonth));
-
-        echo $this->render('dashboard.phtml', array('data' => $stats));
+        echo $this->render('dashboard.phtml', array('sumByKat' => $sumByKat, 'sumMonth' => $sumMonth));
     }
     public function haushaltskasseAction($params) 
     {    
@@ -50,9 +48,10 @@ class Finanzen extends Base {
         $_colum = "id, wer, datum, wieviel, stand, womit";
         $_order = "ORDER BY ID DESC";
 
-        $dataSet = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order);
+        $data = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order);
 
-
+        $pagination = new Pagination();
+        $pagination->getAllItems($data);
 
         if ($this->isPost()) 
         {
@@ -222,7 +221,7 @@ class Finanzen extends Base {
                                 
                 }   
         } 
-        echo $this->render('haushaltskasse.phtml', array('data' => $dataSet));       
+        echo $this->render('haushaltskasse.phtml', array('dataSet' => $data, 'pagination' => $pagination));       
     }
     public function ausgabenAction($params)
     {
@@ -232,7 +231,12 @@ class Finanzen extends Base {
         $_order = "ORDER BY ID DESC";
 
         $model = \App::getResourceModel('DBHandler');
-        $dataSet = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order);
+        $data = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order);
+
+        $pagination = new Pagination();
+        $pagination->getAllItems($data);
+
+        //$dataSet = array('pagination' => $pagination, 'data' => $data);
         
         if ($this->isPost()) 
         {
@@ -244,7 +248,7 @@ class Finanzen extends Base {
                     header('Location: ' . $url);                
                 }
         } 
-        echo $this->render('ausgaben.phtml', array('data' => $dataSet));
+        echo $this->render('ausgaben.phtml', array('dataSet' => $data, 'pagination' => $pagination));
     }
     public function fredericoAction($params)
     {

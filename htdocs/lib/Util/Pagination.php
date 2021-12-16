@@ -13,9 +13,12 @@ class Pagination {
         {
 
         }
-        public function getAllItems()
+        public function getAllItems(array $dataset)
         {
-                //      alle Items aus DB holen, zählen und dadurch die anzahl der aufrufbaren seiten definieren
+                 //      alle Items aus DB holen, zählen und dadurch die anzahl der aufrufbaren seiten definieren
+                 $this->totalItems = count($dataset);
+
+		return $this->totalItems;
         }
         public function setLimit()
         {
