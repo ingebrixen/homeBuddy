@@ -11,15 +11,18 @@ class Pagination {
 	private int $itemsPerPage;
 	private int $currPage;
 
-        public function __construct($data)
+        public function __construct(string $table)
         {
-                $this->totalItems = sizeof($data);
+                //$this->totalItems = sizeof($data);
 		$this->itemsPerPage = '10';
 		$this->currPage = '3';
+                $model = \App::getResourceModel('DBHandler');
+                $this->totalItems = $model->countItems($table);
         }
         public function getPages()
         {
-                 //      alle Items aus DB holen, zählen und dadurch die anzahl der aufrufbaren seiten definieren
+                 //     erzeugt die Anzahl der Seiten basierend auf den Gesamt Items 
+                 //     und der max Anzahl der Einträger die angezeigt werden sollen
                 $this->pages = ceil($this->totalItems/$this->itemsPerPage);
 
 		return $this->pages;
@@ -32,13 +35,4 @@ class Pagination {
         {
                 //      welche Einträge sollen angezeigt werden. basierend auf dem Limit
         }
-        private function getNumPages()
-	{
-		$numPages = ceil($this->totalItems/$this->itemsPerPage);
-
-		return $numPages;
-	}	
-
-
-
 }

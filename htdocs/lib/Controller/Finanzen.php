@@ -15,6 +15,7 @@ class Finanzen extends Base {
     private string $_model = "Finanzen";
     private string $_order;
     private string $_where;
+    private string $_limit;
     
     public function __construct()
     {
@@ -47,20 +48,19 @@ class Finanzen extends Base {
         }
         $_colum = "id, wer, datum, wieviel, stand, womit";
         $_order = "ORDER BY ID DESC";
+        $_limit = '15';
 
         $data = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order);
 
-        $pagination = new Pagination($data);
+        $pagination = new Pagination($this->_table);
         $pagination->getPages(); 
         
         if ($this->isPost()) 
         {
-
             //  Fehler: wenn schon eingekauft, bevor eingezahlt wurde, darf die einzahlung nicht vom Stand abgezogen werden.
-            if ($_POST['privat'] > '0.00') {
+            if (array_key_exists('privat', $_POST)) {
                 $_POST['wieviel'] = $_POST['wieviel'] - $_POST['privat'];
             }
-
             unset($_POST['privat']);
             $_POST['datum'] = date('Y-m-d', strtotime($_POST['datum']));
             switch ($_POST) {
@@ -229,13 +229,15 @@ class Finanzen extends Base {
 
         $_colum = "id, datum, wer, wo, kategorie, wieviel, kommentar";        
         $_order = "ORDER BY ID DESC";
+        $_limit = 'LIMIT 15';
 
-        $model = \App::getResourceModel('DBHandler');
-        $data = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order);
-
-        $pagination = new Pagination($data);
+        $pagination = new Pagination($this->_table);
         $pagination->getPages();
 
+        $_limit = 'LIMIT 15';
+
+        $model = \App::getResourceModel('DBHandler');
+        $data = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order, $_limit);
         //$dataSet = array('pagination' => $pagination, 'data' => $data);
         
         if ($this->isPost()) 

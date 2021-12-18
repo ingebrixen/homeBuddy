@@ -8,20 +8,21 @@ class DBHandler extends Base
 {    
     //private $_order = "";
 
-    public function selectData(string $model, string $table, string $colum, array $params, $order = '') 
+    public function selectData(string $model, string $table, string $colum, array $params, $order = '', $limit = '') 
     //z.B. sortierung, anzahl einträge, standard (z.b. bei sortierung oder datumsfilter)
     {    
-        $sql = \sprintf("SELECT %s FROM %s %s %s", 
+        $sql = \sprintf("SELECT %s FROM %s %s %s %s", 
         $colum, 
         $table, 
         $this->_setWhere($params),
-        $order);
+        $order,
+        $limit);
 
         $dbResult = $this->connect()->query($sql);
         for ($set = array(); $row = $dbResult->fetch(\PDO::FETCH_ASSOC); $set[] = $row); 
-
-        return $this->_dataSetter($set, $model);
         $this->connection = null;
+        return $this->_dataSetter($set, $model);
+        
     }
     public function insertData(string $table, array $post)
     {
@@ -37,20 +38,21 @@ class DBHandler extends Base
             $statement->bindValue($key, $val);
         }
         $statement->execute();
-
-        return $connection->lastInsertId();
         $this->connection = null;
+        return $connection->lastInsertId();
+        
     }
     public function updateData(string $table, string $colum, string $newKonto = '', string $id)
     {
         $sql = \sprintf("UPDATE %s SET %s = %s WHERE id = %s",
         $table, $colum, $newKonto, $id);
+
         $connection = $this->connect();
         $update = $connection->prepare($sql);
 
         $update->execute();
+        
         $this->connection = null;
-
         /* return $connection->lastInsertId(); */
     }
     public function selectTops(string $model, string $sql)
@@ -60,9 +62,21 @@ class DBHandler extends Base
 
         return $this->_dataSetter($set, $model);
     }
+    public function countItems(string $table):string
+    {
+        //  gibt die Anzahl der DB Items als String zurück
+        $sql = \sprintf("SELECT COUNT(*) FROM %s", 
+        $table, 
+        );
+        
+        $dbResult = $this->connect()->query($sql);
+        $totalItems = implode($dbResult->fetch(\PDO::FETCH_ASSOC));
+
+        return $totalItems;
+    }
     private function _dataSetter(array $_set, string $model)
     {
-        //$data->setId($row['id']);
+        //  erzeugt $data->setId($row['id']);
         $_dataSet = array(); 
         foreach ($_set as $array){          
                 $data = \App::getModel($model, $array);
@@ -72,6 +86,7 @@ class DBHandler extends Base
     }
     private function _createBindValue(array $post)
     {
+        //  erzeugt 
         $keys = array_keys($post);
         foreach($keys as $value) {
             $value = ":".$value;
