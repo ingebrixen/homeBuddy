@@ -15,7 +15,7 @@ class Finanzen extends Base {
     private string $_model = "Finanzen";
     private string $_order;
     private string $_where;
-    private string $_limit;
+    private string $_pagin;
     
     public function __construct()
     {
@@ -48,13 +48,13 @@ class Finanzen extends Base {
         }
         $_colum = "id, wer, datum, wieviel, stand, womit";
         $_order = "ORDER BY ID DESC";
-        $_limit = '15';
+        $_offset = '0';
 
-        $data = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order);
+        $data = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order, $_offset);
 
-        $pagination = new Pagination($this->_table);
-        $pagination->getPages(); 
-        
+        $pagination = new Pagination($this->_table, $data);
+        $_offset = $pagination->getOffset();
+
         if ($this->isPost()) 
         {
             //  Fehler: wenn schon eingekauft, bevor eingezahlt wurde, darf die einzahlung nicht vom Stand abgezogen werden.
@@ -221,7 +221,7 @@ class Finanzen extends Base {
                                 
                 }   
         } 
-        echo $this->render('haushaltskasse.phtml', array('dataSet' => $data, 'pagination' => $pagination));       
+        echo $this->render('haushaltskasse.phtml', array('pagination' => $pagination, 'dataSet' => $data));       
     }
     public function ausgabenAction($params)
     {
@@ -229,16 +229,14 @@ class Finanzen extends Base {
 
         $_colum = "id, datum, wer, wo, kategorie, wieviel, kommentar";        
         $_order = "ORDER BY ID DESC";
-        $_limit = 'LIMIT 15';
+        $_offset = "0";
 
-        $pagination = new Pagination($this->_table);
-        $pagination->getPages();
-
-        $_limit = 'LIMIT 15';
 
         $model = \App::getResourceModel('DBHandler');
-        $data = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order, $_limit);
-        //$dataSet = array('pagination' => $pagination, 'data' => $data);
+        $data = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order, $_offset);
+
+        $pagination = new Pagination($this->_table, $data);
+        $_offset = $pagination->getOffset();
         
         if ($this->isPost()) 
         {
@@ -250,7 +248,7 @@ class Finanzen extends Base {
                     header('Location: ' . $url);                
                 }
         } 
-        echo $this->render('ausgaben.phtml', array('dataSet' => $data, 'pagination' => $pagination));
+        echo $this->render('ausgaben.phtml', array('pagination' => $pagination, 'dataSet' => $data));
     }
     public function fredericoAction($params)
     {

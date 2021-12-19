@@ -8,7 +8,7 @@ class DBHandler extends Base
 {    
     //private $_order = "";
 
-    public function selectData(string $model, string $table, string $colum, array $params, $order = '', $limit = '') 
+    public function selectData(string $model, string $table, string $colum, array $params, $order = '', $offset = '') 
     //z.B. sortierung, anzahl einträge, standard (z.b. bei sortierung oder datumsfilter)
     {    
         $sql = \sprintf("SELECT %s FROM %s %s %s %s", 
@@ -16,13 +16,19 @@ class DBHandler extends Base
         $table, 
         $this->_setWhere($params),
         $order,
-        $limit);
+        $this->_getLimit($offset));
 
         $dbResult = $this->connect()->query($sql);
         for ($set = array(); $row = $dbResult->fetch(\PDO::FETCH_ASSOC); $set[] = $row); 
         $this->connection = null;
         return $this->_dataSetter($set, $model);
         
+    }
+    private function _getLimit(string $offset)
+    {
+        if (isset($offset)) {
+            return "LIMIT {$offset},15";
+        }    
     }
     public function insertData(string $table, array $post)
     {
@@ -109,9 +115,8 @@ class DBHandler extends Base
             $colum = $key[0];
             $value = $params[$colum];
             return "WHERE ".$colum." LIKE '".$value."%'";
-        } else {
-            return "";
         }
+            return "";
     }
     private function _getColum(array $post)        
     {

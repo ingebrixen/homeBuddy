@@ -2,37 +2,57 @@
 
 namespace Util;
 
-
-
 class Pagination {
 
-	private int $totalItems;
-        private int $pages;
-	private int $itemsPerPage;
-	private int $currPage;
+	private int $_totalItems;
+        private int $_pages;
+	private int $_itemsPerPage;
+	private int $_currPage = 1;
+        private int $_prevPage;
+        private int $_nextPage;
+        private int $_offset;
+        /* private int $_page; */
 
-        public function __construct(string $table)
+        public function __construct(string $table, array $data)
         {
-                //$this->totalItems = sizeof($data);
-		$this->itemsPerPage = '10';
-		$this->currPage = '3';
-                $model = \App::getResourceModel('DBHandler');
-                $this->totalItems = $model->countItems($table);
+		$this->_itemsPerPage = '10';
+                if (array_key_exists('page', $_GET)) {
+                        $this->_currPage = $_GET['page'];
+                }
+
+                /* $model = \App::getResourceModel('DBHandler');
+                $this->_totalItems = $model->countItems($table); */
+
+                $this->_totalItems = count($data);
+
+                $this->_nextPage = $this->_currPage + 1;
+                $this->_prevPage = $this->_currPage - 1;
+                $this->_offset = ($this->_currPage - 1) * $this->_itemsPerPage;
         }
         public function getPages()
         {
-                 //     erzeugt die Anzahl der Seiten basierend auf den Gesamt Items 
-                 //     und der max Anzahl der Einträger die angezeigt werden sollen
-                $this->pages = ceil($this->totalItems/$this->itemsPerPage);
+                $this->_pages = ceil($this->_totalItems/$this->_itemsPerPage);
 
-		return $this->pages;
+		return $this->_pages;
         }
-/*         public function setLimit()
+        public function getOffset()
         {
-                //      Wieviele Einträge sollen pro Seite angezeigt werden?
-        } */
-        public function setCurrPage()
-        {
-                //      welche Einträge sollen angezeigt werden. basierend auf dem Limit
+                return $this->_offset;
         }
+        public function getCurrPage()
+        {
+                if (!empty($this->_currPage)) {
+                        return $this->_currPage;
+                }                
+        }
+        public function getNextPage()
+        {
+                return $this->_nextPage;
+        }
+        public function getPrevPage()
+        {
+                return $this->_prevPage;
+        }
+
+
 }
