@@ -4540,7 +4540,7 @@ textarea.form-control-lg {
 .page-link {
   position: relative;
   display: block;
-  color: #0d6efd;
+  color: #000;
   text-decoration: none;
   background-color: #fff;
   border: 1px solid #dee2e6;
@@ -4553,7 +4553,7 @@ textarea.form-control-lg {
 }
 .page-link:hover {
   z-index: 2;
-  color: #0a58ca;
+  color: #000;
   background-color: #e9ecef;
   border-color: #dee2e6;
 }
@@ -4571,8 +4571,8 @@ textarea.form-control-lg {
 .page-item.active .page-link {
   z-index: 3;
   color: #fff;
-  background-color: #0d6efd;
-  border-color: #0d6efd;
+  background-color: #264653;
+  border-color: #000000;
 }
 .page-item.disabled .page-link {
   color: #6c757d;

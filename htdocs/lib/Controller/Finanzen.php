@@ -4,15 +4,18 @@ declare(strict_types=1);
 
 namespace Controller;
 
-use Session\User;
+//use Session\User;
+use Util\Kassierer;
+use Util\Pagination;
 
 class Finanzen extends Base {
 
-    private string $_table = "";
-    private string $_colum = "";
+    private string $_table;
+    private string $_colum;
     private string $_model = "Finanzen";
-    private string $_order = "";
-    private string $_where = "";
+    private string $_order;
+    private string $_where;
+    private string $_offset;
     
     public function __construct()
     {
@@ -33,9 +36,7 @@ class Finanzen extends Base {
 
         $sumMonth = $model->selectData($this->_model, $_table, $_colum, $params);
 
-        $stats = array(array($sumByKat), array($sumMonth));
-
-        echo $this->render('dashboard.phtml', array('data' => $stats));
+        echo $this->render('dashboard.phtml', array('sumByKat' => $sumByKat, 'sumMonth' => $sumMonth));
     }
     public function haushaltskasseAction($params) 
     {    
@@ -48,19 +49,19 @@ class Finanzen extends Base {
         $_colum = "id, wer, datum, wieviel, stand, womit";
         $_order = "ORDER BY ID DESC";
 
-        $dataSet = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order);
-        
-        
+        $pagination = new Pagination($this->_table, $params);
+        $_offset = $pagination->getOffset();
+
+        $data = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order, $_offset);
+
+        $pagination->countItems();
+
         if ($this->isPost()) 
         {
-
             //  Fehler: wenn schon eingekauft, bevor eingezahlt wurde, darf die einzahlung nicht vom Stand abgezogen werden.
-            if ($_POST['privat'] > '0.00') {
+            if (array_key_exists('privat', $_POST)) {
                 $_POST['wieviel'] = $_POST['wieviel'] - $_POST['privat'];
             }
-
-            
-            //$_POST['wieviel'] = isset($_POST['privat']) ? $_POST['wieviel'] - $_POST['privat'] : $_POST['wieviel'];
             unset($_POST['privat']);
             $_POST['datum'] = date('Y-m-d', strtotime($_POST['datum']));
             switch ($_POST) {
@@ -133,7 +134,7 @@ class Finanzen extends Base {
                                     }
                                     //  Es sind schulden vorhanden > Eintrag in kasse > womit = lend
                                     //  wenn lend kleiner ist als konto fehlt hier auch die monatliche zahlung > Eintrag Kasse
-                                    break;                                
+                                    break;
                                 default:    //  WORKING
                                     //  es sind keine schulden vorhanden > einfach Eintrag in kasse 
                                     echo "alles iO";
@@ -142,13 +143,13 @@ class Finanzen extends Base {
                                     break;
                             }
                         unset($_POST['whichForm'], $_POST['lend'], $_POST['konto'],$_POST['uid']);
-                        $_POST['stand'] = $_POST['stand'] + $_POST['wieviel'];                        
+                        $_POST['stand'] = $_POST['stand'] + $_POST['wieviel'];
                         if ($updateKasse->insertData('haushaltskasse', $_POST)) {
                             $url = \App::getBaseUrl() . '/finanzen/haushaltskasse';
                             header('Location: ' . $url); 
-                        };                            
+                        };
                         break;
-                    }                   
+                    }
                     if ($updateKonto->updateData('persKonto', 'konto', $_konto, $_uid)) {
                         $url = \App::getBaseUrl() . '/finanzen/haushaltskasse';
                         header('Location: ' . $url); 
@@ -221,7 +222,7 @@ class Finanzen extends Base {
                                 
                 }   
         } 
-        echo $this->render('haushaltskasse.phtml', array('data' => $dataSet));       
+        echo $this->render('haushaltskasse.phtml', array('pagination' => $pagination, 'dataSet' => $data));       
     }
     public function ausgabenAction($params)
     {
@@ -230,9 +231,14 @@ class Finanzen extends Base {
         $_colum = "id, datum, wer, wo, kategorie, wieviel, kommentar";        
         $_order = "ORDER BY ID DESC";
 
+        $pagination = new Pagination($this->_table, $params);
+        $_offset = $pagination->getOffset();
+
         $model = \App::getResourceModel('DBHandler');
-        $dataSet = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order);
-        
+        $data = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order, $_offset);
+
+        $pagination->countItems();
+
         if ($this->isPost()) 
         {
             /** @var \Model\Resource\DBHandler $getResource */
@@ -243,7 +249,7 @@ class Finanzen extends Base {
                     header('Location: ' . $url);                
                 }
         } 
-        echo $this->render('ausgaben.phtml', array('data' => $dataSet));
+        echo $this->render('ausgaben.phtml', array('pagination' => $pagination, 'dataSet' => $data));
     }
     public function fredericoAction($params)
     {

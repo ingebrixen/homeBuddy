@@ -13,10 +13,9 @@
       </div>
     </div> 
 
-    
-    <table class="table table-striped mb-0 text-center">
+    <table class="table table-striped mb-0 text-center shadow-sm">
       <thead>        
-        <tr>
+        <tr class="bgDash1">
           <th scope="col">#</th>
           <th scope="col">Wer</th>
           <th scope="col">Wann</th>
@@ -25,7 +24,7 @@
         </tr>
       </thead>
       <tbody>
-      <?php $i=count($data)+1; foreach ($data as $ausgabe): $i--;?>
+      <?php $i=count($dataSet)+1; foreach ($dataSet as $ausgabe): $i--;?>
         <tr>
           <th scope="row"><?php /* echo */ $ausgabe->getId(); echo $i;?></th>
           <td><?php echo $ausgabe->getWer(); ?></td>
@@ -43,25 +42,25 @@
         </tr>
       <?php endforeach; ?>
       </tbody>      
-    </table> 
-
-    
-    <div class="center">
-      <div class="center fs-6" style="color:red">rot = geliehen</div>
-      <div class="center fs-6" style="color:green">grün = zurückgezahlt</div>
+    </table>     
+    <div class="py-2">
+      <div class=" fs-6" style="color:red">rot = geliehen</div>
+      <div class=" fs-6" style="color:green">grün = zurückgezahlt</div>
     </div>
     <nav aria-label="kasse" class="py-3">
       <ul class="pagination pagination-sm justify-content-center">
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Previous">
+        <li class="page-item <?php if ($pagination->getCurrPage() <= 1){ echo "disabled"; } ?>">
+          <a class="page-link" href="<?php if ($pagination->getCurrPage() <= 1) {echo '#';} else {echo "?page=".$pagination->getPrevPage();} ?>" rel="prev" aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Next">
+          <?php for ($i=1; $i <= $pagination->getPages(); $i++): ?>
+            <li class="page-item <?php if($pagination->getCurrPage() == $i || NULL) {echo 'active'; } ?>">
+                    <a class="page-link" href="?page=<?= $i; ?>"> <?= $i; ?> </a>
+                </li>
+          <?php endfor; ?>          
+          <li class="page-item <?php if ($pagination->getCurrPage() >= $pagination->getPages()){ echo "disabled"; } ?>">
+          <a class="page-link" href="<?php if ($pagination->getCurrPage() >= $pagination->getPages()) {echo '#';} else {echo "?page=".$pagination->getNextPage();} ?>" rel="next" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
           </a>
         </li>

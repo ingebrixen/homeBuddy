@@ -3,12 +3,16 @@
 
   <div class="container-fluid paddingBottom">
     <div class="w3-row">
-      <div class="w3-col m4 l4">
+      <div class="w3-col m4 l4 ">
         <div>Kassenstand am Monatsende</div>
         <canvas id="sumMonth" ></canvas>
       </div>
-      <div class="w3-col m4 l4">
+      <div class="w3-col m4 l4 ">
         <div>Ausgaben kategorisiert</div>
+        <canvas id="sumByKat" ></canvas>
+      </div>
+      <div class="w3-col m4 l4 ">
+        <div>Monentaner Tagesstand im verhältnis zum Tagesdurchschnitt Gesamt</div>
         <canvas id="sumByKat" ></canvas>
       </div>
     </div>
@@ -46,21 +50,19 @@ const sbkChart = new Chart(sbk, {
     type: 'bar',
     data: {
         labels: [
-          <?php foreach ($data[0] as $kategorie){
-                  foreach ($kategorie as $kat){
+          <?php foreach ($sumByKat as $kat){
                     echo "'{$kat->getKategorie()}',";
                     }
-                }
+                
           ?>
         ],
         datasets: [{
             label: '€',            
             data: [
-              <?php foreach ($data[0] as $summe){
-                  foreach ($summe as $sum){
+              <?php foreach ($sumByKat as $sum){
                     echo "'{$sum->getSumKat()}',";
                     }
-                }
+                
               ?>              
             ],
             backgroundColor: bgColor,
@@ -85,21 +87,17 @@ const monthSumChart = new Chart(sM, {
     type: 'line',
     data: {
         labels: [
-          <?php foreach ($data[1] as $monat){
-                  foreach ($monat as $mon){
+          <?php foreach ($sumMonth as $mon){
                     echo "'{$mon->getMonat()}',";
                     }
-                }
           ?>
         ],
         datasets: [{
             label: '€',            
             data: [
-              <?php foreach ($data[1] as $summe){
-                  foreach ($summe as $sum){
+              <?php foreach ($sumMonth as $sum){
                     echo "'{$sum->getSumme()}',";
                     }
-                }
               ?>              
             ],
             backgroundColor: bgColor,
