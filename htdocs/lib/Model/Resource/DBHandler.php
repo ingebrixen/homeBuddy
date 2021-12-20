@@ -21,14 +21,7 @@ class DBHandler extends Base
         $dbResult = $this->connect()->query($sql);
         for ($set = array(); $row = $dbResult->fetch(\PDO::FETCH_ASSOC); $set[] = $row); 
         $this->connection = null;
-        return $this->_dataSetter($set, $model);
-        
-    }
-    private function _getLimit(int $offset)
-    {
-        if (isset($offset)) {
-            return "LIMIT ".$offset.",15";
-        }    
+        return $this->_dataSetter($set, $model);        
     }
     public function insertData(string $table, array $post)
     {
@@ -81,7 +74,13 @@ class DBHandler extends Base
 
         return $totalItems;
     }
-    private function _setWhere(array $params)
+    private function _getLimit(int $offset):string
+    {
+        if (isset($offset)) {
+            return "LIMIT ".$offset.",15";
+        }    
+    }
+    private function _setWhere(array $params):string
     {
         // params Array Key als colum und Value als suchabfrage
         // params[datum] => params[2021-08]
@@ -94,7 +93,7 @@ class DBHandler extends Base
         }
             return "";
     }
-    private function _dataSetter(array $_set, string $model)
+    private function _dataSetter(array $_set, string $model):array
     {
         //  erzeugt $data->setId($row['id']);
         $_dataSet = array(); 
@@ -104,7 +103,7 @@ class DBHandler extends Base
         }
         return $_dataSet;
     }
-    private function _createBindValue(array $post)
+    private function _createBindValue(array $post):array
     {
         //  erzeugt 
         $keys = array_keys($post);
@@ -115,18 +114,14 @@ class DBHandler extends Base
 
         return $arryComb;
     }
-    private function _sort()
-    {
-
-    }
-    private function _getColum(array $post)        
+    private function _getColum(array $post):string
     {
         $keys = array_keys($post);
         $col = \implode(', ', $keys);
 
         return $col;
     }
-    private function _getValue(array $post)        
+    private function _getValue(array $post):string
     {
         $keys = array_keys($post);
         foreach($keys as &$value) {
@@ -136,10 +131,14 @@ class DBHandler extends Base
 
         return $val;
     }
-    private function _setOrder($order)
+    private function _setOrder(string $order):string
     {
         if (isset($order)) {
             return "ORDER BY $order";
         }        
+    }
+    private function _sort()
+    {
+
     }
 }
