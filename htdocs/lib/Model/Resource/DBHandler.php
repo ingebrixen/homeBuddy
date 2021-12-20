@@ -8,7 +8,7 @@ class DBHandler extends Base
 {    
     //private $_order = "";
 
-    public function selectData(string $model, string $table, string $colum, array $params, $order = '', $offset = '') 
+    public function selectData(string $model, string $table, string $colum, array $params, $order = '', int $offset = 0) 
     //z.B. sortierung, anzahl einträge, standard (z.b. bei sortierung oder datumsfilter)
     {    
         $sql = \sprintf("SELECT %s FROM %s %s %s %s", 
@@ -24,10 +24,10 @@ class DBHandler extends Base
         return $this->_dataSetter($set, $model);
         
     }
-    private function _getLimit(string $offset)
+    private function _getLimit(int $offset)
     {
         if (isset($offset)) {
-            return "LIMIT {$offset},15";
+            return "LIMIT ".$offset.",15";
         }    
     }
     public function insertData(string $table, array $post)
@@ -68,17 +68,31 @@ class DBHandler extends Base
 
         return $this->_dataSetter($set, $model);
     }
-    public function countItems(string $table):string
+    public function countItems(string $table, array $params):string
     {
         //  gibt die Anzahl der DB Items als String zurück
-        $sql = \sprintf("SELECT COUNT(*) FROM %s", 
-        $table, 
+        $sql = \sprintf("SELECT COUNT(*) FROM %s %s", 
+        $table,
+        $this->_setWhere($params) 
         );
         
         $dbResult = $this->connect()->query($sql);
         $totalItems = implode($dbResult->fetch(\PDO::FETCH_ASSOC));
 
         return $totalItems;
+    }
+    private function _setWhere(array $params)
+    {
+        // params Array Key als colum und Value als suchabfrage
+        // params[datum] => params[2021-08]
+
+        if (!empty($params)) {
+            $key = array_keys($params);
+            $colum = $key[0];
+            $value = $params[$colum];
+            return "WHERE {$colum} LIKE '{$value}%'";
+        }
+            return "";
     }
     private function _dataSetter(array $_set, string $model)
     {
@@ -104,19 +118,6 @@ class DBHandler extends Base
     private function _sort()
     {
 
-    }
-    private function _setWhere(array $params)
-    {
-        // params Array Key als colum und Value als suchabfrage
-        // params[datum] => params[2021-08]
-
-        if (!empty($params)) {
-            $key = array_keys($params);
-            $colum = $key[0];
-            $value = $params[$colum];
-            return "WHERE ".$colum." LIKE '".$value."%'";
-        }
-            return "";
     }
     private function _getColum(array $post)        
     {

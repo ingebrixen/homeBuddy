@@ -11,23 +11,24 @@ class Pagination {
         private int $_prevPage;
         private int $_nextPage;
         private int $_offset;
-        /* private int $_page; */
 
-        public function __construct(string $table, array $data)
+        public function __construct(string $table, array $params)
         {
-		$this->_itemsPerPage = '10';
+		$this->_itemsPerPage = 15;
                 if (array_key_exists('page', $_GET)) {
                         $this->_currPage = $_GET['page'];
                 }
 
-                /* $model = \App::getResourceModel('DBHandler');
-                $this->_totalItems = $model->countItems($table); */
-
-                $this->_totalItems = count($data);
+                $model = \App::getResourceModel('DBHandler');
+                $this->_totalItems = $model->countItems($table, $params);
 
                 $this->_nextPage = $this->_currPage + 1;
                 $this->_prevPage = $this->_currPage - 1;
                 $this->_offset = ($this->_currPage - 1) * $this->_itemsPerPage;
+        }
+        public function countItems()
+        {
+                return $this->_totalItems;
         }
         public function getPages()
         {
@@ -53,6 +54,4 @@ class Pagination {
         {
                 return $this->_prevPage;
         }
-
-
 }

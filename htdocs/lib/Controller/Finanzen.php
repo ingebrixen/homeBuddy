@@ -15,7 +15,7 @@ class Finanzen extends Base {
     private string $_model = "Finanzen";
     private string $_order;
     private string $_where;
-    private string $_pagin;
+    private string $_offset;
     
     public function __construct()
     {
@@ -48,12 +48,13 @@ class Finanzen extends Base {
         }
         $_colum = "id, wer, datum, wieviel, stand, womit";
         $_order = "ORDER BY ID DESC";
-        $_offset = '0';
+
+        $pagination = new Pagination($this->_table, $params);
+        $_offset = $pagination->getOffset();
 
         $data = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order, $_offset);
 
-        $pagination = new Pagination($this->_table, $data);
-        $_offset = $pagination->getOffset();
+        $pagination->countItems();
 
         if ($this->isPost()) 
         {
@@ -229,15 +230,15 @@ class Finanzen extends Base {
 
         $_colum = "id, datum, wer, wo, kategorie, wieviel, kommentar";        
         $_order = "ORDER BY ID DESC";
-        $_offset = "0";
 
+        $pagination = new Pagination($this->_table, $params);
+        $_offset = $pagination->getOffset();
 
         $model = \App::getResourceModel('DBHandler');
         $data = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order, $_offset);
 
-        $pagination = new Pagination($this->_table, $data);
-        $_offset = $pagination->getOffset();
-        
+        $pagination->countItems();
+
         if ($this->isPost()) 
         {
             /** @var \Model\Resource\DBHandler $getResource */
