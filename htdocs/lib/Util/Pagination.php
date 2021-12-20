@@ -14,7 +14,7 @@ class Pagination {
 
         public function __construct(string $table, array $params)
         {
-		$this->_itemsPerPage = 15;
+		$this->_itemsPerPage = 10;
                 if (array_key_exists('page', $_GET)) {
                         $this->_currPage = $_GET['page'];
                 }
