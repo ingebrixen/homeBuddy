@@ -77,7 +77,7 @@ class DBHandler extends Base
     private function _getLimit(int $offset):string
     {
         if (isset($offset)) {
-            return "LIMIT ".$offset.",15";
+            return "LIMIT ".$offset.",10";
         }    
     }
     private function _setWhere(array $params):string
