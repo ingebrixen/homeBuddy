@@ -9,6 +9,7 @@ class Finanzen
     use ExchangeArray;
 
     private $_id            = 0;
+    private $_num           = "";
     private $_uid           = "";
     private $_stand         = "";
     private $_wer           = "";
@@ -33,6 +34,14 @@ class Finanzen
     public function getId()
     {
         return $this->_id;
+    }
+    public function getNum()
+    {
+        return $this->_num;
+    }
+    public function setNum($num)
+    {
+        $this->_num = $num;
     }
     public function getUid()
     {

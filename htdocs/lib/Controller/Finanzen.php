@@ -62,8 +62,10 @@ class Finanzen extends Base {
             if ($_POST['privat'] > '0.00') {
                 $_POST['wieviel'] = $_POST['wieviel'] - $_POST['privat'];
             }
+
             unset($_POST['privat']);
             $_POST['datum'] = date('Y-m-d', strtotime($_POST['datum']));
+            
             switch ($_POST) {
                 case $_POST['whichForm'] == 'balance' && $_POST['konto'] == '0.00':
                     //  geld leihen 
