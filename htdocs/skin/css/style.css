@@ -118,12 +118,12 @@ background: #555;
 .addForm {
     margin: 5px auto;
     width: 100%;
-}
-  
-input.invalid {
+}  
+input.invalid, 
+select.invalid, 
+textarea.invalid {
     background-color: #f4a261;
-  }
-
+}
 .tab {
     display: none;
 }  
