@@ -4569,7 +4569,7 @@ textarea.form-control-lg {
   margin-left: -1px;
 }
 .page-item.active .page-link {
-  z-index: 3;
+  z-index: 0;
   color: #fff;
   background-color: #264653;
   border-color: #000000;

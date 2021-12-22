@@ -78,14 +78,14 @@
                   
                   <!-- One "tab" for each step in the form: -->
                   <div class="tab">Wann?
-                    <p><input type="date" name="datum" class="form-control" value="<?php echo date("Y-m-d"); ?>" required></p>
+                    <p><input type="date" name="datum" class="form-control" value="<?php echo date("Y-m-d"); ?>" required ></p>
                       Wieviel?
-                    <p><input type="number" name="wieviel" step="0.5" placeholder="  €" class="form-control" required></p>         
+                    <p><input type="number" name="wieviel" step="0.5" placeholder="  €" class="form-control" required ></p>         
                   </div>
                   <div class="tab">
-                    <p>
-                      <select name="kategorie" id="kategorie" class="form-select" required>
-                          <option selected disabled >Kategorie w&auml;hlen</option>
+                    <div>
+                    <p><select name="kategorie" class="form-select" required>
+                          <option selected disabled value="">Kategorie w&auml;hlen</option>
                           <option value="Wohnung">Wohnung</option>
                           <option value="Baumarkt">Baumarkt</option>
                           <option value="Auto">Auto</option>
@@ -93,12 +93,10 @@
                           <option value="Freizeit">Freizeit</option>
                           <option value="Urlaub">Urlaub</option>
                           <option value="Luxus">Luxus</option>
-                          <option value="sonstiges" required >sonstiges</option>
-                      </select>
-                    </p>
-                    <p>
-                    <textarea name="kommentar" id="kommentar" class="form-control" rows="4" placeholder="Kommentar zur Ausgabe"></textarea>
-                    </p>
+                          <option value="sonstiges">sonstiges</option>
+                      </select></p>
+                    </div>
+                    <div><p><textarea name="kommentar" class="form-control" rows="4" playeholder="Mach bitte ein paar Angaben zu deinem Einkauf."required></textarea></p></div>
                   </div>
                   <!-- Circles which indicates the steps of the form: -->
                   <div style="text-align:center;margin-top:40px;">
