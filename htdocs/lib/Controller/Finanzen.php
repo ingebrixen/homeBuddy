@@ -7,6 +7,7 @@ namespace Controller;
 //use Session\User;
 use Util\Kassierer;
 use Util\Pagination;
+use Util\NumItems;
 
 class Finanzen extends Base {
 
@@ -46,7 +47,7 @@ class Finanzen extends Base {
         if (empty($params['datum'])) {
             $params = ["datum" => date('Y-m')];            // standard definiere, wenn kein filter angegeben ist, wird immer der aktuelle Monat ausgegeben.
         }
-        $_colum = "id, wer, datum, wieviel, stand, womit";
+        $_colum = "id, num, wer, datum, wieviel, stand, womit";
         $_order = "ORDER BY ID DESC";
 
         $pagination = new Pagination($this->_table, $params);
@@ -58,14 +59,14 @@ class Finanzen extends Base {
 
         if ($this->isPost()) 
         {
-            //  Fehler: wenn schon eingekauft, bevor eingezahlt wurde, darf die einzahlung nicht vom Stand abgezogen werden.
             if ($_POST['privat'] > '0.00') {
                 $_POST['wieviel'] = $_POST['wieviel'] - $_POST['privat'];
             }
-
             unset($_POST['privat']);
+
             $_POST['datum'] = date('Y-m-d', strtotime($_POST['datum']));
-            
+            $_POST['num'] = NumItems::incrItems($_POST);
+
             switch ($_POST) {
                 case $_POST['whichForm'] == 'balance' && $_POST['konto'] == '0.00':
                     //  geld leihen 
@@ -84,7 +85,6 @@ class Finanzen extends Base {
                         header('Location: ' . $url); 
                     }
                     break;
-
 
                 case $_POST['whichForm'] == 'balance' && $_POST['konto'] != '0.00':
                     $_uid = $_POST['uid'];

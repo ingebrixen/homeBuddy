@@ -1,28 +1,22 @@
 <?php
-/**  (c) Thomas Böhme **/
-
-
 
 namespace Util;
 
 class NumItems  
 {
-        public static function incrItems(array $post)
+        public static function incrItems(array $post):int
         {
-                switch ($post) {
-                        case empty($post['num']) : 
-                                # code...
-                                break;
-                        
-                        default:
-                                # code...
-                                break;
-                }
+                $num = self::getNum($post);
+
+                return ($num + 1);
+        }
+        public static function getNum(array $post):int
+        {
+                $aktDate = ["datum" => date('Y-m', strtotime($post['datum']))];
+
+                $model = \App::getResourceModel('DBHandler');
+                $num = $model->countItems('haushaltskasse', $aktDate);
+
+                return $num;
         }
 }
-
-#       Cases
-#       monat jahr  != aktuellem Jahr-Monat -> num+1
-#       monat-Jahr = aktueller monat 
-#               case num = empty -> num = 1
-#               case num = !empty -> nume +1
