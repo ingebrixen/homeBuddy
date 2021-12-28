@@ -2,8 +2,6 @@
 
 namespace Model;
 
-
-
 trait ExchangeArray
 {
     private function exchangeArray(array $data): void

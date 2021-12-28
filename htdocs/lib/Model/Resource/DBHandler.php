@@ -61,7 +61,7 @@ class DBHandler extends Base
 
         return $this->_dataSetter($set, $model);
     }
-    public function countItems(string $table, array $params):string
+    public function countItems(string $table, array $params = [] ):string
     {
         //  gibt die Anzahl der DB Items als String zurück
         $sql = \sprintf("SELECT COUNT(*) FROM %s %s", 

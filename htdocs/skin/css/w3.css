@@ -967,7 +967,7 @@ a {
 }
 .w3-animate-top {
   position: relative;
-  animation: animatetop 0.5s;
+  animation: animatetop 0.8s;
 }
 @keyframes animatetop {
   from {
@@ -981,7 +981,7 @@ a {
 }
 .w3-animate-left {
   position: relative;
-  animation: animateleft 0.5s;
+  animation: animateleft 0.8s;
 }
 @keyframes animateleft {
   from {
@@ -995,7 +995,7 @@ a {
 }
 .w3-animate-right {
   position: relative;
-  animation: animateright 0.5s;
+  animation: animateright 0.8s;
 }
 @keyframes animateright {
   from {
@@ -1009,7 +1009,7 @@ a {
 }
 .w3-animate-bottom {
   position: relative;
-  animation: animatebottom 0.5s;
+  animation: animatebottom 0.8s;
 }
 @keyframes animatebottom {
   from {
@@ -1022,7 +1022,7 @@ a {
   }
 }
 .w3-animate-zoom {
-  animation: animatezoom 0.6s;
+  animation: animatezoom 1s;
 }
 @keyframes animatezoom {
   from {

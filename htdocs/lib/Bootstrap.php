@@ -142,6 +142,7 @@ class Bootstrap
             }
             $lastIndex = $i;
         }
+        
         $this->_params = $paramArray;
     }
 
