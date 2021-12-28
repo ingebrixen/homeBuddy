@@ -59,7 +59,8 @@ class Finanzen extends Base {
 
         if ($this->isPost()) 
         {
-            if ($_POST['privat'] > '0.00') {
+
+            if (isset($_POST['privat'])) {
                 $_POST['wieviel'] = $_POST['wieviel'] - $_POST['privat'];
             }
             unset($_POST['privat']);
