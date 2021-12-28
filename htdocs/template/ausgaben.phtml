@@ -12,14 +12,7 @@
         </div>
       </div>
     </div>
-    <?php 
-    function dd($variable){
-        echo '<pre>';
-        var_dump($variable);
-        echo '</pre>';
-    }  
-    dd($data);
-    ?>
+
     <table class="table table-striped mb-0 text-center shadow-sm">
       <thead>
         <tr class="bgDash2">
@@ -40,25 +33,8 @@
         <?php endforeach; ?>
       </tbody>      
     </table>
-    <nav aria-label="ausgaben" class="py-3">
-      <ul class="pagination pagination-sm justify-content-center">
-        <li class="page-item <?php if ($pagination->getCurrPage() <= 1){ echo "disabled"; } ?>">
-          <a class="page-link" href="<?php if ($pagination->getCurrPage() <= 1) {echo '#';} else {echo "?page=".$pagination->getPrevPage();} ?>" rel="prev" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-          <?php for ($i=1; $i <= $pagination->getPages(); $i++): ?>
-            <li class="page-item  <?php if($pagination->getCurrPage() == $i || NULL) {echo 'active'; } ?>">
-                    <a class="page-link" href="?page=<?= $i; ?>"> <?= $i; ?> </a>
-                </li>
-          <?php endfor; ?>          
-          <li class="page-item <?php if ($pagination->getCurrPage() >= $pagination->getPages()){ echo "disabled"; } ?>">
-          <a class="page-link" href="<?php if ($pagination->getCurrPage() >= $pagination->getPages()) {echo '#';} else {echo "?page=".$pagination->getNextPage();} ?>" rel="next" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
+    <!-- Pagination -->
+    <?php   require_once($_SERVER['DOCUMENT_ROOT'].'/template/pagination.phtml'); ?>
   </div>
 </div>
 <!-- End page content -->

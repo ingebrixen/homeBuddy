@@ -43,29 +43,13 @@
       <?php endforeach; ?>
       </tbody>      
     </table>     
-    <div class="py-2">
+    <div class="pt-3 left">
       <div class=" fs-6" style="color:red">rot = geliehen</div>
       <div class=" fs-6" style="color:green">grün = zurückgezahlt</div>
     </div>
-    <nav aria-label="kasse" class="py-3">
-      <ul class="pagination pagination-sm justify-content-center">
-        <li class="page-item <?php if ($pagination->getCurrPage() <= 1){ echo "disabled"; } ?>">
-          <a class="page-link" href="<?php if ($pagination->getCurrPage() <= 1) {echo '#';} else {echo "?page=".$pagination->getPrevPage();} ?>" rel="prev" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-          <?php for ($i=1; $i <= $pagination->getPages(); $i++): ?>
-            <li class="page-item <?php if($pagination->getCurrPage() == $i || NULL) {echo 'active'; } ?>">
-                    <a class="page-link" href="?page=<?= $i; ?>"> <?= $i; ?> </a>
-                </li>
-          <?php endfor; ?>          
-          <li class="page-item <?php if ($pagination->getCurrPage() >= $pagination->getPages()){ echo "disabled"; } ?>">
-          <a class="page-link" href="<?php if ($pagination->getCurrPage() >= $pagination->getPages()) {echo '#';} else {echo "?page=".$pagination->getNextPage();} ?>" rel="next" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
+    <!-- Pagination -->
+    <?php   require_once($_SERVER['DOCUMENT_ROOT'].'/template/pagination.phtml'); ?>
+
   </div>
 </div>
 <!-- End page content -->
@@ -189,21 +173,21 @@
                   <div class="tab">wo warst du einkaufen?
                     <div class="row justify-content-md-center">
                       <div class="col px-5">
-                      <input type="radio" class="sr-only" name="wo" id="bae" value="1" >
+                      <input type="radio" class="sr-only" name="wo" id="bae" value="Baecker" >
                       <label for="bae">
                         <img src="<?php echo App::getBaseUrl() ?>/skin/images/haushaltskasse/bakery.png" alt="Baecker" class="img-fluid" >
                       </label>
                       </div>
                       <div class="col px-5">
-                      <input type="radio" class="sr-only" name="wo" id="fle" value="2">
+                      <input type="radio" class="sr-only" name="wo" id="fle" value="Fleischer">
                       <label for="fle">
                           <img src="<?php echo App::getBaseUrl() ?>/skin/images/haushaltskasse/wurst.png" alt="Fleischer" class="img-fluid" >
                       </label>
                       </div>
                     </div>
-<!--                     <div class="row">
+                    <!-- <div class="row">
                       <div>
-                        <input type="text" name="wo" class="form-control" >
+                        <input type="text" name="wo" class="form-control" value="">
                       </div>
                     </div> -->
                   </div>

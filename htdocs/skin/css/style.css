@@ -1,5 +1,6 @@
 /* farbpalette: https://coolors.co/264653-2a9d8f-e9c46a-f4a261-e76f51
 https://coolors.co/f4f1de-e07a5f-3d405b-81b29a-f2cc8f */
+
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -164,9 +165,13 @@ height: auto;
 }
 @media (max-width: 992px) {
     .modal-dialog {
-        animation: animatezoom 0.3s;
-        }    
+        animation: animatezoom 0.5s;
+    }
 }
 .paddingBottom {
     margin-bottom: 50px;
+}
+.pagin {
+    width: fit-content !important;
+    margin: auto;    
 }
