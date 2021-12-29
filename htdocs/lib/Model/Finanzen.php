@@ -35,6 +35,10 @@ class Finanzen
     {
         return $this->_id;
     }
+    public function setId($id)
+    {
+        $this->_id = $id;
+    }
     public function getNum()
     {
         return $this->_num;

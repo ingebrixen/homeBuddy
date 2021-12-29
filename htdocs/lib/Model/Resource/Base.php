@@ -4,6 +4,7 @@
 //  allg. stehen in Model\Resource die anbindungen an externe System z.B. Datenbanken, APIs, Warenwirtschaftssysteme etc.
 
 namespace Model\Resource;
+
 class Base
 {
     private $dbuser = DBUSER;
