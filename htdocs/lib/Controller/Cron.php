@@ -13,7 +13,7 @@ class Cron
                         echo 'hallo welt!';
                         $_model = 'Finanzen';
                         $_table = 'persKonto';
-                        $_colum = 'id, konto';
+                        $_colum = 'id, konto, lend';
 
                         $query = 'SELECT '.$_colum.' FROM '.$_table;
 
