@@ -59,7 +59,8 @@ class Finanzen extends Base {
 
         if ($this->isPost()) 
         {
-            if ($_POST['privat'] > '0.00') {
+
+            if (isset($_POST['privat']) && is_numeric($_POST['privat'])) {
                 $_POST['wieviel'] = $_POST['wieviel'] - $_POST['privat'];
             }
             unset($_POST['privat']);
@@ -98,6 +99,8 @@ class Finanzen extends Base {
                     //  monatsafnag über cron oder cli Methoden aufruf cron.php 
                     //  curl --silent http://domain.com/cron.php Oder php -q /path/to/cron.php
 
+                    #Fehler wenn $lend = 0 und konto - betrag
+
                     switch ($_POST) {
                         case $_POST['konto'] > '0.00':  //  WORKING
                             //normale auszahlung > Konto wird auf Null gesetzt > kein Eintrag in Kasse!
@@ -114,8 +117,7 @@ class Finanzen extends Base {
                                         $_lend = strval($_POST['lend'] + $_POST['wieviel']);
                                         $_konto = strval($_POST['wieviel'] + $_POST['konto']);
                                         $updateLend->updateData('persKonto', 'lend', $_lend, $_uid);
-                                        $_POST['womit'] = "lend";
-                                        
+                                        $_POST['womit'] = "lend";                                        
                                     } else {
                                         //  stand wird nicht aktualisiert
                                         $_konto = strval($_POST['konto'] + $_POST['wieviel']);
@@ -137,9 +139,8 @@ class Finanzen extends Base {
                                     //  Es sind schulden vorhanden > Eintrag in kasse > womit = lend
                                     //  wenn lend kleiner ist als konto fehlt hier auch die monatliche zahlung > Eintrag Kasse
                                     break;
-                                default:    //  WORKING
+                                case $_POST['lend'] == '0.00':   //  WORKING
                                     //  es sind keine schulden vorhanden > einfach Eintrag in kasse 
-                                    echo "alles iO";
                                     $_konto = strval($_POST['konto'] + $_POST['wieviel']);
                                     $_POST['womit'] = "einz";
                                     break;

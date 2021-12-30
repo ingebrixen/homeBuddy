@@ -8,7 +8,7 @@ class DBHandler extends Base
 {    
     //private $_order = "";
 
-    public function selectData(string $model, string $table, string $colum, array $params, $order = '', int $offset = 0) 
+    public function selectData(string $model, string $table, string $colum, array $params = [], $order = '', int $offset = 0) 
     //z.B. sortierung, anzahl einträge, standard (z.b. bei sortierung oder datumsfilter)
     {    
         $sql = \sprintf("SELECT %s FROM %s %s %s %s", 
@@ -41,10 +41,10 @@ class DBHandler extends Base
         return $connection->lastInsertId();
         
     }
-    public function updateData(string $table, string $colum, string $newKonto = '', string $id)
+    public function updateData(string $table, string $colum, string $upVar, string $id)
     {
         $sql = \sprintf("UPDATE %s SET %s = %s WHERE id = %s",
-        $table, $colum, $newKonto, $id);
+        $table, $colum, $upVar, $id);
 
         $connection = $this->connect();
         $update = $connection->prepare($sql);
@@ -73,6 +73,13 @@ class DBHandler extends Base
         $totalItems = implode($dbResult->fetch(\PDO::FETCH_ASSOC));
 
         return $totalItems;
+    }
+    public function selectKonto(string $model, string $sql)
+    {
+        $dbResult = $this->connect()->query($sql);
+        for ($set = array(); $row = $dbResult->fetch(\PDO::FETCH_ASSOC); $set[] = $row); 
+
+        return $set;
     }
     private function _getLimit(int $offset):string
     {
