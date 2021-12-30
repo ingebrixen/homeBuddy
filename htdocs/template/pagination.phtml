@@ -19,3 +19,56 @@
                 </ul>
         </nav>
 </div>
+<div class="pagin py-3">
+        <nav aria-label="pagin" class="">
+                <ul class="pagination pagination-sm shadow-sm">
+                        <li class="page-item <?php if ($pagination->getCurrPage() <= 1){ echo "disabled"; } ?>">
+                                <a class="page-link" href="<?php if ($pagination->getCurrPage() <= 1) {echo '#';} else {echo "?page=".$pagination->getPrevPage();} ?>" rel="prev" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                </a>
+                        </li>
+
+
+                        <?php $dots = false; for ($i=1; $i <= $pagination->getPages(); $i++){
+                                if($i < 5) { ?>
+                                        <li class="page-item <?php if($pagination->getCurrPage() == $i || NULL) {echo 'active'; } ?>">
+                                                <a class="page-link" href="?page=<?= $i; ?>"> <?= $i; ?> </a>
+                                        </li>
+                                <?php }
+                                
+                                //If you always want to render current page number
+                                else if($i == $pagination->getCurrPage()) { ?>
+                                        <li class="page-item <?php if($pagination->getCurrPage() == $i || NULL) {echo 'active'; } ?>">
+                                                <a class="page-link" href="?page=<?= $i; ?>"> <?= $i; ?> </a>
+                                        </li>
+                                        <?php
+                                        $dots = false;
+                                }
+                                
+                                //if you always want the last page number
+                                else if ($i == $pagination->getPages() ) {?>
+                                        <li class="page-item <?php if($pagination->getCurrPage() == $i || NULL) {echo 'active'; } ?>">
+                                                <a class="page-link" href="?page=<?= $i; ?>"> <?= $i; ?> </a>
+                                        </li>
+                                        <?php
+                                }
+                                
+                                //make sure you only do this once per ellipses group
+                                else {
+                                if (!$dots){
+                                        echo ("<li class='page-item page-link'>...</li>");
+                                        $dots = true;
+                                }
+                                }
+
+                        }?>   
+                        
+                        
+                        <li class="page-item <?php if ($pagination->getCurrPage() >= $pagination->getPages()){ echo "disabled"; } ?>">
+                                <a class="page-link" href="<?php if ($pagination->getCurrPage() >= $pagination->getPages()) {echo '#';} else {echo "?page=".$pagination->getNextPage();} ?>" rel="next" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                </a>
+                        </li>
+                </ul>
+        </nav>
+</div>
