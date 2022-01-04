@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace Controller;
 
+#require '../vendor/autoload.php';
+
 //use Session\User;
+use Util\Paginator;
 use Util\Kassierer;
 use Util\Pagination;
 use Util\NumItems;
+
 
 class Finanzen extends Base {
 
@@ -17,6 +21,7 @@ class Finanzen extends Base {
     private string $_order;
     private string $_where;
     private string $_offset;
+    
     
     public function __construct()
     {
@@ -50,12 +55,11 @@ class Finanzen extends Base {
         $_colum = "id, num, wer, datum, wieviel, stand, womit";
         $_order = "ORDER BY ID DESC";
 
-        $pagination = new Pagination($this->_table, $params);
-        $_offset = $pagination->getOffset();
+        $paginator = new Paginator($this->_table, $params);
+        $paginator->setMaxPagesToShow(5);
+        $_offset = $paginator->getOffset();
 
         $data = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order, $_offset);
-
-        $pagination->countItems();
 
         if ($this->isPost()) 
         {
@@ -225,7 +229,7 @@ class Finanzen extends Base {
                                 
                 }   
         } 
-        echo $this->render('haushaltskasse.phtml', array('pagination' => $pagination, 'dataSet' => $data));       
+        echo $this->render('haushaltskasse.phtml', array('dataSet' => $data, 'paginator' => $paginator));       
     }
     public function ausgabenAction($params)
     {
@@ -234,13 +238,16 @@ class Finanzen extends Base {
         $_colum = "id, datum, wer, wo, kategorie, wieviel, kommentar";        
         $_order = "ORDER BY ID DESC";
 
-        $pagination = new Pagination($this->_table, $params);
-        $_offset = $pagination->getOffset();
+        /* $pagination = new Pagination($this->_table, $params);
+        $_offset = $pagination->getOffset(); */
+
+        $paginator = new Paginator($this->_table, $params);
+        $paginator->setMaxPagesToShow(5);
+        $_offset = $paginator->getOffset();
 
         $model = \App::getResourceModel('DBHandler');
         $data = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order, $_offset);
 
-        $pagination->countItems();
 
         if ($this->isPost()) 
         {
@@ -252,7 +259,7 @@ class Finanzen extends Base {
                     header('Location: ' . $url);                
                 }
         } 
-        echo $this->render('ausgaben.phtml', array('pagination' => $pagination, 'dataSet' => $data));
+        echo $this->render('ausgaben.phtml', array('dataSet' => $data, 'paginator' => $paginator));
     }
     public function fredericoAction($params)
     {

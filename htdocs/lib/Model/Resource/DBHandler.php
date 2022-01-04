@@ -23,6 +23,7 @@ class DBHandler extends Base
         $this->connection = null;
         return $this->_dataSetter($set, $model);        
     }
+    
     public function insertData(string $table, array $post)
     {
         $sql = \sprintf("INSERT INTO %s (%s) VALUES (%s)", 
@@ -61,9 +62,9 @@ class DBHandler extends Base
 
         return $this->_dataSetter($set, $model);
     }
-    public function countItems(string $table, array $params = [] ):string
+    public function countItems(string $table, array $params = [] ):int
     {
-        //  gibt die Anzahl der DB Items als String zurück
+        //  gibt die Anzahl der DB Items als Int zurück
         $sql = \sprintf("SELECT COUNT(*) FROM %s %s", 
         $table,
         $this->_setWhere($params) 
@@ -72,7 +73,7 @@ class DBHandler extends Base
         $dbResult = $this->connect()->query($sql);
         $totalItems = implode($dbResult->fetch(\PDO::FETCH_ASSOC));
 
-        return $totalItems;
+        return intval($totalItems);
     }
     public function selectKonto(string $model, string $sql)
     {
