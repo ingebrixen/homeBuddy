@@ -56,7 +56,6 @@ class Finanzen extends Base {
         $_order = "ORDER BY ID DESC";
 
         $paginator = new Paginator($this->_table, $params);
-        $paginator->setMaxPagesToShow(5);
         $_offset = $paginator->getOffset();
 
         $data = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order, $_offset);
@@ -242,7 +241,6 @@ class Finanzen extends Base {
         $_offset = $pagination->getOffset(); */
 
         $paginator = new Paginator($this->_table, $params);
-        $paginator->setMaxPagesToShow(5);
         $_offset = $paginator->getOffset();
 
         $model = \App::getResourceModel('DBHandler');

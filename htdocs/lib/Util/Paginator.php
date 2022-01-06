@@ -15,7 +15,7 @@ class Paginator
     protected $totalItems;
     protected $numPages;
     protected $itemsPerPage;
-    protected int $currentPage = 1;
+    protected int $currentPage;
     protected $urlPattern;
     protected int $maxPagesToShow = 5;
     protected $previousText = 'Previous';
