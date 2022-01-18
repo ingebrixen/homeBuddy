@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 namespace Controller;
 
 use Session\User;
