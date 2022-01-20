@@ -24,7 +24,7 @@ class Finanzen
     private $_lend          = "";
     private $_sumKat        = "";
     private $_monat         = "";
-    private $_summe          = "";
+    private $_summe         = "";
 
     public function __construct(array $data)
     {

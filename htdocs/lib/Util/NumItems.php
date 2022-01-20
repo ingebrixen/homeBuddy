@@ -10,7 +10,7 @@ class NumItems
 
                 return ($num + 1);
         }
-        public static function getNum(array $post):int
+        private static function getNum(array $post):int
         {
                 $aktDate = ["datum" => date('Y-m', strtotime($post['datum']))];
 

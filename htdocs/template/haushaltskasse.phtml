@@ -116,18 +116,18 @@
                         </div>
                         <div class="lh-sm">
                             <?php
-                              echo \Util\Tops::calKonto($stand->getStand(), $konto->getKonto())['text'];                              
+                              echo \Util\Modaltext::calKonto($stand->getStand(), $konto->getKonto())['text'];                              
                             ?>
                         </div>
                         <div class="py-4" >
                             Betrag: 
-                            <input type="number" name="wieviel" id="wieviel" max="<?php echo \Util\Tops::calKonto($stand->getStand(), $konto->getKonto())['max']; ?>" 
-                            value="<?php echo \Util\Tops::calKonto($stand->getStand(), $konto->getKonto())['val']; ?>" class="form-control" step="0.5" required <?php echo \Util\Tops::calKonto($stand->getStand(), $konto->getKonto())['show']; ?> >
+                            <input type="number" name="wieviel" id="wieviel" max="<?php echo \Util\Modaltext::calKonto($stand->getStand(), $konto->getKonto())['max']; ?>" 
+                            value="<?php echo \Util\Modaltext::calKonto($stand->getStand(), $konto->getKonto())['val']; ?>" class="form-control" step="0.5" required <?php echo \Util\Modaltext::calKonto($stand->getStand(), $konto->getKonto())['show']; ?> >
                         </div>
                       <div style="overflow:auto;">
                         <div style="float:right;">
                         <button type="reset" class="btn btn-secondary" id="close" onclick="document.getElementById('balance').style.display='none'">abbrechen</button>
-                        <button type="submit" class="btn btn-primary" id="submit" <?php echo \Util\Tops::calKonto($stand->getStand(), $konto->getKonto())['show']; ?> >absenden</button>
+                        <button type="submit" class="btn btn-primary" id="submit" <?php echo \Util\Modaltext::calKonto($stand->getStand(), $konto->getKonto())['show']; ?> >absenden</button>
                         </div>
                       </div>
                       </form>

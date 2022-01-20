@@ -9,7 +9,7 @@ namespace Controller;
 //use Session\User;
 use Util\Paginator;
 use Util\Kassierer;
-use Util\Pagination;
+use Util\Kontoservice;
 use Util\NumItems;
 
 
