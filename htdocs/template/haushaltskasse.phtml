@@ -103,7 +103,7 @@
                   <div class="">
                     <div class="justify-content-md-center">
                       <form id="balanceForm" class="addForm" method="post">
-                        <input type="hidden" name="whichForm" value="balance">
+                        <input type="hidden" name="wForm" value="balance">
                         <input type="hidden" name="uid" value="<?php echo $_SESSION['userId']; ?>">
                         <input type="hidden" name="wer" value="<?php echo $_SESSION['userName']; ?>">
                         <input type="hidden" name="konto" value="<?php echo $konto->getKonto(); ?>">
@@ -146,7 +146,7 @@
                 </div>
                 <div class="modal-body">
                 <form id="addForm" class="addForm" method="POST">
-                  <input type="hidden" name="whichForm" value="add">
+                  <input type="hidden" name="wForm" value="add">
                   <input type="hidden" name="wer" value="<?php echo $_SESSION['userName']; ?>">
                   <input type="hidden" name="uid" value="<?php echo $_SESSION['userId']; ?>">
                   <input type="hidden" name="konto" value="<?php echo $konto->getKonto(); ?>">

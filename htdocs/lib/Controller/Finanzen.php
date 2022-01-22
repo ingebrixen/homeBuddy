@@ -10,7 +10,7 @@ namespace Controller;
 use Util\Paginator;
 use Util\Kassierer;
 use Util\Kontoservice;
-use Util\NumItems;
+
 
 
 class Finanzen extends Base {
@@ -60,25 +60,29 @@ class Finanzen extends Base {
 
         $data = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order, $_offset);
 
-        if ($this->isPost()) 
+        if ($this->isPost() && $this->_checkLogin()) 
         {
+            //function has error?
 
-            if (isset($_POST['privat']) && is_numeric($_POST['privat'])) {
-                $_POST['wieviel'] = $_POST['wieviel'] - $_POST['privat'];
-            }
-            unset($_POST['privat']);
+            if (!(new Kassierer($_POST))->checkStatus()) {
+                    $url = \App::getBaseUrl() . '/finanzen/haushaltskasse';
+                    header('Location: ' . $url); 
+                }
+            exit;
+                    
 
-            $_POST['datum'] = date('Y-m-d', strtotime($_POST['datum']));
-            $_POST['num'] = NumItems::incrItems($_POST);
+                    
+                    
+
 
             switch ($_POST) {
-                case $_POST['whichForm'] == 'balance' && $_POST['konto'] == '0.00':
+                case $_POST['wForm'] == 'balance' && $_POST['konto'] == '0.00':
                     //  geld leihen 
                     //  update pers konto->lend(-)->konto(-) und haushaltskasse(-)
                     $_wieviel = $_POST['wieviel'] = strval(0 - $_POST['wieviel']);
                     $_uid = $_POST['uid'];
                     $_POST['stand'] = $_POST['stand'] + $_POST['wieviel'];
-                    unset($_POST['whichForm'], $_POST['lend'], $_POST['konto'],$_POST['uid']); 
+                    unset($_POST['wForm'], $_POST['lend'], $_POST['konto'],$_POST['uid']); 
                     $_POST['womit'] = 'lend';
                     $updateLend = $updateKonto = $updateKasse =\App::getResourceModel('DBHandler');
                     
@@ -90,7 +94,7 @@ class Finanzen extends Base {
                     }
                     break;
 
-                case $_POST['whichForm'] == 'balance' && $_POST['konto'] != '0.00':
+                case $_POST['wForm'] == 'balance' && $_POST['konto'] != '0.00':
                     $_uid = $_POST['uid'];
                     $ausgleich = $updateLend = $updateKonto = $updateKasse =\App::getResourceModel('DBHandler');
                     //  pers. Konto ausgleichen
@@ -129,7 +133,7 @@ class Finanzen extends Base {
                                         $rest = $_POST['lend'] + $_POST['wieviel'];
                                         $_POST['wieviel'] = abs($_POST['lend']);
                                         $_POST['womit'] = 'lend';
-                                        unset($_POST['whichForm'], $_POST['lend'], $_POST['konto'],$_POST['uid']);
+                                        unset($_POST['wForm'], $_POST['lend'], $_POST['konto'],$_POST['uid']);
                                         $_POST['stand'] = $_POST['stand'] + $_POST['wieviel'];
                                         //  stand muss aktualisiert werden
                                         $ausgleich = \App::getResourceModel('DBHandler');
@@ -148,7 +152,7 @@ class Finanzen extends Base {
                                     $_POST['womit'] = "einz";
                                     break;
                             }
-                        unset($_POST['whichForm'], $_POST['lend'], $_POST['konto'],$_POST['uid']);
+                        unset($_POST['wForm'], $_POST['lend'], $_POST['konto'],$_POST['uid']);
                         $_POST['stand'] = $_POST['stand'] + $_POST['wieviel'];
                         if ($updateKasse->insertData('haushaltskasse', $_POST)) {
                             $url = \App::getBaseUrl() . '/finanzen/haushaltskasse';
@@ -161,7 +165,7 @@ class Finanzen extends Base {
                         header('Location: ' . $url); 
                     }
                     break;
-                case $_POST['whichForm'] == 'add' && $_POST['womit'] == 'self':
+                case $_POST['wForm'] == 'add' && $_POST['womit'] == 'self':
                     $_uid = $_POST['uid'];
                     //  Bezahlung erfolgt mit eigenem Geld
                     //  update pers. konto->konto(+) 
@@ -184,7 +188,7 @@ class Finanzen extends Base {
                             $_POST['wieviel'] = abs($_POST['lend']);
                             $_POST['womit'] = 'lend';
                             //  ausgleich ausführen > rest muss konto gutgeschrieben und von der kasse abgezogen werden.
-                            unset($_POST['whichForm'], $_POST['lend'], $_POST['konto'],$_POST['uid']);
+                            unset($_POST['wForm'], $_POST['lend'], $_POST['konto'],$_POST['uid']);
                             $ausgleich = \App::getResourceModel('DBHandler');
                             $ausgleich->insertData('haushaltskasse', $_POST);
                             $_POST['womit'] = 'self';
@@ -199,7 +203,7 @@ class Finanzen extends Base {
                         $_POST['stand'] = $_POST['stand'] + $_POST['wieviel']; 
                         
                     }
-                    unset($_POST['whichForm'], $_POST['lend'], $_POST['konto'],$_POST['uid']); 
+                    unset($_POST['wForm'], $_POST['lend'], $_POST['konto'],$_POST['uid']); 
                     $updateLend = $updateKonto = $updateKasse =\App::getResourceModel('DBHandler');
 
                     $updateLend->updateData('persKonto', 'lend', $_lend, $_uid);
@@ -211,20 +215,29 @@ class Finanzen extends Base {
                     break;
 
 
-                case $_POST['whichForm'] == 'add' && $_POST['womit'] == 'kasse':
+                case $_POST['wForm'] == 'add' && $_POST['womit'] == 'kasse':
                     //  Bezahlung erfolgt mit Haushaltsportemonnaie
                     //  insert in Haushaltkasse(-) 
-                    $_POST['wieviel'] = strval(0 - $_POST['wieviel']);
+                    /* $_POST['wieviel'] = strval(0 - $_POST['wieviel']);
                     $_POST['stand'] = $_POST['stand'] + $_POST['wieviel'];
-                    unset($_POST['whichForm'], $_POST['lend'], $_POST['konto'],$_POST['uid']); 
+                    unset($_POST['wForm'], $_POST['lend'], $_POST['konto'],$_POST['uid']); */ 
 
-                    $updateKasse =\App::getResourceModel('DBHandler');
+                    /* $postObj = new Kassierer($_POST); */
+                    /* $post = $postObj->checkStatus();
+                    function dd($variable){
+                        echo '<pre>';
+                        die(var_dump($variable));
+                        echo '</pre>';
+                    }  
+                    dd($post); */
                     
-                    if ($updateKasse->insertData('haushaltskasse', $_POST)) {
+
+                    
+                    /* if ($postObj->checkStatus()) {
                         $url = \App::getBaseUrl() . '/finanzen/haushaltskasse';
                         header('Location: ' . $url); 
-                    }
-                    break;                    
+                    } */
+                    break;
                                 
                 }   
         } 
@@ -247,7 +260,7 @@ class Finanzen extends Base {
         $data = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order, $_offset);
 
 
-        if ($this->isPost()) 
+        if ($this->isPost() && $this->_checkLogin()) 
         {
             /** @var \Model\Resource\DBHandler $getResource */
             $getResource = \App::getResourceModel('DBHandler');

@@ -33,6 +33,8 @@ class Base
         if (!User::isLoggedIn()) {
             $url = \App::getBaseUrl() . '/index/login';
             header('Location: ' . $url);
+        } else {
+            return true;
         }
     }
 }
