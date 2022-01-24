@@ -63,57 +63,23 @@ class Finanzen extends Base {
         if ($this->isPost() && $this->_checkLogin()) 
         {
             //function has error?
-
-            if (!(new Kassierer($_POST))->checkStatus()) {
-                    $url = \App::getBaseUrl() . '/finanzen/haushaltskasse';
-                    header('Location: ' . $url); 
-                }
-            exit;
-                    
-
-                    
-                    
-
-
+            if (isset($_POST['privat']) && is_numeric($_POST['privat'])) {
+                $_POST['wieviel'] = $_POST['wieviel'] - $_POST['privat'];
+            }
+            unset($_POST['privat']);
+            (new Kassierer($_POST));
+            
             switch ($_POST) {
-                case $_POST['wForm'] == 'balance' && $_POST['konto'] == '0.00':
-                    //  geld leihen 
-                    //  update pers konto->lend(-)->konto(-) und haushaltskasse(-)
-                    $_wieviel = $_POST['wieviel'] = strval(0 - $_POST['wieviel']);
-                    $_uid = $_POST['uid'];
-                    $_POST['stand'] = $_POST['stand'] + $_POST['wieviel'];
-                    unset($_POST['wForm'], $_POST['lend'], $_POST['konto'],$_POST['uid']); 
-                    $_POST['womit'] = 'lend';
-                    $updateLend = $updateKonto = $updateKasse =\App::getResourceModel('DBHandler');
-                    
-                    $updateLend->updateData('persKonto', 'lend', $_wieviel, $_uid);
-                    $updateKonto->updateData('persKonto', 'konto', $_wieviel, $_uid);
-                    if ($updateKasse->insertData('haushaltskasse', $_POST)) {
-                        $url = \App::getBaseUrl() . '/finanzen/haushaltskasse';
-                        header('Location: ' . $url); 
-                    }
-                    break;
-
                 case $_POST['wForm'] == 'balance' && $_POST['konto'] != '0.00':
                     $_uid = $_POST['uid'];
                     $ausgleich = $updateLend = $updateKonto = $updateKasse =\App::getResourceModel('DBHandler');
-                    //  pers. Konto ausgleichen
-                    //  nach lend prüfen->update pers. konto->lend
-                    //  update pers. konto->konto
-
-                    //  sonderfall monatsanfang->-200, persKonto set to -200
-                    //  haushaltskasse automatischer eintrag->Thomas 01.01.2x +200 
-                    //  monatsafnag über cron oder cli Methoden aufruf cron.php 
-                    //  curl --silent http://domain.com/cron.php Oder php -q /path/to/cron.php
-
-                    #Fehler wenn $lend = 0 und konto - betrag
 
                     switch ($_POST) {
-                        case $_POST['konto'] > '0.00':  //  WORKING
+                        /* case $_POST['konto'] > '0.00':  //  WORKING
                             //normale auszahlung > Konto wird auf Null gesetzt > kein Eintrag in Kasse!
                             $_konto = strval($_POST['konto'] - $_POST['wieviel']);
                             $_lend = "0.00";
-                            break;                        
+                            break;  */                       
                         case $_POST['konto'] < '0.00':
                         // überprüfen ob schulden vorhanden sind
                         //  überprüfen ob geld geliehen wurde oder die Monatliche Zahlung noch nicht ausgeglichen ist
@@ -123,21 +89,29 @@ class Finanzen extends Base {
                                         
                                         $_lend = strval($_POST['lend'] + $_POST['wieviel']);
                                         $_konto = strval($_POST['wieviel'] + $_POST['konto']);
+
                                         $updateLend->updateData('persKonto', 'lend', $_lend, $_uid);
+
                                         $_POST['womit'] = "lend";                                        
                                     } else {
                                         //  stand wird nicht aktualisiert
                                         $_konto = strval($_POST['konto'] + $_POST['wieviel']);
                                         $_lend = '0.00';
+
                                         $updateLend->updateData('persKonto', 'lend', $_lend, $_uid);
+
                                         $rest = $_POST['lend'] + $_POST['wieviel'];
                                         $_POST['wieviel'] = abs($_POST['lend']);
                                         $_POST['womit'] = 'lend';
+
                                         unset($_POST['wForm'], $_POST['lend'], $_POST['konto'],$_POST['uid']);
+
                                         $_POST['stand'] = $_POST['stand'] + $_POST['wieviel'];
+
                                         //  stand muss aktualisiert werden
                                         $ausgleich = \App::getResourceModel('DBHandler');
                                         $ausgleich->insertData('haushaltskasse', $_POST);
+
                                         $_POST['womit'] = 'einz';
                                         $_POST['wieviel'] = $rest;
                                         //$_POST['stand'] = $_POST['stand'] + $_POST['wieviel'];
@@ -213,32 +187,6 @@ class Finanzen extends Base {
                         header('Location: ' . $url); 
                     }
                     break;
-
-
-                case $_POST['wForm'] == 'add' && $_POST['womit'] == 'kasse':
-                    //  Bezahlung erfolgt mit Haushaltsportemonnaie
-                    //  insert in Haushaltkasse(-) 
-                    /* $_POST['wieviel'] = strval(0 - $_POST['wieviel']);
-                    $_POST['stand'] = $_POST['stand'] + $_POST['wieviel'];
-                    unset($_POST['wForm'], $_POST['lend'], $_POST['konto'],$_POST['uid']); */ 
-
-                    /* $postObj = new Kassierer($_POST); */
-                    /* $post = $postObj->checkStatus();
-                    function dd($variable){
-                        echo '<pre>';
-                        die(var_dump($variable));
-                        echo '</pre>';
-                    }  
-                    dd($post); */
-                    
-
-                    
-                    /* if ($postObj->checkStatus()) {
-                        $url = \App::getBaseUrl() . '/finanzen/haushaltskasse';
-                        header('Location: ' . $url); 
-                    } */
-                    break;
-                                
                 }   
         } 
         echo $this->render('haushaltskasse.phtml', array('dataSet' => $data, 'paginator' => $paginator));       
