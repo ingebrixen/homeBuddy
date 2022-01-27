@@ -13,7 +13,7 @@ class Modaltext {
                     $konto = \abs($konto); 
                     $text = "Du musst <b>{$konto}&#8364;</b> einzahlen!";
                     return  $array = ['text' => $text,
-                                     'max' => '',
+                                     'max' => $konto,
                                      'val' => $konto,
                                      'show' => ''];
                     break;
