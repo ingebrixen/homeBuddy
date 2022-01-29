@@ -18,16 +18,22 @@ class Index extends Base
     public function indexAction($params)
     {   
         $this->_checkLogin();
-        // resource model instanzieren
-        /** @var \Model\Resource\Bild $model */
-        // $model = \App::getResourceModel('Bild');
-        //  Models werden jetzt hier über ein Factory Pattern erzeugt
-        // Bilder abrufen
-        // $bilder = $model->getBilder();
         
-        // bilder darstellen/ template
-        echo $this->render('portal.phtml', array());
-        //  bilder.phtml und das assoziative array werden als parameter an render in Base übergeben
+        $_table = "sumByKat";
+        $_colum = "kategorie, sumKat";
+        $_model = "Finanzen";
+
+        $model = \App::getResourceModel('DBHandler');
+        $sumByKat = $model->selectData($_model, $_table, $_colum, $params);
+
+        $_table = "sumMonth";
+        $_colum = "Monat, Summe";
+
+        $sumMonth = $model->selectData($_model, $_table, $_colum, $params);
+
+        echo $this->render('dashboard.phtml', array('sumByKat' => $sumByKat, 'sumMonth' => $sumMonth));
+
+
     }
     public function registerAction($params)
     {   
