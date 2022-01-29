@@ -27,12 +27,15 @@ class Base
         if (count($_FILES) > 0) {
             return true;
         }
+
+        return false;
+
     }
     public function _checkLogin()
     {
         if (!User::isLoggedIn()) {
             $url = \App::getBaseUrl() . '/index/login';
             header('Location: ' . $url);
-        }
+        } 
     }
 }
