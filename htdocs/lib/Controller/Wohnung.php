@@ -6,7 +6,7 @@ namespace Controller;
 use Session\User;
 use Util\Image;
 
-class Notes extends Base {
+class Wohnung extends Base {
 
     public function __construct()
     {
@@ -18,7 +18,15 @@ class Notes extends Base {
 
         echo $this->render('portal.phtml', array());
     }
+    public function wasserAction($params) 
+    {
 
+        echo $this->render('portal.phtml', array());
+    }
+    public function heizungAction($params) 
+    {
 
+        echo $this->render('portal.phtml', array());
+    }
 
 }
