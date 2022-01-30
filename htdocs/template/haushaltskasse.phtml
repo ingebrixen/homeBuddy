@@ -24,7 +24,7 @@
         </tr>
       </thead>
       <tbody>
-      <?php $i=count($dataSet)+1; foreach ($dataSet as $ausgabe): $i--;?>
+      <?php foreach ($dataSet as $ausgabe):?>
         <tr>
           <th scope="row"><?php echo $ausgabe->getNum(); ?></th>
           <td><?php echo $ausgabe->getWer(); ?></td>

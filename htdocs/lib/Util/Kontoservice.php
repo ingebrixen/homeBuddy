@@ -20,11 +20,11 @@ class Kontoservice extends Base {
                 
                 $this->_post['stand'] = $this->_post['stand'] + $this->_post['wieviel'];
 
-                self::unsetPost(); 
+                $this->unsetPost(); 
 
                 $this->_post['womit'] = 'lend';
 
-                self::updateKasse($this->_post)->updateKonto()->updateLend();
+                $this->updateKasse($this->_post)->updateKonto()->updateLend();
                 
         }
         public function privKontoAusgleich()
@@ -45,7 +45,7 @@ class Kontoservice extends Base {
                                                         $this->_lend = strval($this->_post['lend'] + $this->_post['wieviel']);
                                                         $this->_konto = strval($this->_post['wieviel'] + $this->_post['konto']);
 
-                                                        self::updateLend();
+                                                        $this->updateLend();
                                                         
                                                         $this->_post['womit'] = "lend";  
 
@@ -53,17 +53,17 @@ class Kontoservice extends Base {
                                                         $this->_konto = strval($this->_post['konto'] + $this->_post['wieviel']);
                                                         $this->_lend = '0.00';
 
-                                                        self::updateLend();
+                                                        $this->updateLend();
 
                                                         $this->rest = $this->_post['lend'] + $this->_post['wieviel'];
                                                         $this->_post['wieviel'] = abs($this->_post['lend']);
                                                         $this->_post['womit'] = 'lend';
 
-                                                        self::unsetPost(); 
+                                                        $this->unsetPost(); 
                                                         
                                                         $this->_post['stand'] = $this->_post['stand'] + $this->_post['wieviel'];
 
-                                                        self::updateKasse($this->_post);
+                                                        $this->updateKasse($this->_post);
 
                                                         $this->_post['womit'] = 'einz';
                                                         $this->_post['wieviel'] = $this->rest;
@@ -77,14 +77,14 @@ class Kontoservice extends Base {
 
                                                 break;
                                         }
-                                self::unsetPost(); 
+                                $this->unsetPost(); 
 
                                 $this->_post['stand'] = $this->_post['stand'] + $this->_post['wieviel'];
 
-                                self::updateKasse($this->_post);
+                                $this->updateKasse($this->_post);
 
                                 break;
                         }
-                self::updateKonto();
+                $this->updateKonto();
         }
 }

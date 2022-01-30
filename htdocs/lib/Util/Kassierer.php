@@ -35,9 +35,9 @@ class Kassierer extends Base {
                                         $this->_post['womit'] = 'lend';
                                         $this->_post['stand'] = $this->_post['stand'] + abs($this->_post['lend']);
                                         
-                                        self::unsetPost();
+                                        $this->unsetPost();
 
-                                        self::updateKasse($this->_post);
+                                        $this->updateKasse($this->_post);
                                         
                                         $this->_post['womit'] = 'self';
                                         $this->_post['wieviel'] = 0 - $this->rest;
@@ -52,21 +52,21 @@ class Kassierer extends Base {
                         $this->_post['stand'] = $this->_post['stand'] + $this->_post['wieviel']; 
                 
                 }
-                self::unsetPost();
+                $this->unsetPost();
 
                 $this->_post['num'] = NumItems::incrItems($this->_post);
 
-                self::updateLend();
-                self::updateKonto();
-                self::updateKasse($this->_post);
+                $this->updateLend();
+                $this->updateKonto();
+                $this->updateKasse($this->_post);
         }
         public function shopWithKasse()
         {
                 $this->_post['wieviel'] = strval(0 - $this->_post['wieviel']);
                 $this->_post['stand'] = $this->_post['stand'] + $this->_post['wieviel'];
                 
-                self::unsetPost();
+                $this->unsetPost();
 
-                self::updateKasse($this->_post);
+                $this->updateKasse($this->_post);
         }
 }

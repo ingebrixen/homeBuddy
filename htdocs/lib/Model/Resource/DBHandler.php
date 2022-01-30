@@ -53,7 +53,7 @@ class DBHandler extends Base
         $update->execute();
         
         $this->connection = null;
-        /* return $connection->lastInsertId(); */
+        return $connection->lastInsertId();
     }
     public function selectTops(string $model, string $sql)
     {
