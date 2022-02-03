@@ -7,6 +7,10 @@ use Session\User;
 class Base
 //  Gemeinsame Basisklasse zum rendern von Template Dateien
 {
+    public function __construct()
+    {
+        
+    }
     public function render(string $template, array $data)
     {
         

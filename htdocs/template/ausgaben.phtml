@@ -1,18 +1,32 @@
 <?php   require_once($_SERVER['DOCUMENT_ROOT'].'/template/head.inc.phtml'); ?>
 <!-- !PAGE CONTENT! -->
   <div class="container-fluid paddingBottom">
-    <div class="right py-2">
-      <div class="w3-dropdown-click">
-        <button onclick="getMonth()" class="btn btn-primary">Monat/Jahr</button>
-        <div id="monat" class="w3-dropdown-content w3-bar-block w3-border">
-          <a href="<?php echo App::getBaseUrl()."/finanzen/ausgaben/"; ?>" class="w3-bar-item w3-button">-</a>
+  <div class="row gy-1 py-2 right">
+      <div class="col-auto p-0">
+          <form method="post" >
+              <select name="itemLimit" id="itemLimit" class="form-select form-select-sm" onchange="this.form.submit()">
+                  <option disabled selected>Items</option>
+                  <?php foreach([10,20,30,alle] as $limit) : ?>
+                  <option
+                      <?php if(isset($_SESSION['items']) && $_SESSION['items'] == $limit) echo 'selected'; ?>
+                      value="<?= $limit; ?>">
+                      <?= $limit; ?>
+                  </option>
+                  <?php endforeach; ?>
+              </select>
+          </form>
+      </div>
+      <div class="w3-dropdown-click col-auto">
+        <button onclick="getMonth()" class="form-select form-select-sm">Monat/Jahr</button>
+        <div id="monat" class="w3-dropdown-content w3-bar-block w3-border ">
+          <a href="<?php echo App::getBaseUrl()."/finanzen/ausgaben/"; ?>" class="w3-bar-item "><small>-</small></a>
         <?php foreach (\Util\Datum::getDateRange() as $date): ?>
-          <a href="<?php echo App::getBaseUrl()."/finanzen/ausgaben/datum/".$date->format('Y-m'); ?>" class="w3-bar-item w3-button"><?php echo $date->format('m/y')."\n";?></a>
+          <a href="<?php echo App::getBaseUrl()."/finanzen/ausgaben/datum/".$date->format('Y-m'); ?>" class="w3-bar-item"><small><?php echo $date->format('m/y')."\n";?></small></a>
         <?php endforeach; ?> 
         </div>
       </div>
-    </div>
-
+    </div> 
+    <?php var_dump($_SESSION); ?>
     <table class="table table-striped mb-0 text-center shadow-sm">
       <thead>
         <tr class="bgDash2">

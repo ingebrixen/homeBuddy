@@ -5,6 +5,18 @@ namespace Session;
 
 class User
 {
+    public static function setItemLimit()
+    {
+        if(isset($_POST['itemLimit'])){
+            $_SESSION['items'] = $_POST['itemLimit'];
+
+            return $_SESSION['items'];
+        }
+        if (isset($_SESSION['items'])) {
+            return $_SESSION['items'];
+        }
+        return 10;
+    }
     public static function login($email, $pass)
     {
         self::initSession();

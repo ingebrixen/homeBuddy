@@ -175,3 +175,6 @@ height: auto;
     width: fit-content !important;
     margin: auto;    
 }
+.text-right {
+    text-align: right !important;
+}
