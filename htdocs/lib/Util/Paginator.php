@@ -8,6 +8,8 @@
 
 namespace Util;
 
+use Session\User;
+
 class Paginator
 {
     const NUM_PLACEHOLDER = '(:num)';
@@ -29,15 +31,29 @@ class Paginator
      * @param string $urlPattern A URL for each page, with (:num) as a placeholder for the page number. Ex. '/foo/page/(:num)'
      */
     public function __construct($table, $params)
-    {
+    {   
         $model = \App::getResourceModel('DBHandler');
         $this->totalItems = $model->countItems($table, $params);
 
-        $this->itemsPerPage = 10;
+        $this->itemsPerPage = User::setItemLimit();
+
+        if(!is_numeric(User::setItemLimit()))
+        {
+            $this->itemsPerPage = $this->totalItems;
+        };        
+        
         $this->currentPage = (array_key_exists('page', $_GET)) ? $_GET['page'] : 1 ;
         $this->urlPattern = '?page=(:num)';
 
         $this->offset = ($this->currentPage - 1) * $this->itemsPerPage;
+        echo var_dump($this->offset);
+        if ($this->offset >= $this->totalItems) {
+            $this->currentPage = 1;
+            $this->offset=0;
+        } 
+        echo var_dump($this->offset);
+        echo var_dump($this->totalItems);        
+        echo var_dump($this->itemsPerPage);
 
         $this->updateNumPages();
     }
@@ -49,6 +65,10 @@ class Paginator
     public function getOffset()
     {
             return $this->offset;
+    }
+    public function getLimit()
+    {
+            return $this->itemsPerPage;
     }
 
     /**

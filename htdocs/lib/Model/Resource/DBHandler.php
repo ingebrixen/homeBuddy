@@ -8,7 +8,7 @@ class DBHandler extends Base
 {    
     //private $_order = "";
 
-    public function selectData(string $model, string $table, string $colum, array $params = [], $order = '', int $offset = 0) 
+    public function selectData(string $model, string $table, string $colum, array $params = [], $order = '', int $offset = 0, int $limit = 10) 
     //z.B. sortierung, anzahl einträge, standard (z.b. bei sortierung oder datumsfilter)
     {    
         $sql = \sprintf("SELECT %s FROM %s %s %s %s", 
@@ -16,7 +16,7 @@ class DBHandler extends Base
         $table, 
         $this->_setWhere($params),
         $order,
-        $this->_getLimit($offset));
+        $this->_getLimit($offset, $limit));
 
         $dbResult = $this->connect()->query($sql);
         for ($set = array(); $row = $dbResult->fetch(\PDO::FETCH_ASSOC); $set[] = $row); 
@@ -75,17 +75,19 @@ class DBHandler extends Base
 
         return intval($totalItems);
     }
-    public function selectKonto(string $model, string $sql)
+    public function selectKonto(string $model, string $sql):array
     {
         $dbResult = $this->connect()->query($sql);
         for ($set = array(); $row = $dbResult->fetch(\PDO::FETCH_ASSOC); $set[] = $row); 
 
         return $set;
     }
-    private function _getLimit(int $offset):string
+    private function _getLimit(int $offset, int $limit):string
     {
         if (isset($offset)) {
-            return "LIMIT ".$offset.",10";
+
+            return "LIMIT {$offset}, {$limit}";
+
         }    
     }
     private function _setWhere(array $params):string

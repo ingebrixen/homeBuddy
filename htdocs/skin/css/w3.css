@@ -395,8 +395,7 @@ a {
 }
 .w3-dropdown-hover:first-child,
 .w3-dropdown-click:hover {
-  background-color: #ccc;
-  color: #000;
+    color: #000;
 }
 .w3-dropdown-hover:hover > .w3-button:first-child,
 .w3-dropdown-click:hover > .w3-button:first-child {
@@ -409,10 +408,11 @@ a {
   background-color: #fff;
   display: none;
   position: absolute;
-  min-width: 100%;
-  margin: 0;
+  min-width: 119px;
+  margin: 0  0 0 0px;
   padding: 0;
   z-index: 1;
+  text-align: right;
 }
 .w3-check,
 .w3-radio {

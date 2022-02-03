@@ -6,11 +6,11 @@ namespace Controller;
 
 #require '../vendor/autoload.php';
 
-//use Session\User;
 use Util\Paginator;
 use Util\Kassierer;
 use Util\Dispatcher;
 use Util\NumItems;
+
 
 
 
@@ -27,6 +27,8 @@ class Finanzen extends Base {
     public function __construct()
     {
         $this->_checkLogin();
+
+        
     }
     public function indexAction($params)
     {
@@ -56,15 +58,18 @@ class Finanzen extends Base {
 
         $paginator = new Paginator($this->_table, $params);
         $_offset = $paginator->getOffset();
+        $_limit = intval($paginator->getLimit());
 
-        $data = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order, $_offset);
+        $data = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order, $_offset, $_limit);
 
         if ($this->isPost()) 
         {
+            if (isset($_POST['wForm'])) {
                 if ((new Dispatcher($_POST))) {
-                    $url = \App::getBaseUrl() . '/finanzen/haushaltskasse';
-                    header('Location: ' . $url); 
+                $url = \App::getBaseUrl() . '/finanzen/haushaltskasse';
+                header('Location: ' . $url); 
                 }
+            }            
         }
         echo $this->render('haushaltskasse.phtml', array('dataSet' => $data, 'paginator' => $paginator));       
     }
@@ -80,20 +85,31 @@ class Finanzen extends Base {
 
         $paginator = new Paginator($this->_table, $params);
         $_offset = $paginator->getOffset();
+        $_limit = intval($paginator->getLimit());
 
         $model = \App::getResourceModel('DBHandler');
-        $data = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order, $_offset);
+        $data = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order, $_offset, $_limit);
 
 
         if ($this->isPost()) 
         {
             /** @var \Model\Resource\DBHandler $getResource */
             $getResource = \App::getResourceModel('DBHandler');
-            $_POST['datum'] = date('Y-m-d', strtotime($_POST['datum']));
-            if ($getResource->insertData($this->_table, $_POST)) {                
+
+            if (empty($params['datum'])) {
+                $params = ["datum" => date('Y-m')];            // standard definiere, wenn kein filter angegeben ist, wird immer der aktuelle Monat ausgegeben.
+            }
+            if (isset($_POST['addForm'])) {
+                if ($getResource->insertData($this->_table, $_POST)) {                
                     $url = \App::getBaseUrl() . '/finanzen/ausgaben';
                     header('Location: ' . $url);                
                 }
+            }
+            /* if (isset($_POST['itemLimit'])) {
+                $url = \App::getBaseUrl() . '/finanzen/ausgaben';
+                header('Location: ' . $url);
+            } */
+            
         } 
         echo $this->render('ausgaben.phtml', array('dataSet' => $data, 'paginator' => $paginator));
     }
