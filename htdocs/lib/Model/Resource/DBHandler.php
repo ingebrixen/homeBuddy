@@ -75,13 +75,13 @@ class DBHandler extends Base
 
         return intval($totalItems);
     }
-    public function selectKonto(string $model, string $sql):array
+    /* public function selectKonto(string $model, string $sql):array
     {
         $dbResult = $this->connect()->query($sql);
         for ($set = array(); $row = $dbResult->fetch(\PDO::FETCH_ASSOC); $set[] = $row); 
 
         return $set;
-    }
+    } */
     private function _getLimit(int $offset, int $limit):string
     {
         if (isset($offset)) {
