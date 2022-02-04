@@ -46,14 +46,11 @@ class Paginator
         $this->urlPattern = '?page=(:num)';
 
         $this->offset = ($this->currentPage - 1) * $this->itemsPerPage;
-        echo var_dump($this->offset);
+       
         if ($this->offset >= $this->totalItems) {
             $this->currentPage = 1;
             $this->offset=0;
         } 
-        echo var_dump($this->offset);
-        echo var_dump($this->totalItems);        
-        echo var_dump($this->itemsPerPage);
 
         $this->updateNumPages();
     }
