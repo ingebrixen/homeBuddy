@@ -21,8 +21,7 @@ class Finanzen extends Base {
     private string $_model = "Finanzen";
     private string $_order;
     private string $_where;
-    private string $_offset;
-    
+    private string $_offset;    
     
     public function __construct()
     {
@@ -80,8 +79,6 @@ class Finanzen extends Base {
         $_colum = "id, datum, wer, wo, kategorie, wieviel, kommentar";        
         $_order = "ORDER BY ID DESC";
 
-        /* $pagination = new Pagination($this->_table, $params);
-        $_offset = $pagination->getOffset(); */
 
         $paginator = new Paginator($this->_table, $params);
         $_offset = $paginator->getOffset();
@@ -90,26 +87,17 @@ class Finanzen extends Base {
         $model = \App::getResourceModel('DBHandler');
         $data = $model->selectData($this->_model, $this->_table, $_colum, $params, $_order, $_offset, $_limit);
 
-
         if ($this->isPost()) 
         {
             /** @var \Model\Resource\DBHandler $getResource */
             $getResource = \App::getResourceModel('DBHandler');
 
-            if (empty($params['datum'])) {
-                $params = ["datum" => date('Y-m')];            // standard definiere, wenn kein filter angegeben ist, wird immer der aktuelle Monat ausgegeben.
-            }
-            if (isset($_POST['addForm'])) {
+            if (!isset($_POST['itemLimit'])) {
                 if ($getResource->insertData($this->_table, $_POST)) {                
                     $url = \App::getBaseUrl() . '/finanzen/ausgaben';
-                    header('Location: ' . $url);                
+                    header('Location: ' . $url);                 
                 }
-            }
-            /* if (isset($_POST['itemLimit'])) {
-                $url = \App::getBaseUrl() . '/finanzen/ausgaben';
-                header('Location: ' . $url);
-            } */
-            
+            }            
         } 
         echo $this->render('ausgaben.phtml', array('dataSet' => $data, 'paginator' => $paginator));
     }
