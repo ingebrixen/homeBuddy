@@ -96,13 +96,10 @@ class Finanzen extends Base {
             /** @var \Model\Resource\DBHandler $getResource */
             $getResource = \App::getResourceModel('DBHandler');
 
-            if (empty($params['datum'])) {
-                $params = ["datum" => date('Y-m')];            // standard definiere, wenn kein filter angegeben ist, wird immer der aktuelle Monat ausgegeben.
-            }
-            if (isset($_POST['addForm'])) {
+            if (!isset($_POST['itemLimit'])) {
                 if ($getResource->insertData($this->_table, $_POST)) {                
                     $url = \App::getBaseUrl() . '/finanzen/ausgaben';
-                    header('Location: ' . $url);                
+                    header('Location: ' . $url);                 
                 }
             }
             /* if (isset($_POST['itemLimit'])) {
