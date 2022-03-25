@@ -6,7 +6,7 @@
           <form method="post" >
               <select name="itemLimit" id="itemLimit" class="form-select form-select-sm" onchange="this.form.submit()">
                   <option disabled selected>Items</option>
-                  <?php foreach([10,20,30,alle] as $limit) : ?>
+                  <?php foreach([10,20,30,'alle'] as $limit) : ?>
                   <option
                       <?php if(isset($_SESSION['items']) && $_SESSION['items'] == $limit) echo 'selected'; ?>
                       value="<?= $limit; ?>">
@@ -34,6 +34,7 @@
           <th scope="col">Wann</th>
           <th scope="col">+/-</th>
           <th scope="col">Stand</th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
@@ -52,12 +53,13 @@
             echo "<td>{$ausgabe->getWieviel()} &#8364;</td>";
           }; ?>
           <td><?php echo $ausgabe->getStand(); ?> &#8364;</td>
+          <td><?php echo $ausgabe->getId(); ?></td>
         </tr>
       <?php endforeach; ?>
       </tbody>      
     </table>     
     <!-- Pagination -->
-    <?php   require_once($_SERVER['DOCUMENT_ROOT'].'/template/pagination.inc.phtml'); ?>
+    <?php require_once($_SERVER['DOCUMENT_ROOT'].'/template/pagination.inc.phtml'); ?>
 
   </div>
 </div>

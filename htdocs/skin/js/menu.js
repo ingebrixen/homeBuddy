@@ -20,6 +20,8 @@ function w3_close() {
   overlayBg.style.display = "none";
 }
 
+
+//Dropdowns 
 function finDrop() {
   var x = document.getElementById("finDrop");
   if (x.className.indexOf("w3-show") == -1) {

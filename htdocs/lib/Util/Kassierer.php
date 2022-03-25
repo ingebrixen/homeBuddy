@@ -19,31 +19,31 @@ class Kassierer extends Base {
         public function shopOwnMoney()
         {
                 if ($this->_post['lend'] < '0.00') { 
-                                if (abs($this->_post['lend']) >= $this->_post['wieviel']) {
-                                        
-                                        $this->_lend = $this->_konto = strval($this->_post['wieviel'] + $this->_post['lend']);
-                                        $this->_post['womit'] = 'lend';
+                        if (abs($this->_post['lend']) >= $this->_post['wieviel']) {
+                                
+                                $this->_lend = $this->_konto = strval($this->_post['wieviel'] + $this->_post['lend']);
+                                $this->_post['womit'] = 'lend';
 
-                                } else {
+                        } else {
 
-                                        $this->_konto = strval($this->_post['wieviel'] + $this->_post['lend']);
-                                        $this->_lend = '0.00';
+                                $this->_konto = strval($this->_post['wieviel'] + $this->_post['lend']);
+                                $this->_lend = '0.00';
 
-                                        $this->rest = $this->_post['lend'] + $this->_post['wieviel'];
+                                $this->rest = $this->_post['lend'] + $this->_post['wieviel'];
 
-                                        $this->_post['wieviel'] = abs($this->_post['lend']);
-                                        $this->_post['womit'] = 'lend';
-                                        $this->_post['stand'] = $this->_post['stand'] + abs($this->_post['lend']);
-                                        
-                                        $this->unsetPost();
+                                $this->_post['wieviel'] = abs($this->_post['lend']);
+                                $this->_post['womit'] = 'lend';
+                                $this->_post['stand'] = $this->_post['stand'] + abs($this->_post['lend']);
+                                
+                                $this->unsetPost();
 
-                                        $this->updateKasse($this->_post);
-                                        
-                                        $this->_post['womit'] = 'self';
-                                        $this->_post['wieviel'] = 0 - $this->rest;
-                                        $this->_post['stand'] = $this->_post['stand'] + $this->_post['wieviel'];
-                                        
-                                }
+                                $this->updateKasse($this->_post);
+                                
+                                $this->_post['womit'] = 'self';
+                                $this->_post['wieviel'] = 0 - $this->rest;
+                                $this->_post['stand'] = $this->_post['stand'] + $this->_post['wieviel'];
+                                
+                        }
                 } else {
 
                         $this->_konto = strval($this->_post['wieviel'] + $this->_post['konto']); 
