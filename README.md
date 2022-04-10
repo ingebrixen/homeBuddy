@@ -1,6 +1,6 @@
 # homeBuddy
 
-## Aktuelles Freizeit Projekt als Arbeitsprobe für die dotSource GmbH
+### Aktuelles Freizeit Projekt als Arbeitsprobe für die dotSource GmbH
 
 Die Alpha-Version verfügt über alle grundlegenden Funktionen. Zukünftig sollen diese noch ausgebaut werden. Der Code sieht zwar ein wenig wild aus, spiegelt aber meinen Entwicklungsfortschritt wieder. Ich versuche immer neu Gelerntes einfließen zu lassen oder Module neu zu schreiben, um dadurch fortlaufend etwas mehr Struktur reinzubringen. 
 
