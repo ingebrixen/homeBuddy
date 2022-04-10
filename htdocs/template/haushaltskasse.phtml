@@ -53,7 +53,7 @@
             echo "<td>{$ausgabe->getWieviel()} &#8364;</td>";
           }; ?>
           <td><?php echo $ausgabe->getStand(); ?> &#8364;</td>
-          <td><?php echo $ausgabe->getId(); ?></td>
+          <td><a href="<?php echo App::getBaseUrl()."/finanzen/haushaltskasse/edit/".$ausgabe->getId(); ?>"><i class="fas fa-pen"></i></a></td>
         </tr>
       <?php endforeach; ?>
       </tbody>      

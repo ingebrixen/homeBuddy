@@ -5,7 +5,6 @@ namespace Controller;
 use Session\User;
 
 class Base
-//  Gemeinsame Basisklasse zum rendern von Template Dateien
 {
     public function __construct()
     {

@@ -1,54 +1,54 @@
 <?php   require_once($_SERVER['DOCUMENT_ROOT'].'/template/head.inc.phtml'); ?>
 <!-- !PAGE CONTENT! -->
-  <div class="container-fluid paddingBottom">
-  <div class="row gy-1 py-2 right">
-      <div class="col-auto p-0">
-          <form method="post" >
-              <select name="itemLimit" id="itemLimit" class="form-select form-select-sm" onchange="this.form.submit()">
-                  <option disabled selected>Items</option>
-                  <?php foreach([10,20,30,alle] as $limit) : ?>
-                  <option
-                      <?php if(isset($_SESSION['items']) && $_SESSION['items'] == $limit) echo 'selected'; ?>
-                      value="<?= $limit; ?>">
-                      <?= $limit; ?>
-                  </option>
-                  <?php endforeach; ?>
-              </select>
-          </form>
-      </div>
-      <div class="w3-dropdown-click col-auto">
-        <button onclick="getMonth()" class="form-select form-select-sm">Monat/Jahr</button>
-        <div id="monat" class="w3-dropdown-content w3-bar-block w3-border ">
-          <a href="<?php echo App::getBaseUrl()."/finanzen/ausgaben/"; ?>" class="w3-bar-item "><small>-</small></a>
-        <?php foreach (\Util\Datum::getDateRange() as $date): ?>
-          <a href="<?php echo App::getBaseUrl()."/finanzen/ausgaben/datum/".$date->format('Y-m'); ?>" class="w3-bar-item"><small><?php echo $date->format('m/y')."\n";?></small></a>
-        <?php endforeach; ?> 
-        </div>
-      </div>
-    </div> 
-    <table class="table table-striped mb-0 text-center shadow-sm">
-      <thead>
-        <tr class="bgDash2">
-          <th scope="col">Wann</th>
-          <th scope="col">Wer</th>
-          <th scope="col">Kategorie</th>
-          <th scope="col">Wieviel</th>
-        </tr>
-      </thead>
-      <tbody>
-      <?php foreach ($dataSet as $ausgabe): ?>
-        <tr>
-          <td><?php $ausgabe->getID(); echo date("d.m.y",strtotime($ausgabe->getDatum())); ?></td>
-          <td><?php echo $ausgabe->getWer(); ?></td>
-          <td><?php echo $ausgabe->getKategorie(); ?></td>
-          <td><?php echo $ausgabe->getWieviel(); ?> &#8364;</td>
-        </tr>
-        <?php endforeach; ?>
-      </tbody>      
-    </table>
-    <!-- Pagination -->
-    <?php   require_once($_SERVER['DOCUMENT_ROOT'].'/template/pagination.inc.phtml'); ?>
-  </div>
+	<div class="container-fluid paddingBottom">
+	<div class="row gy-1 py-2 right">
+			<div class="col-auto p-0">
+					<form method="post" >
+							<select name="itemLimit" id="itemLimit" class="form-select form-select-sm" onchange="this.form.submit()">
+									<option disabled selected>Items</option>
+									<?php foreach([10,20,30,'alle'] as $limit) : ?>
+									<option
+											<?php if(isset($_SESSION['items']) && $_SESSION['items'] == $limit) echo 'selected'; ?>
+											value="<?= $limit; ?>">
+											<?= $limit; ?>
+									</option>
+									<?php endforeach; ?>
+							</select>
+					</form>
+			</div>
+			<div class="w3-dropdown-click col-auto">
+				<button onclick="getMonth()" class="form-select form-select-sm">Monat/Jahr</button>
+				<div id="monat" class="w3-dropdown-content w3-bar-block w3-border ">
+					<a href="<?php echo App::getBaseUrl()."/finanzen/ausgaben/"; ?>" class="w3-bar-item "><small>-</small></a>
+				<?php foreach (\Util\Datum::getDateRange() as $date): ?>
+					<a href="<?php echo App::getBaseUrl()."/finanzen/ausgaben/datum/".$date->format('Y-m'); ?>" class="w3-bar-item"><small><?php echo $date->format('m/y')."\n";?></small></a>
+				<?php endforeach; ?>
+				</div>
+			</div>
+		</div>
+		<table class="table table-striped mb-0 text-center shadow-sm">
+			<thead>
+				<tr class="bgDash2">
+					<th scope="col">Wann</th>
+					<th scope="col">Wer</th>
+					<th scope="col">Kategorie</th>
+					<th scope="col">Wieviel</th>
+				</tr>
+			</thead>
+			<tbody>
+			<?php foreach ($dataSet as $ausgabe): ?>
+				<tr>
+					<td><?php $ausgabe->getID(); echo date("d.m.y",strtotime($ausgabe->getDatum())); ?></td>
+					<td><?php echo $ausgabe->getWer(); ?></td>
+					<td><?php echo $ausgabe->getKategorie(); ?></td>
+					<td><?php echo $ausgabe->getWieviel(); ?> &#8364;</td>
+				</tr>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
+		<!-- Pagination -->
+		<?php   require_once($_SERVER['DOCUMENT_ROOT'].'/template/pagination.inc.phtml'); ?>
+	</div>
 </div>
 <!-- End page content -->
 <!-- Footer -->
@@ -56,62 +56,62 @@
 <footer class="footer mt-auto py-3 bgTop">
 <div class="container-fluid">
 
-      <div class="right">
-        <a href="#add" data-target="#id" data-toggle="modal" class="lift" onclick="document.getElementById('add').style.display='block'">
-          <i class="fas fa-plus-circle add lift"></i>
-        </a>       
-      </div>
-      <div id="add" class="w3-modal ">
-            <div class="modal-dialog " >
-              <div class="modal-content w3-card-4 w3-animate-zoom">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="modalTitle">allg. Ausgaben</h5>
-                  <button type="button" class="btn-close" onclick="document.getElementById('add').style.display='none'"></button>
-                </div>
-                <div class="modal-body">
-                <form id="addForm" class="addForm" method="POST">
-                  <input type="hidden" name="wer" value="<?php echo $_SESSION['userName']; ?>">
-                  
-                  <!-- One "tab" for each step in the form: -->
-                  <div class="tab">Wann?
-                    <p><input type="date" name="datum" class="form-control" value="<?php echo date("Y-m-d"); ?>" required ></p>
-                      Wieviel?
-                    <p><input type="number" name="wieviel" step="0.5" placeholder="  €" class="form-control" required ></p>         
-                  </div>
-                  <div class="tab">
-                    <div>
-                    <p><select name="kategorie" class="form-select" required>
-                          <option selected disabled value="">Kategorie w&auml;hlen</option>
-                          <option value="Wohnung">Wohnung</option>
-                          <option value="Baumarkt">Baumarkt</option>
-                          <option value="Auto">Auto</option>
-                          <option value="Geschenke">Geschenke</option>
-                          <option value="Freizeit">Freizeit</option>
-                          <option value="Urlaub">Urlaub</option>
-                          <option value="Luxus">Luxus</option>
-                          <option value="sonstiges">sonstiges</option>
-                      </select></p>
-                    </div>
-                    <div><p><textarea name="kommentar" class="form-control" rows="4" placeholder="Mach bitte ein paar Angaben zu deinem Einkauf."required></textarea></p></div>
-                  </div>
-                  <!-- Circles which indicates the steps of the form: -->
-                  <div style="text-align:center;margin-top:40px;">
-                    <span class="step"></span>
-                    <span class="step"></span>
-                  </div>
-                  <hr>
-                  <div style="overflow:auto;">
-                    <div style="float:right;">
-                    <button type="button" class="btn btn-secondary" id="prevBtn" onclick="nextPrev(-1)">back</button>
-                    <button type="button" class="btn btn-primary" id="nextBtn" onclick="nextPrev(1)">Next</button>
-                    </div>
-                  </div>
-                </form> 
-                </div>
-              </div>
-            </div>
+			<div class="right">
+				<a href="#add" data-target="#id" data-toggle="modal" class="lift" onclick="document.getElementById('add').style.display='block'">
+					<i class="fas fa-plus-circle add lift"></i>
+				</a>
+			</div>
+			<div id="add" class="w3-modal ">
+						<div class="modal-dialog " >
+							<div class="modal-content w3-card-4 w3-animate-zoom">
+								<div class="modal-header">
+									<h5 class="modal-title" id="modalTitle">allg. Ausgaben</h5>
+									<button type="button" class="btn-close" onclick="document.getElementById('add').style.display='none'"></button>
+								</div>
+								<div class="modal-body">
+								<form id="addForm" class="addForm" method="POST">
+									<input type="hidden" name="wer" value="<?php echo $_SESSION['userName']; ?>">
 
-      </div>
+									<!-- One "tab" for each step in the form: -->
+									<div class="tab">Wann?
+										<p><input type="date" name="datum" class="form-control" value="<?php echo date("Y-m-d"); ?>" required ></p>
+											Wieviel?
+										<p><input type="number" name="wieviel" step="0.5" placeholder="  €" class="form-control" required ></p>
+									</div>
+									<div class="tab">
+										<div>
+										<p><select name="kategorie" class="form-select" required>
+													<option selected disabled value="">Kategorie w&auml;hlen</option>
+													<option value="Wohnung">Wohnung</option>
+													<option value="Baumarkt">Baumarkt</option>
+													<option value="Auto">Auto</option>
+													<option value="Geschenke">Geschenke</option>
+													<option value="Freizeit">Freizeit</option>
+													<option value="Urlaub">Urlaub</option>
+													<option value="Luxus">Luxus</option>
+													<option value="sonstiges">sonstiges</option>
+											</select></p>
+										</div>
+										<div><p><textarea name="kommentar" class="form-control" rows="4" placeholder="Mach bitte ein paar Angaben zu deinem Einkauf."required></textarea></p></div>
+									</div>
+									<!-- Circles which indicates the steps of the form: -->
+									<div style="text-align:center;margin-top:40px;">
+										<span class="step"></span>
+										<span class="step"></span>
+									</div>
+									<hr>
+									<div style="overflow:auto;">
+										<div style="float:right;">
+										<button type="button" class="btn btn-secondary" id="prevBtn" onclick="nextPrev(-1)">back</button>
+										<button type="button" class="btn btn-primary" id="nextBtn" onclick="nextPrev(1)">Next</button>
+										</div>
+									</div>
+								</form>
+								</div>
+							</div>
+						</div>
+
+			</div>
 </footer>
 <!-- Begin script area -->
 <script src="<?php echo App::getBaseUrl() ?>/skin/js/form.js"></script>
