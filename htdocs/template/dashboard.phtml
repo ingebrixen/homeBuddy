@@ -1,6 +1,5 @@
 <?php   require_once($_SERVER['DOCUMENT_ROOT'].'/template/head.inc.phtml'); ?>
 <!-- !PAGE CONTENT! -->
-
   <div class="container-fluid paddingBottom">
     <!-- <div class="w3-row"> -->
       <div class="w3-col m4 l4 py-2">
@@ -82,7 +81,7 @@ var bgColor = [
                 'rgba(75, 192, 192, 0.2)',
                 'rgba(153, 102, 255, 0.2)',
                 'rgba(255, 159, 64, 0.2)'
-            ]; 
+            ];
 var boColor = [
                 'rgba(255, 99, 132, 1)',
                 'rgba(54, 162, 235, 1)',
@@ -98,17 +97,17 @@ const sbkChart = new Chart(sbk, {
           <?php foreach ($sumByKat as $kat){
                     echo "'{$kat->getKategorie()}',";
                     }
-                
+
           ?>
         ],
         datasets: [{
-            label: '€',            
+            label: '€',
             data: [
               <?php foreach ($sumByKat as $sum){
                     echo "'{$sum->getSumKat()}',";
                     }
-                
-              ?>              
+
+              ?>
             ],
             backgroundColor: bgColor,
             borderColor: boColor,
@@ -123,9 +122,9 @@ const sbkChart = new Chart(sbk, {
         plugins: {
             legend: {
                 display: false,
-            }            
-        }        
-    }    
+            }
+        }
+    }
 });
 
 const monthSumChart = new Chart(sM, {
@@ -138,12 +137,12 @@ const monthSumChart = new Chart(sM, {
           ?>
         ],
         datasets: [{
-            label: '€',            
+            label: '€',
             data: [
               <?php foreach ($sumMonth as $sum){
                     echo "'{$sum->getSumme()}',";
                     }
-              ?>              
+              ?>
             ],
             backgroundColor: bgColor,
             borderColor: boColor,
@@ -161,9 +160,9 @@ const monthSumChart = new Chart(sM, {
         plugins: {
             legend: {
                 display: false,
-            }            
-        }        
-    }    
+            }
+        }
+    }
 });
 </script>
 <?php   require_once($_SERVER['DOCUMENT_ROOT'].'/template/foot.inc.phtml'); ?>

@@ -7,27 +7,15 @@ namespace Controller;
 #require '../vendor/autoload.php';
 
 use Util\Paginator;
-use Util\Kassierer;
 use Util\Dispatcher;
-use Util\NumItems;
-
-
-
-
 class Finanzen extends Base {
 
     private string $_table;
-    private string $_colum;
     private string $_model = "Finanzen";
-    private string $_order;
-    private string $_where;
-    private string $_offset;    
     
     public function __construct()
     {
-        $this->_checkLogin();
-
-        
+        $this->_checkLogin();        
     }
     public function indexAction($params)
     {

@@ -1,14 +1,11 @@
 <?php
 
-
 namespace Util;
-
-//use Model\Finanzen;
-use Model\Resource\DBHandler;
 
 
 class Tops
 {
+    //	ausgabe der Finanzdaten im Kopfbereich jeder Seite
 
     public static function getTopAusgaben()
     {
@@ -20,7 +17,7 @@ class Tops
 
         $resourceModel = \App::getResourceModel('DBHandler');
         $dataSet = $resourceModel->selectTops($_model, $query);
-        
+
         return $dataSet;
     }
     public static function getTopKonto(string $userId)
@@ -33,10 +30,10 @@ class Tops
 
         $resourceModel = \App::getResourceModel('DBHandler');
         $dataSet = $resourceModel->selectTops($_model, $query);
-        
+
         return $dataSet;
     }
-    public static function getTopStand() 
+    public static function getTopStand()
     {
         $_model = 'Finanzen';
         $_table = 'haushaltskasse';
@@ -46,7 +43,7 @@ class Tops
 
         $resourceModel = \App::getResourceModel('DBHandler');
         $dataSet = $resourceModel->selectTops($_model, $query);
-        
+
         return $dataSet;
     }
 }

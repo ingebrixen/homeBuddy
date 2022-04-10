@@ -4,6 +4,7 @@ namespace Util;
 
 class NumItems  
 {
+        //      zählt die Einträge des jeweiligen Monats und Numeriert die Einzahlungen
         public static function incrItems(array $post):int
         {
                 $num = self::getNum($post);

@@ -55,6 +55,10 @@ class DBHandler extends Base
         $this->connection = null;
         return $connection->lastInsertId();
     }
+    public function deleteData(string $table, string $id)
+    {
+
+    }
     public function selectTops(string $model, string $sql)
     {
         $dbResult = $this->connect()->query($sql);
