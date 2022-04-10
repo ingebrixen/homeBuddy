@@ -3,8 +3,6 @@
 
 namespace Controller;
 
-use Session\User;
-use Util\Image;
 
 class Kueche extends Base {
 

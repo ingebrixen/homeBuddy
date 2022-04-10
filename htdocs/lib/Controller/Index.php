@@ -1,12 +1,7 @@
 <?php
-/**  (c) Thomas Böhme
-*    www.ingebrixen.de
-*
-**/
 
 namespace Controller;
 
-use Model\Benutzer;
 use Session\User;
 
 class Index extends Base

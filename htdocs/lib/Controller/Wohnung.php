@@ -3,9 +3,6 @@
 
 namespace Controller;
 
-use Session\User;
-use Util\Image;
-
 class Wohnung extends Base {
 
     public function __construct()

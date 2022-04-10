@@ -7,8 +7,6 @@ namespace Util;
 
 class Dispatcher {
 
-        private array $_post;
-
 
         public function __construct(array $_post)
         {

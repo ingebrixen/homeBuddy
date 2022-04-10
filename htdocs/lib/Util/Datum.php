@@ -5,6 +5,7 @@ namespace Util;
 
 class Datum  
 {
+    //  erzeugt den einen dynamischen Datumsselector um sich einträge des jeweiligen Monats im letzten Jahr anzeigen zu lassen.
     public static function getDateRange()
     {
         $Start  = new \DateTime(date('Y-m-d')); 
@@ -15,7 +16,7 @@ class Datum
         
         $period = new \DatePeriod(
             $dtStart,
-            new \DateInterval('P1M'), // Periode: 1 Monat
+            new \DateInterval('P1M'), 
             $dtEnd
         );
         
