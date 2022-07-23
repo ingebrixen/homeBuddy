@@ -48,12 +48,11 @@ class Bootstrap
         //  wenn $controller > 0 ist dann ist $controller = $controller ansonsten ist $controller = 'index'
         //  Bei erstaufruf der Seite ist der kontroller leer, also strlen = 0 > der $controller wird auf index gesetzt.
         
-        
         //  action?
         //  Wenn keine action vorhanden ist wird per default die action auf index gesetzt
         // erstaufruf sieht also immer so aus:
         //  http://localhost/ => http://localhost/index/index
-        $action = (strlen($action) > 0) ? $action : 'index';
+        $action = (!empty($action)) ? $action : 'index';
         $this->_setAction($action);
 
         //  parameter?
@@ -69,7 +68,7 @@ class Bootstrap
         $ctrl = sprintf("\\Controller\\%s", ucfirst(strtolower($controller)));
         //var_dump($ctrl);
         if (!class_exists($ctrl)) {
-             throw new InvalidArgumentException(
+            throw new InvalidArgumentException(
                 "Controller unbekannt: $ctrl"
             ); 
             /* echo Base::render('404.phtml', array());  */
