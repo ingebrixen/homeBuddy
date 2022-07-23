@@ -24,15 +24,15 @@ class Cron
 
                 $data = $this->model->selectData($_model, $_table, $_colum);  
                 
-                /* //      summiert alle privaten Kontostände um das Gesamt Minus zu bekommen > float(-25.5)
+                //      summiert alle privaten Kontostände um das Gesamt Minus zu bekommen > float(-25.5)
                 foreach ($data as $obj) {
                         $minusKonto = $minusKonto + $obj->getKonto();
                 }                
                 //      erzeugt wenn negativ die positve Summe alle priv. Kontostände > float(25.5) 
-                $minusKonto = $minusKonto < 0 ? 0 - $minusKonto : $minusKonto; */
+                $minusKonto = $minusKonto < 0 ? 0 - $minusKonto : $minusKonto;
 
                 //      aufgerundeter Anteil des gesamt Minus durch die vorhandenen User > -8.5
-                $anteil = (floor(($this->_checkStand()) / $this->_getUserCount() * 2) / 2);
+                $anteil = (floor(($this->_checkStand() + $minusKonto) / $this->_getUserCount() * 2) / 2);
                 var_dump($anteil);
                 //      wenn Haushalskassen < 200: muss jeder eine höhhere Einzahlung machen, sonst standard 200€
                 $val = $anteil < 0 ? $anteil - 200 : 200;

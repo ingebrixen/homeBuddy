@@ -37,6 +37,12 @@ class DBHandler extends Base
         foreach ($this->_createBindValue($post) as $key => $val) {
             $statement->bindValue($key, $val);
         }
+        function dd($arr){
+            echo '<pre>';
+            die(var_dump($arr));
+            echo '</pre>';
+        }
+        dd($statement);
         $statement->execute();
         $this->connection = null;
         return $connection->lastInsertId();

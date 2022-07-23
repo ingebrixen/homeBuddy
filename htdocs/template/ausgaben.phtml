@@ -62,55 +62,54 @@
 				</a>
 			</div>
 			<div id="add" class="w3-modal ">
-						<div class="modal-dialog " >
-							<div class="modal-content w3-card-4 w3-animate-zoom">
-								<div class="modal-header">
-									<h5 class="modal-title" id="modalTitle">allg. Ausgaben</h5>
-									<button type="button" class="btn-close" onclick="document.getElementById('add').style.display='none'"></button>
-								</div>
-								<div class="modal-body">
-								<form id="addForm" class="addForm" method="POST">
-									<input type="hidden" name="wer" value="<?php echo $_SESSION['userName']; ?>">
+				<div class="modal-dialog " >
+					<div class="modal-content w3-card-4 w3-animate-zoom">
+						<div class="modal-header">
+							<h5 class="modal-title" id="modalTitle">allg. Ausgaben</h5>
+							<button type="button" class="btn-close" onclick="document.getElementById('add').style.display='none'"></button>
+						</div>
+						<div class="modal-body">
+						<form id="addForm" class="addForm" method="POST">
+							<input type="hidden" name="wer" value="<?php echo $_SESSION['userName']; ?>">
 
-									<!-- One "tab" for each step in the form: -->
-									<div class="tab">Wann?
-										<p><input type="date" name="datum" class="form-control" value="<?php echo date("Y-m-d"); ?>" required ></p>
-											Wieviel?
-										<p><input type="number" name="wieviel" step="0.5" placeholder="  €" class="form-control" required ></p>
-									</div>
-									<div class="tab">
-										<div>
-										<p><select name="kategorie" class="form-select" required>
-													<option selected disabled value="">Kategorie w&auml;hlen</option>
-													<option value="Wohnung">Wohnung</option>
-													<option value="Baumarkt">Baumarkt</option>
-													<option value="Auto">Auto</option>
-													<option value="Geschenke">Geschenke</option>
-													<option value="Freizeit">Freizeit</option>
-													<option value="Urlaub">Urlaub</option>
-													<option value="Luxus">Luxus</option>
-													<option value="sonstiges">sonstiges</option>
-											</select></p>
-										</div>
-										<div><p><textarea name="kommentar" class="form-control" rows="4" placeholder="Mach bitte ein paar Angaben zu deinem Einkauf."required></textarea></p></div>
-									</div>
-									<!-- Circles which indicates the steps of the form: -->
-									<div style="text-align:center;margin-top:40px;">
-										<span class="step"></span>
-										<span class="step"></span>
-									</div>
-									<hr>
-									<div style="overflow:auto;">
-										<div style="float:right;">
-										<button type="button" class="btn btn-secondary" id="prevBtn" onclick="nextPrev(-1)">back</button>
-										<button type="button" class="btn btn-primary" id="nextBtn" onclick="nextPrev(1)">Next</button>
-										</div>
-									</div>
-								</form>
+							<!-- One "tab" for each step in the form: -->
+							<div class="tab">Wann?
+								<p><input type="date" name="datum" class="form-control" value="<?php echo date("Y-m-d"); ?>" required ></p>
+									Wieviel?
+								<p><input type="number" name="wieviel" step="0.5" placeholder="  €" class="form-control" required ></p>
+							</div>
+							<div class="tab">
+								<div>
+								<p><select name="kategorie" class="form-select" required>
+											<option selected disabled value="">Kategorie w&auml;hlen</option>
+											<option value="Wohnung">Wohnung</option>
+											<option value="Baumarkt">Baumarkt</option>
+											<option value="Auto">Auto</option>
+											<option value="Geschenke">Geschenke</option>
+											<option value="Freizeit">Freizeit</option>
+											<option value="Urlaub">Urlaub</option>
+											<option value="Luxus">Luxus</option>
+											<option value="sonstiges">sonstiges</option>
+									</select></p>
+								</div>
+								<div><p><textarea name="kommentar" class="form-control" rows="4" placeholder="Mach bitte ein paar Angaben zu deinem Einkauf."required></textarea></p></div>
+							</div>
+							<!-- Circles which indicates the steps of the form: -->
+							<div style="text-align:center;margin-top:40px;">
+								<span class="step"></span>
+								<span class="step"></span>
+							</div>
+							<hr>
+							<div style="overflow:auto;">
+								<div style="float:right;">
+								<button type="button" class="btn btn-secondary" id="prevBtn" onclick="nextPrev(-1)">back</button>
+								<button type="button" class="btn btn-primary" id="nextBtn" onclick="nextPrev(1)">Next</button>
 								</div>
 							</div>
+						</form>
 						</div>
-
+					</div>
+				</div>
 			</div>
 </footer>
 <!-- Begin script area -->
